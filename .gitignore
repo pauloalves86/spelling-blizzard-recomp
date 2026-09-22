@@ -1,0 +1,14 @@
+# CMake build products
+/build/
+
+# Ghidra's mutable local project database
+/ghidra/SpellingBlizzard.rep/
+
+# Reproducible Ghidra analysis output; scripts and concise reports are tracked.
+/ghidra/*.log
+/ghidra/*.out
+/ghidra/application-summary.txt
+
+# Ghidra/local editor state
+/ghidra/*.lock
+*.class
