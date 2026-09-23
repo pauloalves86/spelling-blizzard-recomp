@@ -2,29 +2,19 @@
 
 ## Target: 1018:509c
 
-### Fact
+### Facts and Step 12 correction
 
-`1018:509c` has no direct code reference in Ghidra's reference manager. The `getReferencesTo()` scan also found no direct reference from initialized data to that address.
+`1018:509c` still has no direct code reference in Ghidra's reference manager. A read-only scan of initialized Ghidra memory finds one exact far-pointer encoding, `9c 50 18 10`, at `1018:3248`. This corrects the Phase 4 statement below that the encoding was absent.
 
-A raw executable scan found the 16-bit little-endian value `0x509c` at these loaded code locations:
+The hit is at `+0x18` in a contiguous, four-byte-stride run beginning at `1018:3230`. The 0x140-byte window decodes as 16:16 addresses into executable segments; `+0x12c` contains `1020:4e8e`. This is strong evidence for a static function-pointer sequence, but not proof of one object's vtable: Ghidra has no references to the base or the two entries, and the initializer and owner remain unknown. The Ghidra listing has no instruction boundary at `1018:3230`; the conclusion is based on raw bytes and target resolution, not an auto-created data definition.
 
-- `1018:3248`
-- `1018:8687`
-- `1018:86a1`
-- `1018:86bc`
-- `1018:86d7`
-- `1018:ae8d`
-- `1018:aeef`
+The same scan finds `1018:267e` once, at `1008:9802`, within a separate four-byte-stride sequence beginning at `1008:97c2` (`+0x40`). It also finds `1020:2534` at `1008:7fbc`, within a separate sequence beginning at `1008:7f80` (`+0x3c`). These are candidate static pointer tables/runs; no base address has a Ghidra reference, and raw scans found no literal far pointer to the candidate bases. Do not infer that any candidate run is installed in a runtime object.
 
-These are not yet valid callback references. Instruction-context inspection shows the locations in the `0x86xx` and `0xae8x` ranges are instruction displacement bytes, not function-pointer table entries. The `1018:3248` occurrence is in an undefined code-segment/data-looking region, with neighboring words that do not form the expected far pointer `0x509c:0x1018`. No Ghidra reference is attached to it.
-
-The expected far-pointer byte sequence `9c 50 18 10` was not found in the original file. The original file was scanned directly; it was not modified.
+The other observed 16-bit values `0x509c` in the `0x86xx` and `0xae8x` ranges are instruction displacement bytes, not function-pointer evidence. The pointer-sequence finding at `1018:3248` supersedes the earlier interpretation of that occurrence as unrelated undefined data.
 
 ### Current conclusion
 
-The evidence does not yet prove that `1018:509c` is stored in a conventional static far-pointer callback table. It remains plausible that the function is reached through a near-pointer table, a dynamically populated table, an unrecognized data structure, or an indirect dispatch path whose pointer value is not preserved as a literal `0x509c` in the file.
-
-Do not claim a recovered table containing `1018:509c` yet.
+There is now a static far-pointer occurrence of `1018:509c` in a table-like run. Its owning object/table, initialization, and dispatch site are still unresolved. The bytes alone do not establish that this run is the first parameter's method table or that any caller reaches `1018:509c` through it.
 
 ## Phase 5 data-flow follow-up
 
@@ -47,9 +37,9 @@ Examples:
 
 - `1010:596e` invokes object methods at vtable-relative slots corresponding to `+0x14` and `+0x18`.
 - `1010:3d56` invokes an event callback at an object-relative slot corresponding to `+0x40`.
-- `1018:509c` invokes object-relative callbacks at offsets represented by approximately `+0x1c`, `+0x52`, `+0x5e`, `+0x62`, `+0x66`, and `+0x6a` in Ghidra's output.
+- `1018:509c` invokes its receiver's table slot `+0x1c`. Its first-parameter fields `+0x52`, `+0x62`, `+0x66`, and `+0x6a` are loaded as far object pointers and dispatched through the referenced object's table slot `+0x118`; `+0x5e` is another far object pointer dispatched through slots `+0x124` and `+0x140`.
 
-These establish an indirect-dispatch architecture, but not ownership of the particular `1018:509c` entry.
+These establish an indirect-dispatch architecture, but not ownership of the particular `1018:509c` entry or of the table-like run at `1018:3230`.
 
 ## Callback/function-table initialization evidence
 
@@ -75,26 +65,27 @@ It stores these object pointers in globals including `DAT_1060_0a14`, `DAT_1060_
 ## Event path currently supported by evidence
 
 ```text
-USER message APIs
+unknown message-origin caller
     |
     v
-1008:e412  -- drains selected message ranges
-    |
+1020:2534  -- forwards two far-pointer parameters
+    |           (one raw occurrence at 1008:7f80 + 0x3c;
+    |            no inbound Ghidra reference to this wrapper)
     v
-1010:3d56  -- generic message/key translator and object callback
+1010:3d56  -- direct calls through receiver table +0x40
     |
-    v
-object-relative callback tables
-    |
-    +-- 1018:509c is a game/application handler candidate,
-        but its exact table entry/owner is unresolved
+    +-- concrete receiver table/target unresolved
+
+separate unresolved route:
+1018:509c  -- raw pointer occurrence at 1018:3230 + 0x18;
+              no caller or owner proven
 ```
 
 This diagram intentionally stops at the unresolved edge. The binary does not yet support a more specific claim.
 
 ## Highest-value next trace
 
-Search the owners of the object fields used by `1018:509c`, especially the object passed as its first parameter and the nested objects at offsets represented as `0x52`, `0x5e`, `0x62`, `0x66`, and `0x6a`. The callback table is more likely to be recovered by identifying the object's constructor than by treating every `0x509c` byte sequence as a pointer.
+The next useful trace is the constructor or initialization path that installs a pointer to one of the candidate runs (`1008:97c2`, `1018:3230`, or `1008:7f80`) in an object. For `1018:509c`, the first-parameter constructor remains unknown; its observed offsets `+0x52`, `+0x5e`, `+0x62`, `+0x66`, and `+0x6a` now classify as far object references rather than naked callback addresses. Treat the raw runs as candidates until an object write and a matching dispatch site agree.
 
 ## Phase 7 callback findings
 
@@ -110,6 +101,6 @@ The replacement object's final method-table pointer is `1008:2b04`. Reading its 
 
 `1018:a9a0` uses `+0x20` and `+0x44` while establishing `+0x250`; `1018:5496` uses `+0x1c` for event `0x271b`.
 
-The global object at `DAT_1060:01ec` is read at `1018:5496`, `1018:284c`, `1020:1a9a`, `1008:75b2`, `1008:16ce`, and `1018:9f90`. Its analyzed image bytes are zero, but raw code at `1020:5f29..5f58` first calls current receiver slot `+0x11c` with one, then assigns that receiver from stack `BP+6/BP+8` into this global, clears `DAT_1060:01f0`, and sets receiver byte `+0x15a`. Later `1020:678c` stores its receiver in `DAT_1060:01f0` and clears `+0x15a` after `+0x128/+0x148` dispatches. This supports an activation/completion-context inference, not ownership or concrete callback identities.
+The global object at `DAT_1060:01ec` is read at `1018:5496`, `1018:284c`, `1020:1a9a`, `1008:75b2`, `1008:16ce`, and `1018:9f90`; its analyzed image bytes are zero. The Ghidra listing has no instruction boundary in `1020:5f20..5f5a`, but raw bytes there decode to a call through the incoming receiver's `+0x11c` slot with one at `1020:5f33`, followed by a far-pointer store to `01ec` at `1020:5f3f`, a zero store to `01f0` at `1020:5f43`, and a set of receiver byte `+0x15a` at `1020:5f50`. Later `1020:678c` stores its receiver in `DAT_1060:01f0` at `1020:692b` and clears receiver `+0x15a` at `1020:6934` after `+0x128/+0x148` dispatches. This supports an activation/completion-context inference, not ownership or concrete callback identities; no later clear of `01ec` is established.
 
 Phase 10 confines this object to documented boundaries: `1018:284c` calls its `+0x124`, `+0x128`, `+0x12c`, and `+0x118` slots while applying `01de` thresholds, and `1020:4e8e` may drain its `+0x118` loop before emitting `0x2718`. No direct `0x2714` ordered-record consequence through this runtime object is proven.
