@@ -38,20 +38,31 @@ The function then:
 
 ## Window procedure status
 
-The `lpfnWndProc` value is part of the `WNDCLASS`-like structure at `object + 0x10a`, but the current callers do not write that structure directly. The virtual method at `+0x14` is responsible for preparing it, so the concrete window procedure is currently hidden behind object dispatch.
+The shared class-data helper `1010:5bd8` writes the `WNDCLASS`-like fields directly. In particular, it stores `0x5db2` at `object + 0x10c` and `0x1010` at `object + 0x10e`, so `lpfnWndProc` is the explicit far pointer `1010:5db2`. `1010:5348` and `1010:5824` call this helper; `1008:6fa0` calls `1010:5348`. This proves the callback target for classes using these initializer paths, not necessarily every class in the executable.
 
-No single function can yet be named as the application's registered window procedure. The strongest current statement is:
+Ghidra has no function boundary at `1010:5db2`. Raw 16-bit disassembly of that target shows a window-procedure-shaped handler that:
+
+- obtains the per-window object through `GETWINDOWLONG(hwnd, 0)` and falls back to `DEFWINDOWPROC` when absent;
+- handles `WM_CREATE` (`0x0001`) by taking the object pointer from the creation data, storing it with `SETWINDOWLONG(hwnd, 0, object)`, storing the HWND at object offset `+0x04`, and returning zero;
+- handles `WM_PAINT` (`0x000e`) with `BEGINPAINT`, the object's virtual slot `+0x10`, and `ENDPAINT`;
+- routes messages in `0x0200`-`0x0209` through the object's slot `+0x0c`, with small event values; and
+- routes other messages with an attached object through slot `+0x04`; message `0x0010` also calls `POSTQUITMESSAGE(0)`.
+
+The known constructor tables identify `1010:527c` or `1010:553e` at slot `+0x0c`; these handlers translate coordinates and update cursor-related state. Paint slots include `1008:6dfc`, `1010:559e`, and the `RETF 8` stub at `1010:5d62`. The common `+0x18` post-create callback is `1010:5d66`, whose raw bytes call `SHOWWINDOW`.
+
+The procedure address and its message-dispatch behavior are high-confidence facts for the paths above. The runtime object stored at window offset `+0x154`, and whether it is the startup-created `DAT_1060:07c8` object, remain unresolved. Therefore the complete paint-to-application-owner chain is not yet proven.
 
 ```text
 window object constructor
     -> virtual class-data initializer (+0x14 slot)
     -> WNDCLASS-like data at object+0x10a
+    -> lpfnWndProc = 1010:5db2
     -> REGISTERCLASS
     -> USER window dispatch
-    -> generic/object event handling
+    -> GETWINDOWLONG(hwnd, 0) -> object vtable slots +0x04/+0x0c/+0x10
 ```
 
-Confidence: High for the construction sequence; Unknown for the concrete `lpfnWndProc`.
+See `docs/message-loop-trace.md` for the caller graph, the startup polling loop, static paint-table edges, and remaining ownership limits.
 
 ## Application-level dispatcher
 

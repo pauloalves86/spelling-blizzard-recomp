@@ -23,8 +23,11 @@ NE entry 1000:001a (entry)
   +-- 1000:04f0 FUN_1000_04f0
   |     GETDOSENVIRONMENT; environment/argument setup
   |
-  +-- 1000:2026 and 1000:00d8 -> 1008:2bf4
-  |     framework/application setup boundary not fully resolved
+  +-- 1000:00d8 -> 1008:2bf4
+  |     direct startup-to-object initialization path
+  |
+  +-- 1000:2026
+        separate startup helper (entry call at 1000:00ac); not a direct caller of 1008:2bf4
   |
   +-- 1000:01e7
   +-- 1000:05b4
@@ -72,7 +75,7 @@ Confidence: Medium. The exact object and state semantics remain unknown.
 
 ## Application/controller layer
 
-`1008:2bf4` is the clearest current framework/application initialization boundary. It allocates several objects, writes method-table offset/segment pairs, stores them in global pointers (`DAT_1060_0a14`, `DAT_1060_0a1e`, and `DAT_1060_07c4`), invokes initialization methods, and returns an object field from `DAT_1060_07c4`.
+`1008:2bf4` is the clearest current framework/application initialization boundary. It allocates several objects, writes method-table offset/segment pairs, stores them in global pointers (`DAT_1060_0a14`, `DAT_1060_0a1e`, and `DAT_1060_07c4`), invokes initialization methods, and returns an object field from `DAT_1060_07c4`. The direct startup path is `1000:001a` -> `1000:00d8` -> `1008:2bf4`; `1000:2026` is a separate direct callee of the entry function, not a direct caller of `1008:2bf4`. The object initialization then proceeds through method-table calls, including the `1008:0694` polling path and `1008:72b6` global-object setup.
 
 `1008:ac80` is an application-facing dispatcher. It handles command-like values `0x2af9`, `0x2afa`, `0x2afb`, `0x32c9`, and `0x32ca`. The `0x2af9` path constructs/initializes `DAT_1060_01e4`, calls `1018:a9a0` and `1018:aeaa`, updates `DAT_1060:01de`, clears `DAT_1060:0a36`, calls `1010:d0a6`, and then invokes an object callback. The `0x32c9` and `0x32ca` paths repeatedly invoke object methods while polling `1010:08bc`.
 
@@ -88,7 +91,7 @@ This establishes an application/control layer but does not prove that `1008:ac80
 
 ## Window construction edge
 
-Direct callers of the generic constructors are now documented in `docs/application-windows.md`. The concrete `lpfnWndProc` remains unresolved because the WNDCLASS-like structure at `object + 0x10a` is populated by an indirect object method at the vtable `+0x14` slot before `REGISTERCLASS`.
+Direct callers of the generic constructors are documented in `docs/application-windows.md`. The shared class-data helper `1010:5bd8` writes the concrete `lpfnWndProc` far pointer `1010:5db2` into the WNDCLASS-like structure at `object + 0x10a` (offset and segment at `+0x10c/+0x10e`). Ghidra has no function boundary at the target; raw disassembly shows its window-message dispatch behavior. The runtime owner pointer at window `+0x154` and the full paint-to-application-owner path remain unresolved.
 
 Direct string references for `SpellingDemonsWindow`, `SpellingDemonsDesktop`, `CEditText`, `CAMEditText`, `CWindow`, and `CDesktop` were not recovered by Ghidra's reference manager. Their presence is fact, but they may be debug/class metadata, copied name tables, or strings used through indirect data structures.
 
@@ -99,33 +102,33 @@ The strongest executable evidence for actual window construction is instead:
 - `1010:596e` stores the returned window handle and DC into the object.
 - The object contains a class-name-related pointer at a large positive offset and callback/vtable pointers at the beginning.
 
-The application-specific window instance that supplies these objects has not yet been connected conclusively to a single constructor.
+The application-specific window instance that supplies these objects has not yet been connected conclusively to a single constructor. The direct-call graph from `1008:2bf4` does not reach `1010:596e`, `1010:5b18`, `1008:ac80`, or `1010:3d56`; those paths remain behind indirect object/table dispatch.
 
 ## Updated application flow
 
 ```text
 Win16 entry 1000:001a
     |
-    v
-runtime/environment initialization
+    +--> 1000:00d8 -> 1008:2bf4 object/global initialization
+    |                    |
+    |                    +--> indirect initialization methods
+    |                    +--> root table 1008:2e32
+    |                         +--> 1008:0694 startup polling loop
+    |                         +--> 1008:72b6 creates DAT_1060:07c8 / table 1008:7edc
     |
-    v
-1008:2bf4 object/global initialization
-    |
-    +--> generic window constructors
-    |      1010:596e / 1010:5b18
-    |          |
-    |          +--> WNDCLASS-like object method (+0x14)
-    |          +--> REGISTERCLASS / CREATEWINDOW / GETDC
-    |
-    +--> 1008:ac80 command/application dispatcher
-    |
-    +--> 1010:3d56 message/object translator
-              |
-              v
-          indirect object callbacks
-              |
-              +--> 1018:509c text-input/controller candidate
+    +--> 1000:2026 separate startup helper
+
+Later, through unresolved object/table edges:
+    generic window constructors 1010:596e / 1010:5b18
+        -> REGISTERCLASS / CREATEWINDOW / GETDC
+        -> lpfnWndProc 1010:5db2
+        -> WM_PAINT -> per-window paint method -> nested callback path
+
+    application dispatcher 1008:ac80
+        -> 1018:5496 -> 1008:e412 message drain
+
+    message/key helper 1010:3d56
+        <- direct caller 1020:2534
 ```
 
-The diagram shows proven edges and leaves the callback-table owner and exact application window procedure unresolved.
+The direct startup edges and registered callback target are now known. The incoming callback/table edges connecting the window owner, `1008:ac80`, and the `1008:e412` callers—and the outer loop—remain unresolved. See `docs/message-loop-trace.md` for the detailed evidence and confidence boundaries.

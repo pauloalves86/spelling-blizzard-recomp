@@ -43,26 +43,30 @@ The repeated `PEEKMESSAGE` calls in Ghidra's decompilation carry segmented-point
 
 `1008:ac80` is now the strongest application/controller candidate. It handles command-like values `0x2af9`, `0x2afa`, `0x2afb`, `0x32c9`, and `0x32ca`; it invokes game-segment routines and object methods, and it uses `1010:08bc` to poll for pending `0x0202` messages in two paths. It is not yet proven to be the outermost message loop.
 
-The current message flow is therefore:
+The caller trace found one direct application path into the message-draining helper:
 
 ```text
-USER message APIs
-    |
-    v
-1008:e412 / 1010:08bc message polling helpers
-    |
-    v
-1010:3d56 generic message/key translator
-    |
-    v
-object-relative callback or command dispatcher
-    |
-    +--> 1008:ac80 command/application handling
-    +--> 1018:509c text-input/controller handling
+1008:ac80 --(1008:ad79)--> 1018:5496 --(1018:54db)--> 1008:e412
 ```
 
-This is a supported partial chain, not a claim that every path passes through both `1008:e412` and `1008:ac80`.
-The current evidence does not justify naming `1008:e412` `main_loop`. It is better described as `framework_drain_message_ranges` until callers prove where idle/update work is performed.
+Ghidra found 22 direct call sites to `1008:e412` across 13 caller functions. Only `1018:5496` has a direct caller in the current graph (`1008:ac80`); the other 12 callers have no direct caller there, consistent with but not proof of indirect callback dispatch. `1008:ac80` itself has no direct code-reference caller. See `docs/message-loop-trace.md` for the complete caller list and the read-only analysis procedure.
+
+The USER window path is now partially recovered separately:
+
+```text
+1008:e412 --PEEKMESSAGE / TRANSLATEMESSAGE / DISPATCHMESSAGE--> USER
+    - - - Win16 dispatch semantics - - -> WNDPROC 1010:5db2
+                                          WM_PAINT -> window object's +0x10 method
+                                                    -> nested object callback
+```
+
+`1010:5db2` is the `lpfnWndProc` value written by `1010:5bd8` into the `WNDCLASS`-like record. Ghidra has no function boundary at that target; raw 16-bit disassembly shows `GETWINDOWLONG`/`SETWINDOWLONG`, `BEGINPAINT`/`ENDPAINT`, and object-relative dispatch. The paint callbacks reach per-window object methods; static tables then lead toward application-root methods. The runtime owner pointer at window `+0x154` is not yet proven, so the full paint-to-root chain remains conditional.
+
+Startup also reaches `1008:2bf4` directly via `1000:00d8`. The initialized root table at `1008:2e32` has a polling loop through slots `+0x78/+0x7c` inside `1008:0694` and paint/update callbacks at `+0x48/+0x4c`. This is a confirmed shared object-table surface, but the `1008:0694` loop is observed during initialization and is not evidence of the ordinary game idle loop. The caller trace does not show `1008:e412` called directly from these root-table slots or from the WNDPROC.
+
+`1010:3d56` is a separate message/key polling helper, not a proven callee of `1008:e412`; its direct caller is `1020:2534`. Do not merge these paths solely because both use USER message APIs.
+
+The evidence still does not justify naming `1008:e412` `main_loop`. It remains a message-draining helper. The outer loop, ordinary idle work, and the runtime owner joining the WNDPROC paint callbacks to the `1008:e412` callers remain unresolved.
 
 ## Native recovered seam
 
@@ -78,7 +82,9 @@ The native unit test verifies the recovered ordering for flags selecting the `0x
 
 ## Open questions
 
-- Which function invokes `1008:e412` as part of regular idle/update processing?
+- Which indirect dispatch paths reach the 12 direct callers of `1008:e412` that have no direct callers in the current graph?
+- Does the window's runtime owner pointer at `+0x154` equal the startup-created `DAT_1060:07c8` object?
+- Is the `1008:0694` polling loop initialization-only, or does a related object method participate in ordinary idle work?
 - Does the application run game updates between calls to `1008:e412`?
 - What are the exact `wRemoveMsg` and HWND/filter arguments at each call site?
 - Which object owns the callback reached by `1010:3d56`?
