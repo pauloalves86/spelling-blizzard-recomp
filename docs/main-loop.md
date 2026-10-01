@@ -53,6 +53,8 @@ Ghidra found 22 direct call sites to `1008:e412` across 13 caller functions. Onl
 
 Step 14 update: the indirect entry into `1008:ac80` is now traced. It is slot `+0x1c` of table `1018:6144`, called from `1010:ce9f` (`docs/ac80-indirect-caller.md`).
 
+Step 15 update: the outer loop is `1008:0694` (root `+0x84`, called from `1008:2bf4` at `1008:2d53`). Each iteration fetches events with `PeekMessage` in `1010:3d56`, translates them into Macintosh-style event kinds, and dispatches them in `1010:3a28`. The full path from click to `1008:ac80` is in `docs/input-to-command.md`.
+
 The USER window path is now partially recovered separately:
 
 ```text

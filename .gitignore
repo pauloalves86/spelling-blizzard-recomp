@@ -12,3 +12,4 @@
 # Ghidra/local editor state
 /ghidra/*.lock
 *.class
+__pycache__/

@@ -196,6 +196,8 @@ The one concrete indirect call site proven so far is `1010:ce9f`, inside `1010:c
 ## 6. Open edges
 
 1. Who calls `+0x58` on `1008:b0c8` objects. There are many generic `call [bx+0x58]` sites. The window procedure's mouse path (`1010:5db2` -> `+0x0c` -> `1010:527c`/`1010:553e`) is a candidate, but not proven.
+
+   **Resolved in Step 15** (`docs/input-to-command.md`): base `+0x50` = `1010:491e` hit-tests down the view tree and calls `+0x58` on the clicked object for left-button events. The window-procedure `+0x0c` path only records the cursor position.
 2. Who sends `0x2716` to the `1018:3228` object and `0x2711` to the `1008:97e6` object. `1018:5343`, inside `1018:509c`, sends dword `0x2711` through a receiver `+0x1c`; its receiver is not yet identified. No `0x2716` literal was found, which suggests it is data-driven like the events in section 3 (hypothesis).
 3. The function and creator around the `1008:97e6` installer at `1008:932e`.
 4. The source of the `1010:10f2` records, and the mapping from child id to command value.

@@ -32,6 +32,8 @@ Command used:
 
 > Step 14 correction (`docs/ac80-indirect-caller.md`). The raw scans below missed NE selector fixup chains: in the file, a far pointer's selector word holds a chain link, not a selector. With chains resolved, `1018:3230` is table **`1018:3228`** (`+0x1c` = `1018:553a`, `+0x20` = `1018:509c`, installed at `1018:2c6d`). `1008:97c2` is table **`1008:97e6`** (`+0x1c` = `1018:267e`, installed at `1008:932e`). The `+0x..` offsets below use the old misaligned bases.
 
+> Step 15 correction (`docs/method-table-inventory.md`): `1008:7f80` is not a base; the `+0x3c → 1020:2534` cell is slot `+0x38` of table **`1008:7f84`** (event dispatcher, installed at `1008:77ec` by root `+0x70` = `1008:77d0`, stored at root `+0x0e`). All 117 tables of the common shape have a detected installer.
+
 Ownership was not recovered for any of the three candidate regions.
 
 - `1018:3230` is a strongly table-like raw 16:16 pointer run: `+0x18` contains `1018:509c`; `+0x12c` contains `1020:4e8e`. No object stores this base in a statically identified field, and no constructor or dispatch path is tied to the run.

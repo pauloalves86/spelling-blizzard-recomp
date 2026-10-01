@@ -84,7 +84,11 @@ The `+0x0c` methods identified in the constructor tables at `1008:0f80`, `1008:6
 
 This is an observed startup polling/synchronization loop, not evidence of the ordinary game idle loop. Its exact purpose and the downstream behavior of the unbounded `1008:783a`/`1008:0596` entries remain uncertain.
 
+Step 15 correction (`docs/input-to-command.md`). The loop condition is inverted above: `1008:06ba` is `cmp byte [si+0x1b],0 / jne`, so the loop continues while the byte is **nonzero**. `1008:011b` sets it to 1 at construction, and `+0x7c` (`1008:0596`) runs one event-pump iteration. `1008:0694` is the application main loop.
+
 A paint/update callback path is also visible in static table data:
+
+Step 15 correction (`docs/method-table-inventory.md`). `1008:7edc` has only 12 slots, so the `+0xd4`/`+0xdc` cells listed in item 1 below lie in table `1008:7f84` (its `+0x2c` and `+0x34`), the event dispatcher, not in `1008:7edc`. The window `+0x154` field is a back-pointer to the view whose `+0xc4` created the window. Those views' own `+0xd4`/`+0xdc` are the paint callbacks.
 
 1. The `1008:7edc` table has slot `+0xd4` -> `1010:3d32` and slot `+0xdc` -> `1010:3d52`.
 2. Raw bytes at `1010:3d32` load global `DAT_1060:07c4` and call its table slots `+0x48` and `+0x4c`.
