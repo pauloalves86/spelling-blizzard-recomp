@@ -13,7 +13,7 @@ Confidence labels:
 ## Layout
 
 | Offset | Width | Access pattern | Evidence | Confidence |
-|---:|---:|---|---|---|
+| ---: | ---: | ---: | ---: | ---: |
 | `+0x00` | 6-byte slot text area | NUL-terminated text copied/compared | `1018:ab1c`, `1018:a704` | Fact for accesses; text capacity precondition unresolved |
 | `+0x06` | 16-bit signed word | initialized, read, conditional max update, entry value | `1018:ab1c`, `1018:a704`, `1018:ae3a`, `1018:aeaa` | Fact |
 | `+0x08` | 8-byte slot 1 | second physical entry begins here | `1018:a704` stride-8 addressing | Fact |
@@ -101,7 +101,7 @@ Phase 9 confirms the lifecycle connection for objects produced by the known cons
 The final replacement object table is `1008:2b04`.
 
 | Slot | Target | Observed role | Confidence |
-|---:|---|---|---|
+| ---: | --- | --- | --- |
 | `+0x1c` | `1008:e8b6` | three-byte `RETF 8` no-op override | Fact |
 | `+0x20` | `1008:cf6c` | selects one of three pointers by selector and stores at receiver `+0x24c` | Fact |
 | `+0x44` | `1008:cfc2` | returns `0:0` for null `+0x24c`; otherwise obtains and returns a far pointer | Fact; conditional acquisition is a strong inference |

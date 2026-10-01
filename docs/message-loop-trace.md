@@ -21,7 +21,7 @@ The executable remains `original/BLIZZARD.EXE`, the behavioral authority. Its SH
 Ghidra reports 22 direct code-reference call sites in 13 distinct containing functions:
 
 | Caller | Call site(s) |
-|---|---|
+| --- | --- |
 | `1008:10dc` | `1008:1102` |
 | `1008:16ce` | `1008:16ed` |
 | `1010:9a6a` | `1010:9a73` |

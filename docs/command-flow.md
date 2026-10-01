@@ -16,7 +16,7 @@ The function returns no value. If `param_4 != 0`, it immediately delegates to `1
 ## Command-flow table
 
 | Command ID | Origin | Branch and observed effects | Calls | Confidence |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | `0x2af9` | The immediate producer is unresolved; it arrives in `param_3` | Uses `DAT_1060:0a38` and object offset `+0x66`; conditionally releases/replaces `DAT_1060:01e4`; allocates `0x262` bytes through `1008:ef2c`; initializes method-table entries; calls `1018:a9a0`; reads `1018:aeaa`; stores result + 1 in `DAT_1060:01de`; clears `DAT_1060:0a36`; calls `1010:d0a6`; calls `1018:5496` with control value `1` | `1010:d03c`, indirect object callback, `1008:ef2c`, `1018:a9a0`, `1018:aeaa`, `1010:d0a6`, `1018:5496` | High for branch effects; origin unresolved |
 | `0x2afa` | The immediate producer is unresolved; it arrives in `param_3` | Selects control value `0` and calls `1018:5496` with object field `param_1[2]` | `1018:5496` | High for branch effects; origin unresolved |
 | `0x2afb` | The immediate producer is unresolved; it arrives in `param_3` | Same observed `1018:5496` path and control value `0` as `0x2afa` | `1018:5496` | High for branch effects; origin unresolved |

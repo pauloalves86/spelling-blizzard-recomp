@@ -108,19 +108,6 @@ The file's filesystem timestamp is `1994-07-19 01:10:00 -0300`, but this is file
 
 ## Executable format
 
-The binary has:
-
-- MZ compatibility header.
-- NE header at file offset `0x80`.
-- NE version `5.50`.
-- 16-bit Windows 3.x protected-mode target.
-- Initial entry point `1000:001a`.
-- 5 code segments.
-- 8 data segments.
-- 13 total NE segments.
-- No overlays indicated by the inspected NE header.
-- Seven identified resource blocks.
-
 The MZ stub only provides Windows compatibility messaging and DOS termination. It prints:
 
 `This program requires Microsoft Windows.`
