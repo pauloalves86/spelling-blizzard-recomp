@@ -50,6 +50,8 @@ The branch releases the previous far pointer stored in `DAT_1060:01e4`, allocate
 
 `1018:5496` invokes the replacement object's method at vtable offset `+0x1c` with event value `0x271b`. When its third byte parameter is nonzero—as in this branch—it also calls `1008:e412(10)`, then invokes `DAT_1060:01ec` methods at offsets `+0x124` and `+0x128` with `(0x000e, 0x6d73)`, `(0x0012, 0x6d73)`, and `(0x0006, 0x6d73)`.
 
+Step 14 correction: the raw call at `1008:ad6f..ad79` pushes `1`, then `dword es:[di+0x08]` (receiver `+0x08`, the `1018:3228` owner), not `DAT_1060:01e4`. `1018:5496` therefore deletes the owner's `+0x82` child and sends `0x271b` to the owner's `+0x1c` = `1018:553a`. See `docs/ac80-indirect-caller.md`.
+
 The `+0x1c` method and the `DAT_1060:01ec` methods are not yet semantically identified. The current evidence supports an object callback plus framework/UI dispatch, not a gameplay interpretation.
 
 ## State changes

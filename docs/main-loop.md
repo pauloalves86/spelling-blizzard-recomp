@@ -51,6 +51,8 @@ The caller trace found one direct application path into the message-draining hel
 
 Ghidra found 22 direct call sites to `1008:e412` across 13 caller functions. Only `1018:5496` has a direct caller in the current graph (`1008:ac80`); the other 12 callers have no direct caller there, consistent with but not proof of indirect callback dispatch. `1008:ac80` itself has no direct code-reference caller. See `docs/message-loop-trace.md` for the complete caller list and the read-only analysis procedure.
 
+Step 14 update: the indirect entry into `1008:ac80` is now traced. It is slot `+0x1c` of table `1018:6144`, called from `1010:ce9f` (`docs/ac80-indirect-caller.md`).
+
 The USER window path is now partially recovered separately:
 
 ```text

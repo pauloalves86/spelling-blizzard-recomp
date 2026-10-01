@@ -100,3 +100,5 @@ The evidence now joins Win16 `WM_PAINT` dispatch to per-window paint methods and
 The trace does not show `1008:e412` being called from the window procedure, the root object's `+0x48/+0x4c` paint callbacks, or the root object's `+0x78/+0x7c` polling callbacks. The only resolved direct caller chain into `1008:e412` is `1008:ac80` -> `1018:5496` -> `1008:e412`; the incoming callback/table that reaches `1008:ac80` is unknown. Therefore the outer message/idle/update loop and a complete join to `1008:e412` remain unidentified.
 
 Next, trace the runtime value installed at `window object +0x154`, the table owner behind the `+0xd4/+0xdc` callbacks, and the indirect caller of `1008:ac80`. Preserve the distinction between these confirmed table edges and the still-unproven owner/outer-loop relationship.
+
+Step 14 update: the indirect caller of `1008:ac80` is resolved in `docs/ac80-indirect-caller.md`. `1008:ac80` is slot `+0x1c` of table `1018:6144`, reached from `1010:ce9f`. Note also that `1008:ac80` calls `1018:5496` with `receiver->+0x08` (the owner object), so the `1008:ac80 -> 1018:5496 -> 1008:e412` chain runs on the owner.

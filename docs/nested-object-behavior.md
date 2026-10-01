@@ -110,6 +110,8 @@ The final replacement object table is `1008:2b04`.
 
 Raw code at `1008:e8b6` is `CA 08 00`: `RETF 8`. At the `1018:5496` dispatch site, the call's four 16-bit argument words include receiver far pointer, event `0x271b`, and zero. The override removes the arguments without reads, calls, or state writes. Therefore, for final-table receivers, `0x271b` is deliberately absorbed at this method boundary.
 
+Step 14 caveat: the `1018:5496` call from `1008:ac80` passes `receiver->+0x08`, the owner object, not the `1008:2b04` replacement. So this absorption conclusion does not apply to that call site (`docs/ac80-indirect-caller.md`).
+
 ## DAT_1060:01ec callback boundary
 
 Fact: `1018:5496` reads `DAT_1060:01ec` and dispatches through its `+0x124` once and `+0x128` three times in the nonzero-control path.

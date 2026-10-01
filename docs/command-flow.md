@@ -44,6 +44,8 @@ This is a state transition candidate, not yet a complete behavioral reconstructi
 
 FACT: No direct code-reference caller to `1008:ac80` was found in the current Ghidra reference graph. The function appears to be an indirect callback target, consistent with the framework's object/function-table design.
 
+Step 14 update: `1008:ac80` is the `+0x1c` event handler in table `1018:6144` (cell `1018:6160`). One proven indirect call site is `1010:ce9f` in `1010:ce0a`, which sends a record-defined event from a `1008:b0c8` child to its `+0x04` parent. See `docs/ac80-indirect-caller.md`.
+
 FACT: The five command constants occur as comparisons inside `1008:ac80`. Their concrete source event has not been established.
 
 The current evidence does not justify claiming that they originate from a menu, timer, keyboard message, or window procedure.
