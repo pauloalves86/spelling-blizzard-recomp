@@ -66,7 +66,9 @@ Hypothesis: the handoff from generic startup to the application framework occurs
 
 ## Function inventory
 
-The analyzed Ghidra program contains 959 discovered functions, including 5 code segments, imported Win16 thunks, and runtime/framework code. The following are useful anchors, not definitive semantic names:
+Initial Ghidra auto-analysis identified 959 functions. After systematic virtual method table analysis across all 142 detected method tables (`tools/ne_vtables.py`), 1,088 unique virtual method entry points were exported as seeds (`ghidra/CreateSeeds.java`), resolving 595 previously unanalyzed functions. The program now contains 1,684 discovered functions across the 5 code segments, imported Win16 thunks, and runtime/framework code.
+
+The following are useful anchors, not definitive semantic names:
 
 | Address | Ghidra name | Proposed role | Evidence | Confidence |
 |---|---|---|---|---|

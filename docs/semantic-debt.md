@@ -194,3 +194,39 @@ Confidence: Fact for table values and release edge; unknown semantics.
 
 Next possible investigation: map individual entries from callers and compare
 normal/fallback nested initialization paths.
+
+## `1018:ae3a(99)` ("99 lives" hypothesis)
+
+Known: `1018:ae3a(arg)` takes a 16-bit argument (observed: 99 at `1018:50f3`). It
+compares the signed 16-bit word at slot-0 `+0x06` against `arg`. If the current
+value is less than `arg`, it overwrites the field with `arg` and sets parent
+dirty flag `+0x254` to 1. This is invoked after user types `"CHEAT"` in
+`1018:509c`.
+
+Unknown: source-level field name and player-facing mechanic.
+
+Evidence: `1018:50f3` (call site), `1018:ae3a` (function body), `1018:aeaa` (reader).
+
+Confidence: Fact for machine operations (conditional lower-bound clamp to 99 and
+dirty flag write). The interpretation that this represents "99 player lives" is a
+plausible hypothesis given the `"CHEAT"` trigger, but remains unproven semantic
+debt. The field is strictly recorded as `slot0->+0x06`.
+
+## Framework class names (`TDesktopView`, `TBoardView`, etc.)
+
+Known: object memory layouts, constructor chains, and virtual method table
+hierarchies are fully recovered machine facts (`docs/method-table-inventory.md`).
+
+Unknown: original source code class identifiers used by Bright Star.
+
+Evidence: strings such as `"FailNIL(%s) failed!"` at `1008:5554`, `"Subclass
+Responsibility"` at `1008:efc2` and `1010:0000`, and object-graph properties
+closely resemble MacApp or a Bright Star in-house object framework ported from
+Macintosh to Win16.
+
+Confidence: Structural and hierarchy relations are Facts. Names such as
+`TDesktopView`, `TBoardView`, `TGameWindow`, or `TApplication` are working
+structural designations, not certified source-level identifiers. They must be
+treated as inferred working labels until header files, debug symbols, or library
+fingerprints establish original names.
+

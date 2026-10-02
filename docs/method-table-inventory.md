@@ -74,11 +74,11 @@ So, for windows made by these paths, **`+0x154` is a back-pointer to the view ob
 | `1008:18fc` | `1008:0c78` | `1010:18ec` (base) |
 | `1008:1744` | `1008:1252` | `1010:18ec` (base) |
 
-`1010:53c8` (`1008:ce33`) and `1010:5722` (`1008:671d`, `1008:d79f`) were not followed to their creators in this step.
+`1010:53c8` (`1008:ce33`) and `1010:5722` (`1008:d79f`) were not followed to their creators in this step.
+`1010:5722` (`1008:671d` / `1008:670a`) was resolved in `docs/root-view-lifecycle.md`: its creator is `1008:3218` (slot `+0xc4` of `1008:7d10`, the root desktop view `DAT_1060:0810`).
+All remaining window constructors (`1010:53c8` via `1008:cdf0`, `1010:5722` via `1008:d770`) and slot `+0x14` callers were resolved in `docs/framework-dispatch-edges.md`.
 
 ## Open items
 
-- The other two window constructors' creators (`1008:ce33`, `1008:671d`, `1008:d79f`).
-- Who calls slot `+0x14` (for example `1010:ca3a` in `1020:52ee`, which polls the button state and cursor position directly).
 - Reversed chains are identified only when the matching forward chain exists. A destructor with no counterpart is still counted as a constructor chain, although it contributes no parent edge unless it has ≥ 2 writes.
 - Store-target detection (`Stored to` column) is a 40-byte forward heuristic. `—` means it was not found, not that the object is unstored.

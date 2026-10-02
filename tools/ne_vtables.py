@@ -24,13 +24,15 @@ Detection rules (all on raw segment bytes; no Ghidra state is used):
 * table extent: contiguous fixup-resolved 4-byte cells from the installed
   offset, stopping before the next installed table or a non-cell.
 
-Usage:  ne_vtables.py [--json PATH] [--md PATH] [--sites PATH] [--functions PATH]
+Usage:  ne_vtables.py [--json PATH] [--md PATH] [--sites PATH] [--functions PATH] [--seeds PATH]
 """
 import json
 import struct
 import sys
 from collections import defaultdict
+from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ne_farptr as N
 
 CODE = {1, 2, 3, 4, 5}
@@ -247,7 +249,8 @@ def main(argv):
                         overrides=[(f"{o:#x}", fmt(*c), p if p == "new" else fmt(*p)) for o, c, p in overrides],
                         cells=[fmt(*c) for c in cells]))
 
-    result = dict(input=str(N.EXE.name), sha256=N.SHA256, install_sites=len(installs), constructors=ctor, tables=inv)
+    seeds = sorted({fmt(*c) for t in tables.values() for c in t})
+    result = dict(input=str(N.EXE.name), sha256=N.SHA256, install_sites=len(installs), constructors=ctor, tables=inv, seeds=seeds)
     if "--json" in opts:
         with open(opts["--json"], "w") as f:
             json.dump(result, f, indent=1)
@@ -255,9 +258,13 @@ def main(argv):
         with open(opts["--sites"], "w") as f:
             for r in ctor:
                 f.write(r["site"] + "\n")
+    if "--seeds" in opts:
+        with open(opts["--seeds"], "w") as f:
+            for s in seeds:
+                f.write(s + "\n")
     if "--md" in opts:
         write_md(opts["--md"], result)
-    print(f"install sites={len(installs)} constructors={len(ctor)} tables={len(inv)}")
+    print(f"install sites={len(installs)} constructors={len(ctor)} tables={len(inv)} seeds={len(seeds)}")
 
 
 def write_md(path, r):

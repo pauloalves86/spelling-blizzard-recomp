@@ -118,7 +118,7 @@ Every edge above is a direct instruction or a fixup-resolved table cell, so the 
 
 ## Open edges
 
-1. Who sets `DAT_1060:0810` (the root view used for hit testing), and what its table is.
-2. Root idle `+0x5c` (`1008:7716`) and the per-object `+0x14` polling methods (for example `1010:ca3a`, which reads `GetAsyncKeyState(VK_LBUTTON)` through `1010:07c0`).
-3. The keyboard path (kinds 3/4/5 → `+0x1c` = `1020:2552` in `1008:7f84`) to the `CHEAT` accumulator in `1018:509c` (`docs/callback-dispatch.md`).
-4. The producer of event kind 8.
+1. **Resolved (`docs/root-view-lifecycle.md`).** `DAT_1060:0810` is the 0x30-byte Desktop Screen View (table `1008:7d10`), constructed by root slot `+0x6c` (`1008:7194`). Its slot `+0x50` is `1008:d410`, which delegates to the active front view `DAT_1060:01ca` (updated on window activation/focus).
+2. **Resolved (`docs/framework-dispatch-edges.md`).** Root idle `+0x5c` (`1008:7716`) calls `root->+0x14` (`1008:7592`), which invokes `DAT_1060:0a2e->+0xc0()` (`1010:9644`) to update active game objects and sets `sleepTime = 0` for continuous animation. Per-object `+0x14` methods (e.g. `1010:ca3a`) poll timers and mouse states for controls.
+3. **Resolved (`docs/framework-dispatch-edges.md`).** Event kinds 3/5 reach `+0x1c` (`1020:2552`), which intercepts Ctrl-Q via `root->+0x20` (`1008:769a`). View keystrokes dispatch via virtual slot `+0x20` (`KeyDown`), bubbling up parents (`1008:b802`) to the board view (`1018:3228`), whose `+0x20` override `1018:509c` accumulates characters in `DAT_1060:0a3c`, matches `"CHEAT"`, creates `DAT_1060:01e4`, raises slot-0 `+0x06` to at least 99 via `1018:ae3a(99)`, and emits command `0x2711`.
+4. **Resolved (`docs/framework-dispatch-edges.md`).** Event kind 8 is Macintosh `activateEvt`. Entry `1010:3afa` remains in the framework jump table, but `1010:3d56` never produces it on Win16; it is an inert artifact of the Macintosh port.
