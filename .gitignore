@@ -13,3 +13,5 @@
 /ghidra/*.lock
 *.class
 __pycache__/
+
+original/
