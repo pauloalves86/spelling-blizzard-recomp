@@ -189,6 +189,17 @@ void sb_recovered_1018_adb8(SBRecoveredMemory16 *memory,
     parent_object->byte_254 = 1;
 }
 
+void sb_recovered_1018_aede(const SBRecoveredMemory16 *memory,
+                            SBFarPtr16 parent,
+                            int16_t value)
+{
+    SBRecoveredParentObject *parent_object = parent_at(memory, parent);
+    SBRecoveredNestedObject *nested = nested_at(memory, parent);
+
+    nested->word_1a8 = value;
+    parent_object->byte_254 = 1;
+}
+
 void sb_recovered_1008_e8b6_noop(void)
 {
 }
@@ -211,7 +222,8 @@ void sb_recovered_1008_ac80_replace_01e4(
     replacement = hooks->allocate_0262(hooks->context);
     hooks->construct_before_final_table(hooks->context, replacement);
     replacement_object = parent_at(memory, replacement);
-    replacement_object->far_000 = (SBFarPtr16)SB_FAR(0x2b04, 0x1008);
+    replacement_object->far_000.offset = 0x2b04;
+    replacement_object->far_000.segment = 0x1008;
     hooks->initialize_nested(hooks->context, replacement);
     globals->far_01e4 = replacement;
 }

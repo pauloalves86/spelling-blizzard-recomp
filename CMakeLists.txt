@@ -12,6 +12,12 @@ add_library(recovered_application STATIC
     src/recovered/application/object_model.c
     src/recovered/application/application_state.c
 )
+
+add_custom_target(win16_objects
+    COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tools/build_win16_objects.sh
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Building reconstructed C as a Win16 OMF library with Open Watcom"
+)
 target_include_directories(recovered_message_pump PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/recovered/framework
 )

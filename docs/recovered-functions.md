@@ -258,3 +258,14 @@ Confidence levels: CONFIRMED, HIGH CONFIDENCE, MEDIUM CONFIDENCE, LOW CONFIDENCE
 - `aede`: `__stdcall16far`, `RETF 6`; writes an unmodified word to `+0x1a8`, parent `+0x254=1`.
 - `af08`: `__stdcall16far`, `RETF 6`; returns `AL=1` when signed argument is `<=` signed `+0x1a8`.
 - Native reconstruction: intentionally omitted; `adb8` has unchecked 16-bit segmented-offset selection, so a bounded native array model would be speculative.
+- `1018:aede` now has a bounded native reconstruction in `src/recovered/application/object_model.c`; it follows the shared far-pointer resolver and records the raw signed-word store at nested `+0x1a8`, followed by parent `+0x254=1`.
+
+## Win16 ABI entrypoints
+
+The separate `src/recovered/win16/application_primitives.c` unit provides direct large-model far Pascal entries for a small set of recovered functions. Its caller-visible signatures and far-return cleanup are kept separate from the host resolver models in `application/object_model.c`.
+
+- `1018:aeaa`: one far parent pointer, returns the raw word at nested `+0x06`, `RETF 4`.
+- `1018:aede`: far parent pointer plus word, stores nested `+0x1a8` and parent `+0x254=1`, `RETF 6`; direct caller `1018:284c`.
+- `1018:af08`: far parent pointer plus signed word, returns `AL=1` when the argument is `<=` nested signed `+0x1a8`, `RETF 6`.
+
+The Win16 build's disassembly check confirms these stack-cleanup sizes. This is static ABI verification; runtime comparison against the original Windows program remains outstanding.

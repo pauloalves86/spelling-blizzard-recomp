@@ -118,6 +118,29 @@ static void test_aeaa_raw_values(void)
     assert(sb_recovered_1018_aeaa(&memory, second_parent) == 99);
 }
 
+static void test_aede_word_store_and_dirty_byte(void)
+{
+    TestSegment segment = {.segment = 0x1234};
+    SBRecoveredMemory16 memory = {
+        .context = &segment,
+        .resolve = resolve_test_segment
+    };
+    SBFarPtr16 parent = far_at(0x0100, segment.segment);
+    SBRecoveredParentObject *parent_object =
+        (SBRecoveredParentObject *)&segment.bytes[parent.offset];
+    SBRecoveredNestedObject *nested =
+        (SBRecoveredNestedObject *)&segment.bytes[0x0c00];
+
+    setup_parent_chain(&segment, parent.offset, 0x0800, 0x0c00);
+    nested->word_1a8 = 17;
+    parent_object->byte_254 = 0;
+
+    sb_recovered_1018_aede(&memory, parent, (int16_t)0x8123);
+
+    assert((uint16_t)nested->word_1a8 == 0x8123);
+    assert(parent_object->byte_254 == 1);
+}
+
 static void test_ordered_slots(void)
 {
     int count;
@@ -308,6 +331,7 @@ int main(void)
 
     test_accessors_and_mutations();
     test_aeaa_raw_values();
+    test_aede_word_store_and_dirty_byte();
     test_ordered_slots();
     test_1018_adb8_signed_clamp_and_accumulation();
     test_known_replacement_boundaries();

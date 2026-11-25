@@ -66,7 +66,7 @@ Hypothesis: the handoff from generic startup to the application framework occurs
 
 ## Function inventory
 
-Initial Ghidra auto-analysis identified 959 functions. After systematic virtual method table analysis across all 142 detected method tables (`tools/ne_vtables.py`), 1,088 unique virtual method entry points were exported as seeds (`ghidra/CreateSeeds.java`), resolving 595 previously unanalyzed functions. The program now contains 1,684 discovered functions across the 5 code segments, imported Win16 thunks, and runtime/framework code.
+Initial Ghidra auto-analysis identified 959 functions. Systematic virtual method table analysis across all 142 detected method tables (`tools/ne_vtables.py`) exported 1,088 unique virtual method entry points as seeds (`ghidra/CreateSeeds.java`). Historical reports then recorded totals of 1,554 and 1,684 discovered functions, with differing inclusion/counting rules. The reproducible local Ghidra 12.2 project currently exports 1,552 function records: 1,422 in the five initialized code segments and 130 import/thunk records. Its code function bodies sum to the same 180,530 bytes reported by the earlier coverage analysis, but it has two fewer function records than the 1,554-function inventory. The older database is unavailable, so the boundary-count difference remains unexplained; use the local export as the current progress baseline and retain older numbers as historical measurements.
 
 The following are useful anchors, not definitive semantic names:
 

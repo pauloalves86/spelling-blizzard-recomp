@@ -29,3 +29,7 @@ The R600x diagnostics and Win16 import set are strong compatibility evidence, bu
 - Direct VGA BIOS graphics: not supported by current Ghidra instruction findings. Graphics are strongly represented by GDI APIs.
 
 These are format/interface conclusions, not claims about every possible dynamically loaded component.
+
+## Reconstruction compiler candidate
+
+Open Watcom 2.0 has been installed locally as a reconstruction tool and successfully emits 16-bit Windows large-model OMF objects. The tested compiler identifies itself as Open Watcom C x86 16-bit, version 2.0 beta. The downloaded Linux x64 package was verified against SHA-256 `637c56498b8e1a283832eb4b30595dbfb817a0ee4578f2d37be0f3237cb03b3a`. This establishes a usable Win16 ABI build path; it does not identify the compiler used for the original executable. See [local setup](local-setup.md) and the [Open Watcom 2.0 C/C++ User's Guide](https://open-watcom.github.io/open-watcom-v2-wikidocs/cguide.html).

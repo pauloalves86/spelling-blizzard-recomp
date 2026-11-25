@@ -3,6 +3,9 @@
 
 # Ghidra's mutable local project database
 /ghidra/SpellingBlizzard.rep/
+/ghidra/local/
+# Locally installed reverse-engineering tools
+/.local/tools/
 
 # Reproducible Ghidra analysis output; scripts and concise reports are tracked.
 /ghidra/*.log

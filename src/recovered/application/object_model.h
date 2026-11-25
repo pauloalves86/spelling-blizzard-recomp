@@ -4,6 +4,15 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#if defined(__WATCOMC__)
+#define SB_STATIC_ASSERT_JOIN_INNER(a, b) a##b
+#define SB_STATIC_ASSERT_JOIN(a, b) SB_STATIC_ASSERT_JOIN_INNER(a, b)
+#define SB_STATIC_ASSERT(condition, message) \
+    typedef char SB_STATIC_ASSERT_JOIN(sb_static_assert_, __LINE__)[(condition) ? 1 : -1]
+#else
+#define SB_STATIC_ASSERT(condition, message) _Static_assert(condition, message)
+#endif
+
 /* The observed Win16 records have 2-byte structure alignment. */
 #pragma pack(push, 2)
 
@@ -113,6 +122,12 @@ void sb_recovered_1018_adb8(SBRecoveredMemory16 *memory,
                             uint16_t flag,
                             uint16_t index);
 
+/* Original 1018:aede: __stdcall16far, far parent plus one word, RETF 6.
+ * Stores the incoming word at nested +0x1a8, then sets parent +0x254. */
+void sb_recovered_1018_aede(const SBRecoveredMemory16 *memory,
+                            SBFarPtr16 parent,
+                            int16_t value);
+
 /* Native bodies preserve recovered control flow and data operations, while
  * their source comments preserve the original 16-bit far ABI above. */
 void sb_recovered_1008_e8b6_noop(void);
@@ -134,26 +149,26 @@ void sb_recovered_1008_ac80_replace_01e4(
     SBRecoveredGlobals *globals,
     const SBRecoveredReplacementHooks *hooks);
 
-_Static_assert(sizeof(SBFarPtr16) == 0x04, "Win16 far pointer must be 4 bytes");
-_Static_assert(offsetof(SBFarPtr16, offset) == 0x00, "far offset");
-_Static_assert(offsetof(SBFarPtr16, segment) == 0x02, "far segment");
-_Static_assert(sizeof(SBRecoveredNestedSlot) == 0x08, "nested slot stride");
-_Static_assert(offsetof(SBRecoveredNestedSlot, word_06) == 0x06, "nested slot word");
-_Static_assert(offsetof(SBRecoveredNestedObject, count_38) == 0x38, "nested count");
-_Static_assert(offsetof(SBRecoveredNestedObject, bytes_19a) == 0x19a, "nested bytes");
-_Static_assert(offsetof(SBRecoveredNestedObject, field_1a4) == 0x1a4, "nested field");
-_Static_assert(offsetof(SBRecoveredNestedObject, word_1a8) == 0x1a8, "nested word");
-_Static_assert(sizeof(SBRecoveredNestedObject) == 0x1aa, "nested object size");
-_Static_assert(offsetof(SBRecoveredParentObject, far_250) == 0x250, "parent far pointer");
-_Static_assert(offsetof(SBRecoveredParentObject, byte_254) == 0x254, "parent byte");
-_Static_assert(offsetof(SBRecoveredParentObject, unknown_256) == 0x256, "parent unknown region");
-_Static_assert(sizeof(SBRecoveredParentObject) == 0x262, "parent object size");
-_Static_assert(offsetof(SBRecoveredGlobals, word_01de) == 0x01de, "global word");
-_Static_assert(offsetof(SBRecoveredGlobals, far_01e4) == 0x01e4, "global far pointer");
-_Static_assert(offsetof(SBRecoveredGlobals, far_01ec) == 0x01ec, "global far pointer");
-_Static_assert(offsetof(SBRecoveredGlobals, byte_0a36) == 0x0a36, "global byte");
-_Static_assert(offsetof(SBRecoveredGlobals, far_0a46) == 0x0a46, "global far pointer");
-_Static_assert(offsetof(SBRecoveredFinalMethodTable, slot_1c) == 0x1c, "method slot");
-_Static_assert(offsetof(SBRecoveredFinalMethodTable, slot_68) == 0x68, "method slot");
+SB_STATIC_ASSERT(sizeof(SBFarPtr16) == 0x04, "Win16 far pointer must be 4 bytes");
+SB_STATIC_ASSERT(offsetof(SBFarPtr16, offset) == 0x00, "far offset");
+SB_STATIC_ASSERT(offsetof(SBFarPtr16, segment) == 0x02, "far segment");
+SB_STATIC_ASSERT(sizeof(SBRecoveredNestedSlot) == 0x08, "nested slot stride");
+SB_STATIC_ASSERT(offsetof(SBRecoveredNestedSlot, word_06) == 0x06, "nested slot word");
+SB_STATIC_ASSERT(offsetof(SBRecoveredNestedObject, count_38) == 0x38, "nested count");
+SB_STATIC_ASSERT(offsetof(SBRecoveredNestedObject, bytes_19a) == 0x19a, "nested bytes");
+SB_STATIC_ASSERT(offsetof(SBRecoveredNestedObject, field_1a4) == 0x1a4, "nested field");
+SB_STATIC_ASSERT(offsetof(SBRecoveredNestedObject, word_1a8) == 0x1a8, "nested word");
+SB_STATIC_ASSERT(sizeof(SBRecoveredNestedObject) == 0x1aa, "nested object size");
+SB_STATIC_ASSERT(offsetof(SBRecoveredParentObject, far_250) == 0x250, "parent far pointer");
+SB_STATIC_ASSERT(offsetof(SBRecoveredParentObject, byte_254) == 0x254, "parent byte");
+SB_STATIC_ASSERT(offsetof(SBRecoveredParentObject, unknown_256) == 0x256, "parent unknown region");
+SB_STATIC_ASSERT(sizeof(SBRecoveredParentObject) == 0x262, "parent object size");
+SB_STATIC_ASSERT(offsetof(SBRecoveredGlobals, word_01de) == 0x01de, "global word");
+SB_STATIC_ASSERT(offsetof(SBRecoveredGlobals, far_01e4) == 0x01e4, "global far pointer");
+SB_STATIC_ASSERT(offsetof(SBRecoveredGlobals, far_01ec) == 0x01ec, "global far pointer");
+SB_STATIC_ASSERT(offsetof(SBRecoveredGlobals, byte_0a36) == 0x0a36, "global byte");
+SB_STATIC_ASSERT(offsetof(SBRecoveredGlobals, far_0a46) == 0x0a46, "global far pointer");
+SB_STATIC_ASSERT(offsetof(SBRecoveredFinalMethodTable, slot_1c) == 0x1c, "method slot");
+SB_STATIC_ASSERT(offsetof(SBRecoveredFinalMethodTable, slot_68) == 0x68, "method slot");
 
 #endif

@@ -131,8 +131,10 @@ The complete data generated during this phase is preserved in the following arti
 | Artifact | Contents |
 |---|---|
 | `build/vtable_seeds.txt` | Exactly 1,088 unique virtual method entry points extracted from all 142 tables. |
-| `build/functions.json` | 1,554 functions with entry addresses, body size, stack purge, and return instructions. |
-| `build/functions.txt` | Human-readable listing of all 1,554 functions and their return signatures. |
+| `build/functions.json` | Historical export of 1,554 functions with entry addresses, body size, stack purge, and return instructions. |
+| `build/functions.txt` | Historical human-readable listing of those 1,554 functions and their return signatures. |
 | `build/coverage_classification.json` | Segment-by-segment and overall byte-level coverage classification. |
 | `build/vtable_ranges.txt` | Table extent ranges (segment, start, end, byte size) for all 142 method tables. |
 | `docs/semantic-debt.md` | Grounded registry distinguishing machine operations from unproven source semantics. |
+
+The current local Ghidra 12.2 project exports 1,552 records (1,422 code-segment functions plus 130 import/thunk records). Its code function bodies still total 180,530 bytes. The two-record boundary-count difference from the historical 1,554 export is unresolved because the prior Ghidra database is unavailable; the figures above remain as historical provenance rather than being silently replaced.
