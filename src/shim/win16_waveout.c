@@ -6,9 +6,31 @@ static uint32_t g_shim_time_ms = 1000u;
 static uint16_t g_waveout_open_count = 0;
 static uint32_t g_total_bytes_written = 0;
 static uint32_t g_last_sample_rate = 0;
+static SB_WaveOutSink g_sink;
+static int g_has_sink = 0;
+static uint32_t (*g_time_source)(void) = NULL;
+
+void sb_win16_waveOut_setSink(const SB_WaveOutSink *sink)
+{
+    if (sink) {
+        g_sink = *sink;
+        g_has_sink = 1;
+    } else {
+        memset(&g_sink, 0, sizeof(g_sink));
+        g_has_sink = 0;
+    }
+}
+
+void sb_win16_setTimeSource(uint32_t (*now_ms)(void))
+{
+    g_time_source = now_ms;
+}
 
 uint32_t sb_win16_timeGetTime(void)
 {
+    if (g_time_source) {
+        return g_time_source();
+    }
     return g_shim_time_ms;
 }
 
@@ -62,6 +84,9 @@ uint16_t sb_win16_waveOutOpen(SB_HWAVEOUT *lphWaveOut,
     g_waveout_open_count++;
     *lphWaveOut = (SB_HWAVEOUT)g_waveout_open_count;
     g_last_sample_rate = lpFormat->nSamplesPerSec;
+    if (g_has_sink && g_sink.open) {
+        g_sink.open(g_sink.ctx, lpFormat);
+    }
     return 0;
 }
 
@@ -92,6 +117,9 @@ uint16_t sb_win16_waveOutWrite(SB_HWAVEOUT hWaveOut, SB_WAVEHDR *lpWaveOutHdr, u
         return 1;
     }
     g_total_bytes_written += lpWaveOutHdr->dwBufferLength;
+    if (g_has_sink && g_sink.write) {
+        g_sink.write(g_sink.ctx, lpWaveOutHdr->lpData, lpWaveOutHdr->dwBufferLength);
+    }
     lpWaveOutHdr->dwFlags |= SB_WHDR_DONE;
     return 0;
 }
@@ -100,6 +128,9 @@ uint16_t sb_win16_waveOutReset(SB_HWAVEOUT hWaveOut)
 {
     if (hWaveOut == 0) {
         return 1;
+    }
+    if (g_has_sink && g_sink.reset) {
+        g_sink.reset(g_sink.ctx);
     }
     return 0;
 }

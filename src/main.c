@@ -15,11 +15,19 @@
  *   --level <1..101>      Select starting level (default: 1)
  *   --save-ppm <path>     Export rendered 640x480 256-color screen framebuffer to a 24-bit RGB PPM image
  *   --interactive         Run interactive terminal spelling session
+ *   --window              Open a real window (SDL2 platform backend) with live audio
+ *                         and run the recovered Win16 message loop until closed
+ *   --scale <1..4>        Window scale factor for --window (default: 2)
+ *   --frames <n>          Auto-quit --window mode after n frames (for automated runs)
+ *   --no-audio            Do not open an audio device in --window mode
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "recovered/application/game_logic.h"
+#ifdef SB_HAVE_PLATFORM
+#include "platform/sb_platform.h"
+#endif
 
 static int save_screen_as_ppm(const char *ppm_path, const SBPictSurface *surface) {
     FILE *fp;
@@ -84,10 +92,51 @@ static void render_river_grid_ascii(const SBSpellingMatch *match) {
     printf("  +---------------------------------------------------------------------------+\n");
 }
 
+#ifdef SB_HAVE_PLATFORM
+/* Host-driven main loop: the same work as `CApplication_RunMainLoop_1008_0694`
+ * (drain Win16 messages, then idle/audio/timer pumping), plus a present of the
+ * shim screen bitmap and frame pacing, which on real Win16 the display driver
+ * and the cooperative scheduler provided for free. */
+static int run_window_loop(SBApplication *app, uint32_t max_frames) {
+    uint32_t frames = 0;
+    uint32_t next_frame_ms = sb_platform_ticks_ms();
+
+    sb_platform_set_target_hwnd(app->main_window_74->hwnd_42);
+    sb_win16_InvalidateRect(app->main_window_74->hwnd_42, NULL, 0);
+
+    while (!app->quit_requested_66) {
+        uint32_t now;
+        sb_platform_pump_events();
+        while (CEventDispatcherBase_ProcessOneEvent_1010_3bb2(&app->dispatcher_00) &&
+               !app->quit_requested_66) {
+        }
+        CApplication_PumpIdleAndAudio_1008_79ec(app);
+        sb_platform_present();
+
+        ++frames;
+        if (max_frames > 0 && frames >= max_frames) {
+            CApplication_RequestQuit_1008_7bf2(app);
+        }
+        next_frame_ms += 16u; /* ~60 Hz, the rate of `CTimer60Hz_1010_456a` */
+        now = sb_platform_ticks_ms();
+        if (next_frame_ms > now) {
+            sb_platform_sleep_ms(next_frame_ms - now);
+        } else {
+            next_frame_ms = now;
+        }
+    }
+    return (int)frames;
+}
+#endif
+
 int main(int argc, char **argv) {
     int16_t level_id = 1;
     const char *ppm_path = NULL;
     int interactive = 0;
+    int window_mode = 0;
+    int window_scale = 2;
+    int window_audio = 1;
+    uint32_t window_frames = 0;
     int i;
 
     SBApplication *app;
@@ -97,7 +146,7 @@ int main(int argc, char **argv) {
     SB_RECT16 banner_dst_rc = {142, 12, 498, 28};
     uint16_t frtr_ids[4] = {1000, 1002, 1003, 1004};
     SBSpellingPracticeSession practice;
-    SBSpellingMatch *match;
+    SBSpellingMatch *match = NULL;
     SBRollQuotePair quote_pairs[8];
     int quote_len;
 
@@ -111,6 +160,17 @@ int main(int argc, char **argv) {
             ppm_path = argv[++i];
         } else if (strcmp(argv[i], "--interactive") == 0) {
             interactive = 1;
+        } else if (strcmp(argv[i], "--window") == 0) {
+            window_mode = 1;
+        } else if (strcmp(argv[i], "--scale") == 0 && i + 1 < argc) {
+            window_scale = atoi(argv[++i]);
+            if (window_scale < 1 || window_scale > 4) {
+                window_scale = 2;
+            }
+        } else if (strcmp(argv[i], "--frames") == 0 && i + 1 < argc) {
+            window_frames = (uint32_t)strtoul(argv[++i], NULL, 10);
+        } else if (strcmp(argv[i], "--no-audio") == 0) {
+            window_audio = 0;
         }
     }
 
@@ -126,6 +186,27 @@ int main(int argc, char **argv) {
         fprintf(stderr, "ERROR: Failed to open original/BLIZZARD.EXE or original/SB_CDRES.DLL\n");
         return 1;
     }
+#ifdef SB_HAVE_PLATFORM
+    if (window_mode) {
+        SBPlatformConfig cfg;
+        memset(&cfg, 0, sizeof(cfg));
+        cfg.title = "Spelling Blizzard (reconstructed)";
+        cfg.scale = window_scale;
+        cfg.enable_audio = window_audio;
+        cfg.escape_closes = 1;
+        if (sb_platform_init(&cfg) != 0) {
+            fprintf(stderr, "ERROR: platform backend failed to initialize\n");
+            sb_win16_resource_shim_shutdown();
+            return 1;
+        }
+    }
+#else
+    if (window_mode) {
+        fprintf(stderr, "ERROR: built without the SDL2 platform backend; --window unavailable\n");
+        sb_win16_resource_shim_shutdown();
+        return 1;
+    }
+#endif
 
     /* 2. Run WinMain (`1008:2bf4`) & Application Subsystem Initialization (`1008:72b6`) */
     if (!System_CheckRequirements_1008_6a28()) {
@@ -146,10 +227,12 @@ int main(int argc, char **argv) {
            (unsigned)app->main_window_74->hwnd_42);
 
     /* 3. Stream intro speech/audio from SB_CDRES.DLL ('snd ' #129 & #130) */
-    CSoundManager_PlaySoundResource_1008_22d6(g_DAT_1060_07c8_soundMgr, 129);
-    CSoundManager_Stop_1008_2462(g_DAT_1060_07c8_soundMgr);
-    CSoundManager_PlaySoundResource_1008_22d6(g_DAT_1060_07c8_soundMgr, 130);
-    CSoundManager_Stop_1008_2462(g_DAT_1060_07c8_soundMgr);
+    if (!window_mode) {
+        CSoundManager_PlaySoundResource_1008_22d6(g_DAT_1060_07c8_soundMgr, 129);
+        CSoundManager_Stop_1008_2462(g_DAT_1060_07c8_soundMgr);
+        CSoundManager_PlaySoundResource_1008_22d6(g_DAT_1060_07c8_soundMgr, 130);
+        CSoundManager_Stop_1008_2462(g_DAT_1060_07c8_soundMgr);
+    }
     printf("[3/6] Streamed BSW 11,025 Hz 8-bit mono audio ('snd ' #129, #130): %u PCM bytes written\n",
            (unsigned)sb_win16_waveOut_getTotalBytesWritten());
 
@@ -171,6 +254,20 @@ int main(int argc, char **argv) {
             printf("      Saved 640x480 24-bit RGB frame preview to %s\n", ppm_path);
         }
     }
+
+#ifdef SB_HAVE_PLATFORM
+    if (window_mode) {
+        int frames;
+        /* Intro speech plays live while the window is up. */
+        CSoundManager_PlaySoundResource_1008_22d6(g_DAT_1060_07c8_soundMgr, 129);
+        printf("[window] Running recovered message loop (close the window or press Esc to quit)\n");
+        frames = run_window_loop(app, window_frames);
+        printf("[window] Message loop exited after %d frames; %u PCM bytes sent to waveOut\n",
+               frames, (unsigned)sb_win16_waveOut_getTotalBytesWritten());
+        CSoundManager_Stop_1008_2462(g_DAT_1060_07c8_soundMgr);
+        goto shutdown;
+    }
+#endif
 
     /* 5. Initialize Player Profile & Run Magic Spelling Tricks Word Practice Round */
     g_DAT_1060_0a46_highScoreTable = CPlayerRecord_Ctor_1018_a9a0(NULL, "TOP7", 0);
@@ -254,7 +351,10 @@ int main(int argc, char **argv) {
         CApplication_ProcessSingleStep_1008_06c8(app);
     }
 
-    CSpellingMatch_Dtor(match);
+shutdown:
+    if (match) {
+        CSpellingMatch_Dtor(match);
+    }
     CMaskedPictSurface_Dtor_1008_604a(hud_banner);
     CBoardScene_Dtor_1010_735e(board_scene);
     free(board_scene);
@@ -281,6 +381,11 @@ int main(int argc, char **argv) {
     }
     ResMgr_FreeCdResLibrary_1008_2bcc();
     sb_win16_resource_shim_shutdown();
+#ifdef SB_HAVE_PLATFORM
+    if (window_mode) {
+        sb_platform_shutdown();
+    }
+#endif
 
     printf("========================================================================\n");
     printf("  SPELLING BLIZZARD — Clean Shutdown Complete (Exit Code 0)\n");

@@ -78,6 +78,28 @@ uint16_t sb_win16_waveOutWrite(SB_HWAVEOUT hWaveOut, SB_WAVEHDR *lpWaveOutHdr, u
 uint16_t sb_win16_waveOutReset(SB_HWAVEOUT hWaveOut);
 uint16_t sb_win16_waveOutClose(SB_HWAVEOUT hWaveOut);
 
+/* Host backend hooks.
+ *
+ * The shim itself never talks to an audio device or wall clock: by default
+ * `timeGetTime` is a deterministic counter and `waveOutWrite` only counts
+ * bytes, which keeps unit tests reproducible. A host platform layer (e.g.
+ * `src/platform/sb_platform_sdl.c`) installs these hooks to route PCM to a
+ * real device and drive time from the real clock. Pass NULL to uninstall.
+ */
+typedef struct SB_WaveOutSink {
+    void *ctx;
+    /* Called from waveOutOpen with the requested PCM format. */
+    void (*open)(void *ctx, const SB_PCMWAVEFORMAT *fmt);
+    /* Called from waveOutWrite; the sink must copy `data` before returning
+     * because the caller frees the buffer after waveOutReset/Unprepare. */
+    void (*write)(void *ctx, const void *data, uint32_t len);
+    /* Called from waveOutReset/waveOutClose: drop any queued audio. */
+    void (*reset)(void *ctx);
+} SB_WaveOutSink;
+
+void sb_win16_waveOut_setSink(const SB_WaveOutSink *sink);
+void sb_win16_setTimeSource(uint32_t (*now_ms)(void));
+
 /* Diagnostic counters for testing audio playback */
 uint32_t sb_win16_waveOut_getTotalBytesWritten(void);
 uint32_t sb_win16_waveOut_getLastSampleRate(void);
