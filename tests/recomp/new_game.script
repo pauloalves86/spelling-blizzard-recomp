@@ -1,0 +1,8 @@
+# Headless smoke test: title -> map -> New Game -> enter name -> Play -> level.
+# Times are ms since start. Snapshots are written relative to the working dir.
+30500 click 460 385
+36000 text ALEX
+37500 key RETURN
+44000 click 352 384
+58500 click 356 183
+62000 quit

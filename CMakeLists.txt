@@ -132,3 +132,8 @@ pkg_check_modules(FREETYPE REQUIRED IMPORTED_TARGET freetype2)
 find_package(SDL2 CONFIG REQUIRED)
 target_link_libraries(sb_recomp PRIVATE sb_recomp_gen SDL2::SDL2 PkgConfig::FREETYPE m)
 target_compile_options(sb_recomp PRIVATE -Wall -Wno-unused-function)
+add_test(NAME recomp_new_game_headless
+         COMMAND sb_recomp --headless --no-audio --data-dir ${CMAKE_CURRENT_BINARY_DIR}/recomp_test_run
+                 --script ${CMAKE_CURRENT_SOURCE_DIR}/tests/recomp/new_game.script
+         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+set_tests_properties(recomp_new_game_headless PROPERTIES TIMEOUT 120)
