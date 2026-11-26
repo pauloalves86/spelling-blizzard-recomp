@@ -6,12 +6,12 @@ All functions in the five initialized code segments are listed in [reconstructio
 ## Function inventory
 
 - Code-segment functions: **1422** (180,530 bytes)
-- Decompiled & tested functions (Path 2 C + Win16 ABI): **108 / 1422 (7.59%)**
-- Decompiled & tested code bytes: **11,267 / 180,530 (6.24%)**
-  - Clean C decompiled against Win16 shim (`decompiled`): **105** (11,168 bytes)
+- Decompiled & tested functions (Path 2 C + Win16 ABI): **182 / 1422 (12.80%)**
+- Decompiled & tested code bytes: **21,197 / 180,530 (11.74%)**
+  - Clean C decompiled against Win16 shim (`decompiled`): **179** (21,098 bytes)
   - Win16 OMF ABI-checked entrypoints (`win16-abi-checked`): **3** (99 bytes)
 - Partial original functions: **1** (340 bytes)
-- Remaining functions (mapped in `docs/subsystem-map.md`): **1313**
+- Remaining functions (mapped in `docs/subsystem-map.md`): **1239**
 
 ## Decompiled Functions (Path 2 Clean C + Thin Win16 Shim)
 
@@ -30,9 +30,62 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1008:2bbc` | `src/recovered/framework/resource_manager.c` | Loads `SB_CDRES.DLL` into `DAT_1060_001c` (`ResMgr_LoadCdResLibrary_1008_2bbc`). |
 | `1008:2bcc` | `src/recovered/framework/resource_manager.c` | Frees `SB_CDRES.DLL` module handle (`ResMgr_FreeCdResLibrary_1008_2bcc`). |
 | `1008:2bdc` | `src/recovered/framework/resource_manager.c` | Routes `'WIND'` to `BLIZZARD.EXE` and all other FourCCs to `SB_CDRES.DLL` (`ResMgr_GetResourceModule_1008_2bdc`). |
+| `1008:326e` | `src/recovered/framework/graphics_gdi.c` | Initializes 236-entry `CPaletteManager_1008_8278` at `DAT_1060_0198` (`CPaletteManager_Init_1008_326e`). |
+| `1008:3464` | `src/recovered/framework/graphics_gdi.c` | `CPaletteManager_1008_8278` virtual destructor (`CPaletteManager_Dtor_1008_3464`). |
+| `1008:34bc` | `src/recovered/framework/graphics_gdi.c` | Crossfades current palette to target palette (`CPaletteManager_FadeToCurrent_1008_34bc`). |
+| `1008:34e6` | `src/recovered/framework/graphics_gdi.c` | Crossfades active palette range to black (`CPaletteManager_FadeOut_1008_34e6`). |
+| `1008:3596` | `src/recovered/framework/graphics_gdi.c` | Applies target CLUT entries across range (`CPaletteManager_ApplyTargetRange_1008_3596`). |
+| `1008:3624` | `src/recovered/framework/graphics_gdi.c` | Applies black entries across range (`CPaletteManager_ApplyBlackRange_1008_3624`). |
+| `1008:36b2` | `src/recovered/framework/graphics_gdi.c` | Loads `'clut'` (`0x03ef`) primary and companion palette resources (`CPaletteManager_LoadClutResource_1008_36b2`). |
+| `1008:382e` | `src/recovered/framework/graphics_gdi.c` | Saves current 236-entry palette and realizes (`CPaletteManager_SaveAndRealize_1008_382e`). |
+| `1008:3950` | `src/recovered/framework/graphics_gdi.c` | Restores saved 236-entry palette and realizes (`CPaletteManager_RestoreAndRealize_1008_3950`). |
+| `1008:3a74` | `src/recovered/framework/graphics_gdi.c` | Resets palette to initial system entries (`CPaletteManager_ResetToInitial_1008_3a74`). |
+| `1008:3b44` | `src/recovered/framework/graphics_gdi.c` | Rotates/cycles palette range by 1 slot and calls `AnimatePalette` (`CPaletteManager_CycleRange_1008_3b44`). |
+| `1008:3c5c` | `src/recovered/framework/graphics_gdi.c` | Finds palette index matching 16-bit Mac RGB triplet (`CPaletteManager_FindColorIndex_1008_3c5c`). |
+| `1008:3cd2` | `src/recovered/framework/graphics_gdi.c` | 32-step interpolated palette crossfade (`CPaletteManager_CrossfadeRange_1008_3cd2`). |
+| `1008:3e34` | `src/recovered/framework/graphics_gdi.c` | Animates all 236 palette entries (`CPaletteManager_AnimateAll_1008_3e34`). |
+| `1008:5646` | `src/recovered/framework/graphics_gdi.c` | Initializes blank offscreen `CPictSurface_1008_6448` (`CPictSurface_InitBlank_1008_5646`). |
+| `1008:56a8` | `src/recovered/framework/graphics_gdi.c` | `CPictSurface_1008_6448` virtual destructor (`CPictSurface_Dtor_1008_56a8`). |
+| `1008:56f8` | `src/recovered/framework/graphics_gdi.c` | Copies screen rectangle into surface for mode `0`/`0x24` (`CPictSurface_CopyToScreenIfMode_1008_56f8`). |
+| `1008:5724` | `src/recovered/framework/graphics_gdi.c` | `CPictSurface_1008_6448` slot `+0x14` no-op (`CPictSurface_Noop14_1008_5724`). |
+| `1008:5728` | `src/recovered/framework/graphics_gdi.c` | Dispatches opaque (`0`) or transparent (`0x24`) surface-to-surface blit (`CPictSurface_BlitToSurfaceByMode_1008_5728`). |
+| `1008:5786` | `src/recovered/framework/graphics_gdi.c` | Dispatches opaque (`0`) or transparent (`0x24`) surface-to-screen blit (`CPictSurface_BlitToScreenByMode_1008_5786`). |
+| `1008:57ce` | `src/recovered/framework/graphics_gdi.c` | Stores surface bounds and creates memory DC (`CPictSurface_CreateDc_1008_57ce`). |
+| `1008:5804` | `src/recovered/framework/graphics_gdi.c` | Loads and decodes `'PICT'` (`0x03f3`) resource into surface (`CPictSurface_LoadPictResource_1008_5804`). |
+| `1008:5a0a` | `src/recovered/framework/graphics_gdi.c` | Fills surface rectangle with black (`CPictSurface_FillBlack_1008_5a0a`). |
+| `1008:5a2a` | `src/recovered/framework/graphics_gdi.c` | Clips source and destination blit rectangles against bounds (`CPictSurface_ClipRects_1008_5a2a`). |
+| `1008:5b78` | `src/recovered/framework/graphics_gdi.c` | Fills surface rectangle with palette color index (`CPictSurface_FillColorRect_1008_5b78`). |
+| `1008:5c68` | `src/recovered/framework/graphics_gdi.c` | Copies rectangle from screen DC into surface (`CPictSurface_CopyFromScreen_1008_5c68`). |
+| `1008:5c88` | `src/recovered/framework/graphics_gdi.c` | Opaque blit from surface to target surface (`CPictSurface_CopyToSurface_1008_5c88`). |
+| `1008:5caa` | `src/recovered/framework/graphics_gdi.c` | Opaque blit from surface to screen DC (`CPictSurface_CopyToScreen_1008_5caa`). |
+| `1008:5cca` | `src/recovered/framework/graphics_gdi.c` | Fills screen DC rectangle with black (`CPictSurface_ClearScreenRect_1008_5cca`). |
+| `1008:5cea` | `src/recovered/framework/graphics_gdi.c` | Transparent blit from surface to target surface (`CPictSurface_TransparentBlitToSurface_1008_5cea`). |
+| `1008:5d36` | `src/recovered/framework/graphics_gdi.c` | Transparent blit from surface to screen DC (`CPictSurface_TransparentBlitToScreen_1008_5d36`). |
+| `1008:5d7c` | `src/recovered/framework/graphics_gdi.c` | Returns surface `HBITMAP` (`CPictSurface_GetHBitmap_1008_5d7c`). |
+| `1008:5d8a` | `src/recovered/framework/graphics_gdi.c` | Returns surface `HDC` (`CPictSurface_GetHDc_1008_5d8a`). |
+| `1008:5d98` | `src/recovered/framework/graphics_gdi.c` | Reads 8-bit palette index at `(x, y)` in surface (`CPictSurface_GetPixel_1008_5d98`). |
+| `1008:5e14` | `src/recovered/framework/graphics_gdi.c` | Initializes `CLayeredOffscreen_1008_b310` from `'PICT'` resource (`CLayeredOffscreen_InitFromPict_1008_5e14`). |
+| `1008:5ed4` | `src/recovered/framework/graphics_gdi.c` | `CLayeredOffscreen_1008_b310` slot `+0x64` forwarder (`CLayeredOffscreen_Forward18_1008_5ed4`). |
+| `1008:5f02` | `src/recovered/framework/graphics_gdi.c` | `CLayeredOffscreen_1008_b310` slot `+0x68` forwarder (`CLayeredOffscreen_Forward1c_1008_5f02`). |
+| `1008:5f2c` | `src/recovered/framework/graphics_gdi.c` | `CLayeredOffscreen_1008_b310` slot `+0x6c` forwarder (`CLayeredOffscreen_Forward38_1008_5f2c`). |
+| `1008:5f52` | `src/recovered/framework/graphics_gdi.c` | `CLayeredOffscreen_1008_b310` slot `+0x70` forwarder (`CLayeredOffscreen_Forward3c_1008_5f52`). |
+| `1008:5f6e` | `src/recovered/framework/graphics_gdi.c` | Initializes `CMaskedPictSurface_1008_b384` and precomputes 1-bit mask (`CMaskedPictSurface_InitFromPict_1008_5f6e`). |
+| `1008:604a` | `src/recovered/framework/graphics_gdi.c` | `CMaskedPictSurface_1008_b384` virtual destructor (`CMaskedPictSurface_Dtor_1008_604a`). |
+| `1008:60b2` | `src/recovered/framework/graphics_gdi.c` | `CMaskedPictSurface_1008_b384` slot `+0x64` forwarder (`CMaskedPictSurface_Forward18_1008_60b2`). |
+| `1008:60e0` | `src/recovered/framework/graphics_gdi.c` | `CMaskedPictSurface_1008_b384` slot `+0x68` forwarder (`CMaskedPictSurface_Forward1c_1008_60e0`). |
+| `1008:610a` | `src/recovered/framework/graphics_gdi.c` | Blits masked surface to target surface (`CMaskedPictSurface_BlitToSurface_1008_610a`). |
+| `1008:612e` | `src/recovered/framework/graphics_gdi.c` | Blits masked surface to screen DC (`CMaskedPictSurface_BlitToScreen_1008_612e`). |
+| `1008:614e` | `src/recovered/framework/graphics_gdi.c` | Initializes tiled surface from `'PICT'` resource (`CTiledPictSurface_InitFromPict_1008_614e`). |
+| `1008:6246` | `src/recovered/framework/graphics_gdi.c` | Repeats tile pattern across full surface bounds (`CTiledPictSurface_CreateTiled_1008_6246`). |
+| `1008:6436` | `src/recovered/framework/graphics_gdi.c` | `CPictSurface_1008_6448` slot `+0x0c` no-op (`CPictSurface_Noop0c_1008_6436`). |
+| `1008:643a` | `src/recovered/framework/graphics_gdi.c` | `CPictSurface_1008_6448` slot `+0x58` returns 1 (`CPictSurface_True58_1008_643a`). |
+| `1008:6440` | `src/recovered/framework/graphics_gdi.c` | `CPictSurface_1008_6448` slot `+0x5c` no-op (`CPictSurface_Noop5c_1008_6440`). |
+| `1008:6444` | `src/recovered/framework/graphics_gdi.c` | `CPictSurface_1008_6448` slot `+0x60` no-op (`CPictSurface_Noop60_1008_6444`). |
+| `1008:64ac` | `src/recovered/framework/graphics_gdi.c` | Procedural 32x32 water/ice shimmer animation across palette indices `0xa8..0xaf` (`WaterShimmer_AnimateBitmap_1008_64ac`). |
 | `1008:65f2` | `src/recovered/framework/resource_manager.c` | Initializes `CResourceManager_1008_2da6` (`CResourceManager_Init_1008_65f2`). |
 | `1008:6602` | `src/recovered/framework/resource_manager.c` | Purges `PICT` (`0x03f3`) immediately on unlock when purgeable (`CResourceManager_UpdateEntryFlags_1008_6602`). |
 | `1008:6a28` | `src/recovered/framework/audio_waveout.c` | Verifies Win 3.10+, 11.025 kHz 8-bit mono async `waveOut`, and display capabilities (`System_CheckRequirements_1008_6a28`). |
+| `1008:7cb4` | `src/recovered/framework/graphics_gdi.c` | Returns active `HPALETTE` handle (`CPaletteManager_GetHPalette_1008_7cb4`). |
 | `1008:e412` | `src/recovered/framework/message_pump.c` | Message ranges/order decompiled (`framework_drain_message_ranges`). |
 | `1008:eed8` | `src/recovered/framework/resource_manager.c` | Zero-initialized memory allocator (`AllocZeroed_1008_eed8`). |
 | `1008:ef1e` | `src/recovered/framework/resource_manager.c` | Memory release helper (`FreeMem_1008_ef1e`). |
@@ -53,11 +106,24 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:03ee` | `src/recovered/framework/resource_manager.c` | Resizes handle payload buffer (`Handle_Resize_1010_03ee`). |
 | `1010:057c` | `src/recovered/framework/resource_manager.c` | Disposes handle via pointer and clears pointer (`Handle_FreeIndirect_1010_057c`). |
 | `1010:0608` | `src/recovered/framework/resource_manager.c` | No-op handle compaction stub (`Handle_MoveNeck_1010_0608`). |
+| `1010:0614` | `src/recovered/framework/graphics_gdi.c` | Unlocks and frees global memory block (`Global_FreePtr_1010_0614`). |
 | `1010:07ae` | `src/recovered/framework/audio_waveout.c` | Global 60 Hz tick query (`Timer_GetTicks60Hz_1010_07ae`). |
+| `1010:07ba` | `src/recovered/framework/graphics_gdi.c` | Random byte helper (`Random_Byte_1010_07ba`). |
+| `1010:08e0` | `src/recovered/framework/graphics_gdi.c` | Decodes PackBits RLE or raw `'PICT'` (`0x03f3`) resource into 8-bit `HBITMAP` (`Pict_DecodeToBitmap_1010_08e0`). |
+| `1010:0c94` | `src/recovered/framework/graphics_gdi.c` | Low-memory banded PackBits RLE `'PICT'` decoder (`Pict_DecodeRleBanded_1010_0c94`). |
+| `1010:0f1c` | `src/recovered/framework/graphics_gdi.c` | `IsRectEmpty` wrapper (`Rect_IsEmpty_1010_0f1c`). |
+| `1010:0f2a` | `src/recovered/framework/graphics_gdi.c` | `EqualRect` wrapper (`Rect_Equal_1010_0f2a`). |
+| `1010:0f3c` | `src/recovered/framework/graphics_gdi.c` | Insets rectangle by `(dx, dy)` (`Rect_Inset_1010_0f3c`). |
+| `1010:0f74` | `src/recovered/framework/graphics_gdi.c` | `OffsetRect` wrapper (`Rect_Offset_1010_0f74`). |
+| `1010:0f88` | `src/recovered/framework/graphics_gdi.c` | `IntersectRect` wrapper (`Rect_Intersect_1010_0f88`). |
+| `1010:0f9e` | `src/recovered/framework/graphics_gdi.c` | Sets 16-bit `(x, y)` point (`Point_Set_1010_0f9e`). |
+| `1010:0fb6` | `src/recovered/framework/graphics_gdi.c` | `SetRect` wrapper (`Rect_Set_1010_0fb6`). |
+| `1010:0fd0` | `src/recovered/framework/graphics_gdi.c` | `UnionRect` wrapper (`Rect_Union_1010_0fd0`). |
 | `1010:0fe6` | `src/recovered/framework/resource_manager.c` | Finds, loads, sizes, and locks NE resource into handle (`ResHandle_LoadAndLock_1010_0fe6`). |
 | `1010:10f2` | `src/recovered/framework/resource_manager.c` | Fetches or loads resource by `(win16_type_id, mac_fourcc, res_id)` (`ResMgr_GetResource_1010_10f2`). |
 | `1010:11d8` | `src/recovered/framework/resource_manager.c` | Reloads purged resource handle on demand (`ResHandle_EnsureLoaded_1010_11d8`). |
 | `1010:1206` | `src/recovered/framework/resource_manager.c` | Purges unlocked resources and dereferences handle (`ResHandle_PurgeAndDeref_1010_1206`). |
+| `1010:24ae` | `src/recovered/framework/graphics_gdi.c` | Loads `'PICT'` (`0x03f3`) resource handle by ID (`Pict_LoadResourceHandle_1010_24ae`). |
 | `1010:24f8` | `src/recovered/framework/audio_waveout.c` | Inclusive bounded random integer helper (`Random_Range_1010_24f8`). |
 | `1010:25be` | `src/recovered/framework/resource_manager.c` | `CResourceTypeList_1010_2b12` virtual destructor (`CResourceTypeList_Dtor_1010_25be`). |
 | `1010:25e4` | `src/recovered/framework/resource_manager.c` | Finds or creates resource handle entry by ID (`CResourceTypeList_FindOrCreateById_1010_25e4`). |
@@ -76,6 +142,14 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:2a94` | `src/recovered/framework/resource_manager.c` | Resource ID comparator callback (`ResEntry_CompareId_1010_2a94`). |
 | `1010:2ae2` | `src/recovered/framework/resource_manager.c` | Callback invoking type list slot `+0x64` (`PurgeAll`). |
 | `1010:2afa` | `src/recovered/framework/resource_manager.c` | Callback invoking type list slot `+0x6c` (`ReleaseAll`). |
+| `1010:2ba8` | `src/recovered/framework/graphics_gdi.c` | Stretches `HBITMAP` to `HBITMAP` via temporary DCs (`Gdi_StretchBitmapToBitmap_1010_2ba8`). |
+| `1010:2c40` | `src/recovered/framework/graphics_gdi.c` | Blits `HBITMAP` into destination `HDC` (`Gdi_BlitBitmapToDc_1010_2c40`). |
+| `1010:2cc0` | `src/recovered/framework/graphics_gdi.c` | Stretches source `HDC` to destination `HDC` (`Gdi_StretchDcToDc_1010_2cc0`). |
+| `1010:2d2e` | `src/recovered/framework/graphics_gdi.c` | Allocates and builds 14-byte 1-bit transparent sprite mask (`SpriteMask_Create_1010_2d2e`). |
+| `1010:2d58` | `src/recovered/framework/graphics_gdi.c` | Generates 1-bit monochrome mask where index 0 is transparent (`SpriteMask_InitFromBitmap_1010_2d58`). |
+| `1010:2e12` | `src/recovered/framework/graphics_gdi.c` | Destroys 14-byte transparent sprite mask (`SpriteMask_Destroy_1010_2e12`). |
+| `1010:2e60` | `src/recovered/framework/graphics_gdi.c` | Transparent `SRCAND`+`SRCPAINT` sprite blitter (`Gdi_TransparentBlit_1010_2e60`). |
+| `1010:2f6a` | `src/recovered/framework/graphics_gdi.c` | Transparent blitter using precomputed `SBSpriteMask` (`Gdi_TransparentBlitPrecomputed_1010_2f6a`). |
 | `1010:312a` | `src/recovered/framework/audio_waveout.c` | Zero-initializes 10-byte `SBBswSample` (`BswSample_InitEmpty_1010_312a`). |
 | `1010:3152` | `src/recovered/framework/audio_waveout.c` | Frees PCM buffer in `SBBswSample` (`BswSample_FreeBuffer_1010_3152`). |
 | `1010:3172` | `src/recovered/framework/audio_waveout.c` | `SBBswSample` constructor (`BswSample_Ctor_1010_3172`). |
