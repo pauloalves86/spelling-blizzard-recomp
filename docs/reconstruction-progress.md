@@ -6,12 +6,12 @@ All functions in the five initialized code segments are listed in [reconstructio
 ## Function inventory
 
 - Code-segment functions: **1422** (180,530 bytes)
-- Decompiled & tested functions (Path 2 C + Win16 ABI): **415 / 1422 (29.18%)**
-- Decompiled & tested code bytes: **41,235 / 180,530 (22.84%)**
-  - Clean C decompiled against Win16 shim (`decompiled`): **412** (41,136 bytes)
+- Decompiled & tested functions (Path 2 C + Win16 ABI): **620 / 1422 (43.60%)**
+- Decompiled & tested code bytes: **87,681 / 180,530 (48.57%)**
+  - Clean C decompiled against Win16 shim (`decompiled`): **617** (87,582 bytes)
   - Win16 OMF ABI-checked entrypoints (`win16-abi-checked`): **3** (99 bytes)
-- Partial original functions: **1** (340 bytes)
-- Remaining functions (mapped in `docs/subsystem-map.md`): **1006**
+- Partial original functions: **0** (0 bytes)
+- Remaining functions (mapped in `docs/subsystem-map.md`): **802**
 
 ## Decompiled Functions (Path 2 Clean C + Thin Win16 Shim)
 
@@ -133,6 +133,32 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1008:7c02` | `src/recovered/framework/ui_framework.c` | Event Dispatcher & Cursor Manager (`CEventDispatcher_1008_7f84`) (`1008:7c02`). |
 | `1008:7c5c` | `src/recovered/framework/ui_framework.c` | Event Dispatcher & Cursor Manager (`CEventDispatcher_1008_7f84`) (`1008:7c5c`). |
 | `1008:7cb4` | `src/recovered/framework/graphics_gdi.c` | Returns active `HPALETTE` handle (`CPaletteManager_GetHPalette_1008_7cb4`). |
+| `1008:82b8` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:82b8`). |
+| `1008:8b34` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8b34`). |
+| `1008:8c86` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8c86`). |
+| `1008:8c98` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8c98`). |
+| `1008:8caa` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8caa`). |
+| `1008:8dfc` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8dfc`). |
+| `1008:8e46` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8e46`). |
+| `1008:91a2` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:91a2`). |
+| `1008:9222` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9222`). |
+| `1008:9542` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9542`). |
+| `1008:9922` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9922`). |
+| `1008:9b4c` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9b4c`). |
+| `1008:9bbc` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9bbc`). |
+| `1008:a05a` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a05a`). |
+| `1008:a15a` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a15a`). |
+| `1008:a1d4` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a1d4`). |
+| `1008:a24c` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a24c`). |
+| `1008:a2ce` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a2ce`). |
+| `1008:a4ec` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a4ec`). |
+| `1008:a57e` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a57e`). |
+| `1008:a5c6` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a5c6`). |
+| `1008:a614` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a614`). |
+| `1008:a656` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a656`). |
+| `1008:aa42` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:aa42`). |
+| `1008:ab54` | `src/recovered/application/game_logic.c` | Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:ab54`). |
+| `1008:ac80` | `src/recovered/application/game_logic.c` | Game Controller `0x2af9` player profile initialization and command dispatch (`CGameController_HandleCommand_1008_ac80`). |
 | `1008:b6f8` | `src/recovered/framework/ui_framework.c` | Base Event/Command Target (`CEventTarget_1008_07f4`) (`1008:b6f8`). |
 | `1008:b6fa` | `src/recovered/framework/ui_framework.c` | Base Event/Command Target (`CEventTarget_1008_07f4`) (`1008:b6fa`). |
 | `1008:b70e` | `src/recovered/framework/ui_framework.c` | Base Event/Command Target (`CEventTarget_1008_07f4`) (`1008:b70e`). |
@@ -198,8 +224,31 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1008:c69e` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c69e`). |
 | `1008:c6b6` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c6b6`). |
 | `1008:c762` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c762`). |
+| `1008:ce88` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:ce88`). |
+| `1008:cebc` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cebc`). |
+| `1008:cf3e` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cf3e`). |
+| `1008:cf6c` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cf6c`). |
+| `1008:cfc2` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cfc2`). |
+| `1008:d074` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d074`). |
+| `1008:d0a8` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d0a8`). |
+| `1008:d0ac` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d0ac`). |
+| `1008:d0f2` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d0f2`). |
+| `1008:d198` | `src/recovered/application/game_logic.c` | Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d198`). |
 | `1008:d1d8` | `src/recovered/framework/ui_framework.c` | Desktop allocator (`CDesktop_New_1008_d1d8`) (`1008:d1d8`). |
 | `1008:e412` | `src/recovered/framework/message_pump.c` | Message ranges/order decompiled (`framework_drain_message_ranges`). |
+| `1008:e812` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e812`). |
+| `1008:e838` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e838`). |
+| `1008:e83c` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e83c`). |
+| `1008:e840` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e840`). |
+| `1008:e87e` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e87e`). |
+| `1008:e8b6` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8b6`). |
+| `1008:e8ba` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8ba`). |
+| `1008:e8be` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8be`). |
+| `1008:e8c2` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8c2`). |
+| `1008:e94a` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e94a`). |
+| `1008:e988` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e988`). |
+| `1008:e9ac` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e9ac`). |
+| `1008:eb12` | `src/recovered/application/game_logic.c` | Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:eb12`). |
 | `1008:eed8` | `src/recovered/framework/resource_manager.c` | Zero-initialized memory allocator (`AllocZeroed_1008_eed8`). |
 | `1008:ef1e` | `src/recovered/framework/resource_manager.c` | Memory release helper (`FreeMem_1008_ef1e`). |
 | `1008:ef2c` | `src/recovered/framework/resource_manager.c` | Zero-initialized C++ object allocator (`NewObject_1008_ef2c`). |
@@ -238,6 +287,8 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:11d8` | `src/recovered/framework/resource_manager.c` | Reloads purged resource handle on demand (`ResHandle_EnsureLoaded_1010_11d8`). |
 | `1010:1206` | `src/recovered/framework/resource_manager.c` | Purges unlocked resources and dereferences handle (`ResHandle_PurgeAndDeref_1010_1206`). |
 | `1010:1246` | `src/recovered/framework/ui_framework.c` | Dispatches virtual slot across `CObList` elements (`CObList_CallVirtual_1010_1246`) (`1010:1246`). |
+| `1010:14c2` | `src/recovered/application/game_logic.c` | String List (`STR#` `0x03ed`) & Pascal String Helpers (`StrList_GetIndString_1010_13b6`) (`1010:14c2`). |
+| `1010:1504` | `src/recovered/application/game_logic.c` | String List (`STR#` `0x03ed`) & Pascal String Helpers (`StrList_GetIndString_1010_13b6`) (`1010:1504`). |
 | `1010:15f0` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:15f0`). |
 | `1010:16da` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:16da`). |
 | `1010:16ea` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:16ea`). |
@@ -398,6 +449,66 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:5d62` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5d62`). |
 | `1010:5d66` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5d66`). |
 | `1010:5d7c` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5d7c`). |
+| `1010:637a` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:637a`). |
+| `1010:6898` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6898`). |
+| `1010:694c` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:694c`). |
+| `1010:698e` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:698e`). |
+| `1010:6e3e` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6e3e`). |
+| `1010:6e7e` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6e7e`). |
+| `1010:6ef4` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6ef4`). |
+| `1010:735e` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:735e`). |
+| `1010:73d0` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:73d0`). |
+| `1010:73f0` | `src/recovered/application/game_logic.c` | Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:73f0`). |
+| `1010:84ba` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:84ba`). |
+| `1010:8558` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8558`). |
+| `1010:8b00` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8b00`). |
+| `1010:8b9c` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8b9c`). |
+| `1010:8c12` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8c12`). |
+| `1010:8c88` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8c88`). |
+| `1010:8cec` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8cec`). |
+| `1010:8d94` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8d94`). |
+| `1010:8e06` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8e06`). |
+| `1010:8ed6` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8ed6`). |
+| `1010:8ef2` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8ef2`). |
+| `1010:8f70` | `src/recovered/application/game_logic.c` | Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8f70`). |
+| `1010:c9f8` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:c9f8`). |
+| `1010:ca3a` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:ca3a`). |
+| `1010:cb02` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cb02`). |
+| `1010:cbe8` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cbe8`). |
+| `1010:ccee` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:ccee`). |
+| `1010:cd6c` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cd6c`). |
+| `1010:cd94` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cd94`). |
+| `1010:cdd6` | `src/recovered/application/game_logic.c` | Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cdd6`). |
+| `1018:0350` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0350`). |
+| `1018:0398` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0398`). |
+| `1018:0508` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0508`). |
+| `1018:05a0` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:05a0`). |
+| `1018:05a4` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:05a4`). |
+| `1018:0626` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0626`). |
+| `1018:0700` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0700`). |
+| `1018:0704` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0704`). |
+| `1018:0772` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0772`). |
+| `1018:07ba` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:07ba`). |
+| `1018:0836` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0836`). |
+| `1018:087e` | `src/recovered/application/game_logic.c` | Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:087e`). |
+| `1018:267e` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:267e`). |
+| `1018:27f6` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:27f6`). |
+| `1018:284c` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:284c`). |
+| `1018:2af2` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2af2`). |
+| `1018:2bf0` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2bf0`). |
+| `1018:2cf4` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2cf4`). |
+| `1018:2df2` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2df2`). |
+| `1018:2f20` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2f20`). |
+| `1018:2f9a` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2f9a`). |
+| `1018:3004` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:3004`). |
+| `1018:304c` | `src/recovered/application/game_logic.c` | Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:304c`). |
+| `1018:43ac` | `src/recovered/application/game_logic.c` | Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:43ac`). |
+| `1018:4e92` | `src/recovered/application/game_logic.c` | Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:4e92`). |
+| `1018:4fd8` | `src/recovered/application/game_logic.c` | Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:4fd8`). |
+| `1018:509c` | `src/recovered/application/game_logic.c` | Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:509c`). |
+| `1018:5496` | `src/recovered/application/game_logic.c` | Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:5496`). |
+| `1018:553a` | `src/recovered/application/game_logic.c` | Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:553a`). |
+| `1018:5772` | `src/recovered/application/game_logic.c` | Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:5772`). |
 | `1018:63b2` | `src/recovered/framework/audio_waveout.c` | `CTimedCallback_1008_823c` flag `+0x0a` getter (`CTimedCallback_GetByte0a_1018_63b2`). |
 | `1018:63c0` | `src/recovered/framework/audio_waveout.c` | `CTimedCallback_1008_823c` flag `+0x09` getter (`CTimedCallback_GetByte09_1018_63c0`). |
 | `1018:63ce` | `src/recovered/framework/audio_waveout.c` | `CTimedCallback_1008_823c` paused flag `+0x08` getter (`CTimedCallback_IsPaused_1018_63ce`). |
@@ -410,6 +521,25 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1018:646a` | `src/recovered/framework/audio_waveout.c` | Schedules next 60 Hz callback tick (`CTimedCallback_ScheduleNext_1018_646a`). |
 | `1018:648e` | `src/recovered/framework/audio_waveout.c` | Returns 0 (`CTimedCallback_False0_1018_648e`). |
 | `1018:6494` | `src/recovered/framework/audio_waveout.c` | Returns 0 (`CTimedCallback_False1_1018_6494`). |
+| `1018:6c42` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6c42`). |
+| `1018:6c56` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6c56`). |
+| `1018:6c72` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6c72`). |
+| `1018:6ebe` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6ebe`). |
+| `1018:6f42` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6f42`). |
+| `1018:6ffe` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6ffe`). |
+| `1018:7038` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7038`). |
+| `1018:703c` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:703c`). |
+| `1018:7040` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7040`). |
+| `1018:71da` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:71da`). |
+| `1018:7634` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7634`). |
+| `1018:7738` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7738`). |
+| `1018:7790` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7790`). |
+| `1018:7864` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7864`). |
+| `1018:7890` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7890`). |
+| `1018:78bc` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:78bc`). |
+| `1018:78e6` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:78e6`). |
+| `1018:7920` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7920`). |
+| `1018:795a` | `src/recovered/application/game_logic.c` | Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:795a`). |
 | `1018:9140` | `src/recovered/framework/resource_manager.c` | Loads `RsLt` (`0x03e9`) resource list by ID (`CResourceList_Init_1018_9140`). |
 | `1018:9176` | `src/recovered/framework/resource_manager.c` | `CResourceList_1008_821c` virtual destructor (`CResourceList_Dtor_1018_9176`). |
 | `1018:919e` | `src/recovered/framework/resource_manager.c` | Marks all resources in `RsLt` non-purgeable (`CResourceList_MarkAllNoPurge_1018_919e`). |
@@ -418,11 +548,58 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1018:93dc` | `src/recovered/framework/resource_manager.c` | Unlocks all resources in `RsLt` (`CResourceList_UnlockAll_1018_93dc`). |
 | `1018:9480` | `src/recovered/framework/resource_manager.c` | Preloads all resources in `RsLt` (`CResourceList_PreloadAll_1018_9480`). |
 | `1018:a704` | `src/recovered/application/object_model.c` | Top-7 descending ordered record insertion (`RecordTable_InsertTop7_1018_a704`). |
+| `1018:a9a0` | `src/recovered/application/game_logic.c` | Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:a9a0`). |
+| `1018:aa84` | `src/recovered/application/game_logic.c` | Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:aa84`). |
+| `1018:ab1c` | `src/recovered/application/game_logic.c` | Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ab1c`). |
+| `1018:ac66` | `src/recovered/application/game_logic.c` | Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ac66`). |
+| `1018:ad88` | `src/recovered/application/game_logic.c` | Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ad88`). |
 | `1018:adb8` | `src/recovered/application/object_model.c` | Indexed word adjustment and accumulated total update (`1018:adb8`). |
 | `1018:ae3a` | `src/recovered/application/object_model.c` | High-water mark update and top-7 table sync (`1018:ae3a`). |
+| `1018:ae7e` | `src/recovered/application/game_logic.c` | Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ae7e`). |
 | `1018:aeaa` | `src/recovered/win16/application_primitives.c` | Direct far entry follows parent +0x250 to holder +0 and reads nested +0x06; RETF 4 verified. |
+| `1018:aec0` | `src/recovered/application/game_logic.c` | Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:aec0`). |
 | `1018:aede` | `src/recovered/win16/application_primitives.c` | Direct far entry writes nested +0x1a8 then parent +0x254; RETF 6 verified. |
 | `1018:af08` | `src/recovered/win16/application_primitives.c` | Direct far entry returns AL=1 for signed argument <= nested +0x1a8; RETF 6 verified. |
+| `1018:b190` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b190`). |
+| `1018:b1fc` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b1fc`). |
+| `1018:b222` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b222`). |
+| `1018:b24a` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b24a`). |
+| `1018:b312` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b312`). |
+| `1018:b338` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b338`). |
+| `1018:b35c` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b35c`). |
+| `1018:b78c` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b78c`). |
+| `1018:b8e4` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b8e4`). |
+| `1018:b8f8` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b8f8`). |
+| `1018:b90c` | `src/recovered/application/game_logic.c` | Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b90c`). |
+| `1018:d0fc` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d0fc`). |
+| `1018:d380` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d380`). |
+| `1018:d5d6` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d5d6`). |
+| `1018:d66c` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d66c`). |
+| `1018:d69a` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d69a`). |
+| `1018:d6f8` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d6f8`). |
+| `1018:d736` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d736`). |
+| `1018:d9da` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d9da`). |
+| `1018:da32` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:da32`). |
+| `1018:dd34` | `src/recovered/application/game_logic.c` | Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:dd34`). |
+| `1020:0c36` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0c36`). |
+| `1020:0c72` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0c72`). |
+| `1020:0d76` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0d76`). |
+| `1020:0e50` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0e50`). |
+| `1020:0fd2` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0fd2`). |
+| `1020:10d8` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:10d8`). |
+| `1020:1292` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1292`). |
+| `1020:1500` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1500`). |
+| `1020:1784` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1784`). |
+| `1020:1852` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1852`). |
+| `1020:1866` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1866`). |
+| `1020:1884` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1884`). |
+| `1020:189e` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:189e`). |
+| `1020:18dc` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:18dc`). |
+| `1020:19a4` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:19a4`). |
+| `1020:1a5e` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1a5e`). |
+| `1020:1a9a` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1a9a`). |
+| `1020:1c9a` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1c9a`). |
+| `1020:1d0a` | `src/recovered/application/game_logic.c` | Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1d0a`). |
 | `1020:2534` | `src/recovered/framework/ui_framework.c` | Event Dispatcher mouse state query (`CEventDispatcher_1008_7f84`) (`1020:2534`). |
 | `1020:2552` | `src/recovered/framework/ui_framework.c` | Event Dispatcher mouse state query (`CEventDispatcher_1008_7f84`) (`1020:2552`). |
 | `1020:27d8` | `src/recovered/framework/audio_waveout.c` | `CSoundChannel_1010_bdd4` virtual destructor (`CSoundChannel_Dtor_1020_27d8`). |
@@ -432,6 +609,34 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1020:2928` | `src/recovered/framework/audio_waveout.c` | Appends `'snd '` resource ID to channel and locks handle (`CSoundChannel_AddSound_1020_2928`). |
 | `1020:29b6` | `src/recovered/framework/audio_waveout.c` | Sets primary `'snd '` resource ID on channel (`CSoundChannel_SetPrimarySound_1020_29b6`). |
 | `1020:2a96` | `src/recovered/framework/audio_waveout.c` | Stops and unlocks all `'snd '` handles in channel (`CSoundChannel_ClearSounds_1020_2a96`). |
+| `1020:2e5c` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2e5c`). |
+| `1020:2e86` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2e86`). |
+| `1020:2e94` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2e94`). |
+| `1020:2eae` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2eae`). |
+| `1020:2efe` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2efe`). |
+| `1020:30e4` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:30e4`). |
+| `1020:323a` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:323a`). |
+| `1020:3262` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:3262`). |
+| `1020:32e0` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:32e0`). |
+| `1020:3334` | `src/recovered/application/game_logic.c` | Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:3334`). |
+| `1020:62fe` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:62fe`). |
+| `1020:63c2` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:63c2`). |
+| `1020:63e6` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:63e6`). |
+| `1020:640a` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:640a`). |
+| `1020:642e` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:642e`). |
+| `1020:6494` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6494`). |
+| `1020:6526` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6526`). |
+| `1020:65a2` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:65a2`). |
+| `1020:6616` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6616`). |
+| `1020:6666` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6666`). |
+| `1020:66a6` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:66a6`). |
+| `1020:6704` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6704`). |
+| `1020:678c` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:678c`). |
+| `1020:6940` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6940`). |
+| `1020:6994` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6994`). |
+| `1020:69a6` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:69a6`). |
+| `1020:6ae2` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6ae2`). |
+| `1020:6af6` | `src/recovered/application/game_logic.c` | Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6af6`). |
 
 ## Partial work
 

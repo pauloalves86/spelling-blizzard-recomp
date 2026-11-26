@@ -317,32 +317,32 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1008:7c5c,FUN_1008_7c5c,87,decompiled,framework,src/recovered/framework/ui_framework.c,Event Dispatcher & Cursor Manager (`CEventDispatcher_1008_7f84`) (`1008:7c5c`).
 1008:7cb4,FUN_1008_7cb4,14,decompiled,framework,src/recovered/framework/graphics_gdi.c,Returns active `HPALETTE` handle (`CPaletteManager_GetHPalette_1008_7cb4`).
 1008:7cc2,FUN_1008_7cc2,78,not-started,untriaged,,Classified in subsystem-map.md.
-1008:82b8,FUN_1008_82b8,2169,not-started,untriaged,,Classified in subsystem-map.md.
-1008:8b34,FUN_1008_8b34,337,not-started,untriaged,,Classified in subsystem-map.md.
-1008:8c86,FUN_1008_8c86,18,not-started,untriaged,,Classified in subsystem-map.md.
-1008:8c98,FUN_1008_8c98,18,not-started,untriaged,,Classified in subsystem-map.md.
-1008:8caa,FUN_1008_8caa,338,not-started,untriaged,,Classified in subsystem-map.md.
-1008:8dfc,FUN_1008_8dfc,74,not-started,untriaged,,Classified in subsystem-map.md.
-1008:8e46,FUN_1008_8e46,435,not-started,untriaged,,Classified in subsystem-map.md.
-1008:91a2,FUN_1008_91a2,128,not-started,untriaged,,Classified in subsystem-map.md.
-1008:9222,FUN_1008_9222,798,not-started,untriaged,,Classified in subsystem-map.md.
-1008:9542,FUN_1008_9542,36,not-started,untriaged,,Classified in subsystem-map.md.
-1008:9922,FUN_1008_9922,551,not-started,untriaged,,Classified in subsystem-map.md.
-1008:9b4c,FUN_1008_9b4c,111,not-started,untriaged,,Classified in subsystem-map.md.
-1008:9bbc,FUN_1008_9bbc,1181,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a05a,FUN_1008_a05a,255,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a15a,FUN_1008_a15a,122,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a1d4,FUN_1008_a1d4,119,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a24c,FUN_1008_a24c,129,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a2ce,FUN_1008_a2ce,539,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a4ec,FUN_1008_a4ec,141,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a57e,FUN_1008_a57e,72,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a5c6,FUN_1008_a5c6,77,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a614,FUN_1008_a614,66,not-started,untriaged,,Classified in subsystem-map.md.
-1008:a656,FUN_1008_a656,999,not-started,untriaged,,Classified in subsystem-map.md.
-1008:aa42,FUN_1008_aa42,274,not-started,untriaged,,Classified in subsystem-map.md.
-1008:ab54,FUN_1008_ab54,299,not-started,untriaged,,Classified in subsystem-map.md.
-1008:ac80,FUN_1008_ac80,340,partial,application,src/recovered/application/application_state.c,0x2af9 global-state writes represented; full command switch pending.
+1008:82b8,FUN_1008_82b8,2169,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:82b8`).
+1008:8b34,FUN_1008_8b34,337,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8b34`).
+1008:8c86,FUN_1008_8c86,18,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8c86`).
+1008:8c98,FUN_1008_8c98,18,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8c98`).
+1008:8caa,FUN_1008_8caa,338,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8caa`).
+1008:8dfc,FUN_1008_8dfc,74,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8dfc`).
+1008:8e46,FUN_1008_8e46,435,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:8e46`).
+1008:91a2,FUN_1008_91a2,128,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:91a2`).
+1008:9222,FUN_1008_9222,798,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9222`).
+1008:9542,FUN_1008_9542,36,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9542`).
+1008:9922,FUN_1008_9922,551,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9922`).
+1008:9b4c,FUN_1008_9b4c,111,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9b4c`).
+1008:9bbc,FUN_1008_9bbc,1181,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:9bbc`).
+1008:a05a,FUN_1008_a05a,255,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a05a`).
+1008:a15a,FUN_1008_a15a,122,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a15a`).
+1008:a1d4,FUN_1008_a1d4,119,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a1d4`).
+1008:a24c,FUN_1008_a24c,129,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a24c`).
+1008:a2ce,FUN_1008_a2ce,539,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a2ce`).
+1008:a4ec,FUN_1008_a4ec,141,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a4ec`).
+1008:a57e,FUN_1008_a57e,72,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a57e`).
+1008:a5c6,FUN_1008_a5c6,77,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a5c6`).
+1008:a614,FUN_1008_a614,66,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a614`).
+1008:a656,FUN_1008_a656,999,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:a656`).
+1008:aa42,FUN_1008_aa42,274,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:aa42`).
+1008:ab54,FUN_1008_ab54,299,decompiled,application,src/recovered/application/game_logic.c,Game Controller & Command Switch (`CGameControllerView_1008_97e6`) (`1008:ab54`).
+1008:ac80,FUN_1008_ac80,340,decompiled,application,src/recovered/application/game_logic.c,Game Controller `0x2af9` player profile initialization and command dispatch (`CGameController_HandleCommand_1008_ac80`).
 1008:add8,FUN_1008_add8,175,not-started,untriaged,,Classified in subsystem-map.md.
 1008:aee8,FUN_1008_aee8,477,not-started,untriaged,,Classified in subsystem-map.md.
 1008:b508,FUN_1008_b508,290,not-started,untriaged,,Classified in subsystem-map.md.
@@ -435,16 +435,16 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1008:cd52,FUN_1008_cd52,158,not-started,untriaged,,Classified in subsystem-map.md.
 1008:cdf0,FUN_1008_cdf0,105,not-started,untriaged,,Classified in subsystem-map.md.
 1008:ce5a,FUN_1008_ce5a,45,not-started,untriaged,,Classified in subsystem-map.md.
-1008:ce88,FUN_1008_ce88,51,not-started,untriaged,,Classified in subsystem-map.md.
-1008:cebc,FUN_1008_cebc,130,not-started,untriaged,,Classified in subsystem-map.md.
-1008:cf3e,FUN_1008_cf3e,46,not-started,untriaged,,Classified in subsystem-map.md.
-1008:cf6c,FUN_1008_cf6c,84,not-started,untriaged,,Classified in subsystem-map.md.
-1008:cfc2,FUN_1008_cfc2,178,not-started,untriaged,,Classified in subsystem-map.md.
-1008:d074,FUN_1008_d074,52,not-started,untriaged,,Classified in subsystem-map.md.
-1008:d0a8,FUN_1008_d0a8,3,not-started,untriaged,,Classified in subsystem-map.md.
-1008:d0ac,FUN_1008_d0ac,68,not-started,untriaged,,Classified in subsystem-map.md.
-1008:d0f2,FUN_1008_d0f2,165,not-started,untriaged,,Classified in subsystem-map.md.
-1008:d198,FUN_1008_d198,52,not-started,untriaged,,Classified in subsystem-map.md.
+1008:ce88,FUN_1008_ce88,51,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:ce88`).
+1008:cebc,FUN_1008_cebc,130,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cebc`).
+1008:cf3e,FUN_1008_cf3e,46,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cf3e`).
+1008:cf6c,FUN_1008_cf6c,84,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cf6c`).
+1008:cfc2,FUN_1008_cfc2,178,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:cfc2`).
+1008:d074,FUN_1008_d074,52,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d074`).
+1008:d0a8,FUN_1008_d0a8,3,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d0a8`).
+1008:d0ac,FUN_1008_d0ac,68,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d0ac`).
+1008:d0f2,FUN_1008_d0f2,165,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d0f2`).
+1008:d198,FUN_1008_d198,52,decompiled,application,src/recovered/application/game_logic.c,Player Profile Serialization & Accessors (`CPlayerRecord_1008_2b04`) (`1008:d198`).
 1008:d1d8,FUN_1008_d1d8,249,decompiled,framework,src/recovered/framework/ui_framework.c,Desktop allocator (`CDesktop_New_1008_d1d8`) (`1008:d1d8`).
 1008:d2d2,FUN_1008_d2d2,74,not-started,untriaged,,Classified in subsystem-map.md.
 1008:d31c,FUN_1008_d31c,70,not-started,untriaged,,Classified in subsystem-map.md.
@@ -525,19 +525,19 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1008:e286,FUN_1008_e286,197,not-started,untriaged,,Classified in subsystem-map.md.
 1008:e412,FUN_1008_e412,980,decompiled,framework,src/recovered/framework/message_pump.c,Message ranges/order decompiled (`framework_drain_message_ranges`).
 1008:e7e6,FUN_1008_e7e6,43,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e812,FUN_1008_e812,37,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e838,FUN_1008_e838,3,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e83c,FUN_1008_e83c,3,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e840,FUN_1008_e840,62,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e87e,FUN_1008_e87e,55,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e8b6,FUN_1008_e8b6,3,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e8ba,FUN_1008_e8ba,3,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e8be,FUN_1008_e8be,3,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e8c2,FUN_1008_e8c2,136,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e94a,FUN_1008_e94a,62,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e988,FUN_1008_e988,36,not-started,untriaged,,Classified in subsystem-map.md.
-1008:e9ac,FUN_1008_e9ac,356,not-started,untriaged,,Classified in subsystem-map.md.
-1008:eb12,FUN_1008_eb12,444,not-started,untriaged,,Classified in subsystem-map.md.
+1008:e812,FUN_1008_e812,37,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e812`).
+1008:e838,FUN_1008_e838,3,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e838`).
+1008:e83c,FUN_1008_e83c,3,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e83c`).
+1008:e840,FUN_1008_e840,62,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e840`).
+1008:e87e,FUN_1008_e87e,55,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e87e`).
+1008:e8b6,FUN_1008_e8b6,3,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8b6`).
+1008:e8ba,FUN_1008_e8ba,3,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8ba`).
+1008:e8be,FUN_1008_e8be,3,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8be`).
+1008:e8c2,FUN_1008_e8c2,136,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e8c2`).
+1008:e94a,FUN_1008_e94a,62,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e94a`).
+1008:e988,FUN_1008_e988,36,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e988`).
+1008:e9ac,FUN_1008_e9ac,356,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:e9ac`).
+1008:eb12,FUN_1008_eb12,444,decompiled,application,src/recovered/application/game_logic.c,Player Profile Virtual Methods (`CPlayerRecord_1008_2b04`) (`1008:eb12`).
 1008:ecd0,FUN_1008_ecd0,62,not-started,untriaged,,Classified in subsystem-map.md.
 1008:ed0e,FUN_1008_ed0e,457,not-started,untriaged,,Classified in subsystem-map.md.
 1008:eed8,FUN_1008_eed8,69,decompiled,framework,src/recovered/framework/resource_manager.c,Zero-initialized memory allocator (`AllocZeroed_1008_eed8`).
@@ -588,8 +588,8 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1010:1206,FUN_1010_1206,29,decompiled,framework,src/recovered/framework/resource_manager.c,Purges unlocked resources and dereferences handle (`ResHandle_PurgeAndDeref_1010_1206`).
 1010:1224,FUN_1010_1224,33,not-started,untriaged,,Classified in subsystem-map.md.
 1010:1246,FUN_1010_1246,365,decompiled,framework,src/recovered/framework/ui_framework.c,Dispatches virtual slot across `CObList` elements (`CObList_CallVirtual_1010_1246`) (`1010:1246`).
-1010:14c2,FUN_1010_14c2,65,not-started,untriaged,,Classified in subsystem-map.md.
-1010:1504,FUN_1010_1504,56,not-started,untriaged,,Classified in subsystem-map.md.
+1010:14c2,FUN_1010_14c2,65,decompiled,application,src/recovered/application/game_logic.c,String List (`STR#` `0x03ed`) & Pascal String Helpers (`StrList_GetIndString_1010_13b6`) (`1010:14c2`).
+1010:1504,FUN_1010_1504,56,decompiled,application,src/recovered/application/game_logic.c,String List (`STR#` `0x03ed`) & Pascal String Helpers (`StrList_GetIndString_1010_13b6`) (`1010:1504`).
 1010:153c,FUN_1010_153c,179,not-started,untriaged,,Classified in subsystem-map.md.
 1010:15f0,FUN_1010_15f0,233,decompiled,framework,src/recovered/framework/ui_framework.c,View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:15f0`).
 1010:16da,FUN_1010_16da,16,decompiled,framework,src/recovered/framework/ui_framework.c,View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:16da`).
@@ -779,16 +779,16 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1010:6206,FUN_1010_6206,30,not-started,untriaged,,Classified in subsystem-map.md.
 1010:6296,FUN_1010_6296,165,not-started,untriaged,,Classified in subsystem-map.md.
 1010:633e,FUN_1010_633e,58,not-started,untriaged,,Classified in subsystem-map.md.
-1010:637a,FUN_1010_637a,1304,not-started,untriaged,,Classified in subsystem-map.md.
-1010:6898,FUN_1010_6898,179,not-started,untriaged,,Classified in subsystem-map.md.
-1010:694c,FUN_1010_694c,66,not-started,untriaged,,Classified in subsystem-map.md.
-1010:698e,FUN_1010_698e,17,not-started,untriaged,,Classified in subsystem-map.md.
-1010:6e3e,FUN_1010_6e3e,64,not-started,untriaged,,Classified in subsystem-map.md.
-1010:6e7e,FUN_1010_6e7e,58,not-started,untriaged,,Classified in subsystem-map.md.
-1010:6ef4,FUN_1010_6ef4,1128,not-started,untriaged,,Classified in subsystem-map.md.
-1010:735e,FUN_1010_735e,114,not-started,untriaged,,Classified in subsystem-map.md.
-1010:73d0,FUN_1010_73d0,31,not-started,untriaged,,Classified in subsystem-map.md.
-1010:73f0,FUN_1010_73f0,226,not-started,untriaged,,Classified in subsystem-map.md.
+1010:637a,FUN_1010_637a,1304,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:637a`).
+1010:6898,FUN_1010_6898,179,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6898`).
+1010:694c,FUN_1010_694c,66,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:694c`).
+1010:698e,FUN_1010_698e,17,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:698e`).
+1010:6e3e,FUN_1010_6e3e,64,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6e3e`).
+1010:6e7e,FUN_1010_6e7e,58,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6e7e`).
+1010:6ef4,FUN_1010_6ef4,1128,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:6ef4`).
+1010:735e,FUN_1010_735e,114,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:735e`).
+1010:73d0,FUN_1010_73d0,31,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:73d0`).
+1010:73f0,FUN_1010_73f0,226,decompiled,application,src/recovered/application/game_logic.c,Board Scene & `FrTr` (`0x040c`) Frame Tree Controller (`CBoardScene_1010_be64`) (`1010:73f0`).
 1010:74d2,FUN_1010_74d2,48,not-started,untriaged,,Classified in subsystem-map.md.
 1010:7502,FUN_1010_7502,65,not-started,untriaged,,Classified in subsystem-map.md.
 1010:7544,FUN_1010_7544,37,not-started,untriaged,,Classified in subsystem-map.md.
@@ -815,18 +815,18 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1010:8210,FUN_1010_8210,297,not-started,untriaged,,Classified in subsystem-map.md.
 1010:833e,FUN_1010_833e,156,not-started,untriaged,,Classified in subsystem-map.md.
 1010:83dc,FUN_1010_83dc,199,not-started,untriaged,,Classified in subsystem-map.md.
-1010:84ba,FUN_1010_84ba,156,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8558,FUN_1010_8558,1442,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8b00,FUN_1010_8b00,155,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8b9c,FUN_1010_8b9c,118,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8c12,FUN_1010_8c12,118,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8c88,FUN_1010_8c88,99,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8cec,FUN_1010_8cec,168,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8d94,FUN_1010_8d94,113,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8e06,FUN_1010_8e06,208,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8ed6,FUN_1010_8ed6,27,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8ef2,FUN_1010_8ef2,125,not-started,untriaged,,Classified in subsystem-map.md.
-1010:8f70,FUN_1010_8f70,30,not-started,untriaged,,Classified in subsystem-map.md.
+1010:84ba,FUN_1010_84ba,156,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:84ba`).
+1010:8558,FUN_1010_8558,1442,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8558`).
+1010:8b00,FUN_1010_8b00,155,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8b00`).
+1010:8b9c,FUN_1010_8b9c,118,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8b9c`).
+1010:8c12,FUN_1010_8c12,118,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8c12`).
+1010:8c88,FUN_1010_8c88,99,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8c88`).
+1010:8cec,FUN_1010_8cec,168,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8cec`).
+1010:8d94,FUN_1010_8d94,113,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8d94`).
+1010:8e06,FUN_1010_8e06,208,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8e06`).
+1010:8ed6,FUN_1010_8ed6,27,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8ed6`).
+1010:8ef2,FUN_1010_8ef2,125,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8ef2`).
+1010:8f70,FUN_1010_8f70,30,decompiled,application,src/recovered/application/game_logic.c,Board Actor & `SdOb` (`0x0403`) Entity (`CDemonActor_1010_92ae`) (`1010:8f70`).
 1010:931e,FUN_1010_931e,136,not-started,untriaged,,Classified in subsystem-map.md.
 1010:93a8,FUN_1010_93a8,43,not-started,untriaged,,Classified in subsystem-map.md.
 1010:93d4,FUN_1010_93d4,43,not-started,untriaged,,Classified in subsystem-map.md.
@@ -911,14 +911,14 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1010:c8d4,FUN_1010_c8d4,30,not-started,untriaged,,Classified in subsystem-map.md.
 1010:c92a,FUN_1010_c92a,68,not-started,untriaged,,Classified in subsystem-map.md.
 1010:c96e,FUN_1010_c96e,136,not-started,untriaged,,Classified in subsystem-map.md.
-1010:c9f8,FUN_1010_c9f8,65,not-started,untriaged,,Classified in subsystem-map.md.
-1010:ca3a,FUN_1010_ca3a,199,not-started,untriaged,,Classified in subsystem-map.md.
-1010:cb02,FUN_1010_cb02,229,not-started,untriaged,,Classified in subsystem-map.md.
-1010:cbe8,FUN_1010_cbe8,45,not-started,untriaged,,Classified in subsystem-map.md.
-1010:ccee,FUN_1010_ccee,126,not-started,untriaged,,Classified in subsystem-map.md.
-1010:cd6c,FUN_1010_cd6c,40,not-started,untriaged,,Classified in subsystem-map.md.
-1010:cd94,FUN_1010_cd94,66,not-started,untriaged,,Classified in subsystem-map.md.
-1010:cdd6,FUN_1010_cdd6,52,not-started,untriaged,,Classified in subsystem-map.md.
+1010:c9f8,FUN_1010_c9f8,65,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:c9f8`)."
+1010:ca3a,FUN_1010_ca3a,199,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:ca3a`)."
+1010:cb02,FUN_1010_cb02,229,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cb02`)."
+1010:cbe8,FUN_1010_cbe8,45,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cbe8`)."
+1010:ccee,FUN_1010_ccee,126,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:ccee`)."
+1010:cd6c,FUN_1010_cd6c,40,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cd6c`)."
+1010:cd94,FUN_1010_cd94,66,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cd94`)."
+1010:cdd6,FUN_1010_cdd6,52,decompiled,application,src/recovered/application/game_logic.c,"Demon Object Grid Controller (`CDemonGridController_1020_52ee`, `SdGd` `0x0405`) (`1010:cdd6`)."
 1010:ce0a,FUN_1010_ce0a,158,not-started,untriaged,,Classified in subsystem-map.md.
 1010:cea8,FUN_1010_cea8,39,not-started,untriaged,,Classified in subsystem-map.md.
 1010:ced0,FUN_1010_ced0,234,not-started,untriaged,,Classified in subsystem-map.md.
@@ -994,18 +994,18 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1010:ee4a,FUN_1010_ee4a,90,not-started,untriaged,,Classified in subsystem-map.md.
 1010:eea4,FUN_1010_eea4,62,not-started,untriaged,,Classified in subsystem-map.md.
 1010:eee2,FUN_1010_eee2,89,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0350,FUN_1018_0350,72,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0398,FUN_1018_0398,367,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0508,FUN_1018_0508,152,not-started,untriaged,,Classified in subsystem-map.md.
-1018:05a0,FUN_1018_05a0,3,not-started,untriaged,,Classified in subsystem-map.md.
-1018:05a4,FUN_1018_05a4,130,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0626,FUN_1018_0626,195,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0700,FUN_1018_0700,3,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0704,FUN_1018_0704,109,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0772,FUN_1018_0772,72,not-started,untriaged,,Classified in subsystem-map.md.
-1018:07ba,FUN_1018_07ba,123,not-started,untriaged,,Classified in subsystem-map.md.
-1018:0836,FUN_1018_0836,72,not-started,untriaged,,Classified in subsystem-map.md.
-1018:087e,FUN_1018_087e,292,not-started,untriaged,,Classified in subsystem-map.md.
+1018:0350,FUN_1018_0350,72,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0350`)."
+1018:0398,FUN_1018_0398,367,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0398`)."
+1018:0508,FUN_1018_0508,152,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0508`)."
+1018:05a0,FUN_1018_05a0,3,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:05a0`)."
+1018:05a4,FUN_1018_05a4,130,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:05a4`)."
+1018:0626,FUN_1018_0626,195,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0626`)."
+1018:0700,FUN_1018_0700,3,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0700`)."
+1018:0704,FUN_1018_0704,109,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0704`)."
+1018:0772,FUN_1018_0772,72,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0772`)."
+1018:07ba,FUN_1018_07ba,123,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:07ba`)."
+1018:0836,FUN_1018_0836,72,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:0836`)."
+1018:087e,FUN_1018_087e,292,decompiled,application,src/recovered/application/game_logic.c,"Actor Behavior & Movement (`CActorBehavior_1010_90be`, `SdOb` `0x0403`) (`1018:087e`)."
 1018:0bea,FUN_1018_0bea,46,not-started,untriaged,,Classified in subsystem-map.md.
 1018:0c18,FUN_1018_0c18,95,not-started,untriaged,,Classified in subsystem-map.md.
 1018:0c78,FUN_1018_0c78,241,not-started,untriaged,,Classified in subsystem-map.md.
@@ -1068,17 +1068,17 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1018:25aa,FUN_1018_25aa,19,not-started,untriaged,,Classified in subsystem-map.md.
 1018:25ca,FUN_1018_25ca,124,not-started,untriaged,,Classified in subsystem-map.md.
 1018:2646,FUN_1018_2646,56,not-started,untriaged,,Classified in subsystem-map.md.
-1018:267e,FUN_1018_267e,346,not-started,untriaged,,Classified in subsystem-map.md.
-1018:27f6,FUN_1018_27f6,86,not-started,untriaged,,Classified in subsystem-map.md.
-1018:284c,FUN_1018_284c,675,not-started,untriaged,,Classified in subsystem-map.md.
-1018:2af2,FUN_1018_2af2,252,not-started,untriaged,,Classified in subsystem-map.md.
-1018:2bf0,FUN_1018_2bf0,258,not-started,untriaged,,Classified in subsystem-map.md.
-1018:2cf4,FUN_1018_2cf4,252,not-started,untriaged,,Classified in subsystem-map.md.
-1018:2df2,FUN_1018_2df2,302,not-started,untriaged,,Classified in subsystem-map.md.
-1018:2f20,FUN_1018_2f20,121,not-started,untriaged,,Classified in subsystem-map.md.
-1018:2f9a,FUN_1018_2f9a,106,not-started,untriaged,,Classified in subsystem-map.md.
-1018:3004,FUN_1018_3004,72,not-started,untriaged,,Classified in subsystem-map.md.
-1018:304c,FUN_1018_304c,154,not-started,untriaged,,Classified in subsystem-map.md.
+1018:267e,FUN_1018_267e,346,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:267e`).
+1018:27f6,FUN_1018_27f6,86,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:27f6`).
+1018:284c,FUN_1018_284c,675,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:284c`).
+1018:2af2,FUN_1018_2af2,252,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2af2`).
+1018:2bf0,FUN_1018_2bf0,258,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2bf0`).
+1018:2cf4,FUN_1018_2cf4,252,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2cf4`).
+1018:2df2,FUN_1018_2df2,302,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2df2`).
+1018:2f20,FUN_1018_2f20,121,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2f20`).
+1018:2f9a,FUN_1018_2f9a,106,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:2f9a`).
+1018:3004,FUN_1018_3004,72,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:3004`).
+1018:304c,FUN_1018_304c,154,decompiled,application,src/recovered/application/game_logic.c,Game Controller HUD Events & Level Tutorial Thresholds (`CGameControllerView_1008_97e6`) (`1018:304c`).
 1018:30e8,FUN_1018_30e8,32,not-started,untriaged,,Classified in subsystem-map.md.
 1018:3704,FUN_1018_3704,1248,not-started,untriaged,,Classified in subsystem-map.md.
 1018:3be4,FUN_1018_3be4,140,not-started,untriaged,,Classified in subsystem-map.md.
@@ -1088,13 +1088,13 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1018:41c0,FUN_1018_41c0,154,not-started,untriaged,,Classified in subsystem-map.md.
 1018:425c,FUN_1018_425c,154,not-started,untriaged,,Classified in subsystem-map.md.
 1018:438e,FUN_1018_438e,29,not-started,untriaged,,Classified in subsystem-map.md.
-1018:43ac,FUN_1018_43ac,2784,not-started,untriaged,,Classified in subsystem-map.md.
-1018:4e92,FUN_1018_4e92,325,not-started,untriaged,,Classified in subsystem-map.md.
-1018:4fd8,FUN_1018_4fd8,196,not-started,untriaged,,Classified in subsystem-map.md.
-1018:509c,FUN_1018_509c,803,not-started,untriaged,,Classified in subsystem-map.md.
-1018:5496,FUN_1018_5496,163,not-started,untriaged,,Classified in subsystem-map.md.
-1018:553a,FUN_1018_553a,565,not-started,untriaged,,Classified in subsystem-map.md.
-1018:5772,FUN_1018_5772,1345,not-started,untriaged,,Classified in subsystem-map.md.
+1018:43ac,FUN_1018_43ac,2784,decompiled,application,src/recovered/application/game_logic.c,"Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:43ac`)."
+1018:4e92,FUN_1018_4e92,325,decompiled,application,src/recovered/application/game_logic.c,"Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:4e92`)."
+1018:4fd8,FUN_1018_4fd8,196,decompiled,application,src/recovered/application/game_logic.c,"Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:4fd8`)."
+1018:509c,FUN_1018_509c,803,decompiled,application,src/recovered/application/game_logic.c,"Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:509c`)."
+1018:5496,FUN_1018_5496,163,decompiled,application,src/recovered/application/game_logic.c,"Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:5496`)."
+1018:553a,FUN_1018_553a,565,decompiled,application,src/recovered/application/game_logic.c,"Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:553a`)."
+1018:5772,FUN_1018_5772,1345,decompiled,application,src/recovered/application/game_logic.c,"Main Menu, Match View & `CHEAT` Handler (`CMainMenuOrMatchView_1018_3228`) (`1018:5772`)."
 1018:6378,FUN_1018_6378,57,not-started,untriaged,,Classified in subsystem-map.md.
 1018:63b2,FUN_1018_63b2,14,decompiled,framework,src/recovered/framework/audio_waveout.c,`CTimedCallback_1008_823c` flag `+0x0a` getter (`CTimedCallback_GetByte0a_1018_63b2`).
 1018:63c0,FUN_1018_63c0,14,decompiled,framework,src/recovered/framework/audio_waveout.c,`CTimedCallback_1008_823c` flag `+0x09` getter (`CTimedCallback_GetByte09_1018_63c0`).
@@ -1112,25 +1112,25 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1018:66ee,FUN_1018_66ee,62,not-started,untriaged,,Classified in subsystem-map.md.
 1018:6a8e,FUN_1018_6a8e,413,not-started,untriaged,,Classified in subsystem-map.md.
 1018:6c2e,FUN_1018_6c2e,20,not-started,untriaged,,Classified in subsystem-map.md.
-1018:6c42,FUN_1018_6c42,20,not-started,untriaged,,Classified in subsystem-map.md.
-1018:6c56,FUN_1018_6c56,28,not-started,untriaged,,Classified in subsystem-map.md.
-1018:6c72,FUN_1018_6c72,587,not-started,untriaged,,Classified in subsystem-map.md.
-1018:6ebe,FUN_1018_6ebe,131,not-started,untriaged,,Classified in subsystem-map.md.
-1018:6f42,FUN_1018_6f42,188,not-started,untriaged,,Classified in subsystem-map.md.
-1018:6ffe,FUN_1018_6ffe,57,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7038,FUN_1018_7038,3,not-started,untriaged,,Classified in subsystem-map.md.
-1018:703c,FUN_1018_703c,3,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7040,FUN_1018_7040,74,not-started,untriaged,,Classified in subsystem-map.md.
-1018:71da,FUN_1018_71da,1110,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7634,FUN_1018_7634,260,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7738,FUN_1018_7738,87,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7790,FUN_1018_7790,212,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7864,FUN_1018_7864,44,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7890,FUN_1018_7890,44,not-started,untriaged,,Classified in subsystem-map.md.
-1018:78bc,FUN_1018_78bc,41,not-started,untriaged,,Classified in subsystem-map.md.
-1018:78e6,FUN_1018_78e6,58,not-started,untriaged,,Classified in subsystem-map.md.
-1018:7920,FUN_1018_7920,58,not-started,untriaged,,Classified in subsystem-map.md.
-1018:795a,FUN_1018_795a,58,not-started,untriaged,,Classified in subsystem-map.md.
+1018:6c42,FUN_1018_6c42,20,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6c42`).
+1018:6c56,FUN_1018_6c56,28,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6c56`).
+1018:6c72,FUN_1018_6c72,587,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6c72`).
+1018:6ebe,FUN_1018_6ebe,131,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6ebe`).
+1018:6f42,FUN_1018_6f42,188,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6f42`).
+1018:6ffe,FUN_1018_6ffe,57,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:6ffe`).
+1018:7038,FUN_1018_7038,3,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7038`).
+1018:703c,FUN_1018_703c,3,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:703c`).
+1018:7040,FUN_1018_7040,74,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7040`).
+1018:71da,FUN_1018_71da,1110,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:71da`).
+1018:7634,FUN_1018_7634,260,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7634`).
+1018:7738,FUN_1018_7738,87,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7738`).
+1018:7790,FUN_1018_7790,212,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7790`).
+1018:7864,FUN_1018_7864,44,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7864`).
+1018:7890,FUN_1018_7890,44,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7890`).
+1018:78bc,FUN_1018_78bc,41,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:78bc`).
+1018:78e6,FUN_1018_78e6,58,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:78e6`).
+1018:7920,FUN_1018_7920,58,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:7920`).
+1018:795a,FUN_1018_795a,58,decompiled,application,src/recovered/application/game_logic.c,Demon Grid Spatial Buckets & Collision Lists (`CDemonGridController_1020_52ee`) (`1018:795a`).
 1018:7994,FUN_1018_7994,37,not-started,untriaged,,Classified in subsystem-map.md.
 1018:79ba,FUN_1018_79ba,58,not-started,untriaged,,Classified in subsystem-map.md.
 1018:79f4,FUN_1018_79f4,58,not-started,untriaged,,Classified in subsystem-map.md.
@@ -1206,29 +1206,29 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1018:9fe6,FUN_1018_9fe6,169,not-started,untriaged,,Classified in subsystem-map.md.
 1018:a676,FUN_1018_a676,142,not-started,untriaged,,Classified in subsystem-map.md.
 1018:a704,FUN_1018_a704,666,decompiled,application,src/recovered/application/object_model.c,Top-7 descending ordered record insertion (`RecordTable_InsertTop7_1018_a704`).
-1018:a9a0,FUN_1018_a9a0,227,not-started,untriaged,,Classified in subsystem-map.md.
-1018:aa84,FUN_1018_aa84,151,not-started,untriaged,,Classified in subsystem-map.md.
-1018:ab1c,FUN_1018_ab1c,330,not-started,untriaged,,Classified in subsystem-map.md.
-1018:ac66,FUN_1018_ac66,77,not-started,untriaged,,Classified in subsystem-map.md.
-1018:ad88,FUN_1018_ad88,47,not-started,untriaged,,Classified in subsystem-map.md.
+1018:a9a0,FUN_1018_a9a0,227,decompiled,application,src/recovered/application/game_logic.c,Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:a9a0`).
+1018:aa84,FUN_1018_aa84,151,decompiled,application,src/recovered/application/game_logic.c,Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:aa84`).
+1018:ab1c,FUN_1018_ab1c,330,decompiled,application,src/recovered/application/game_logic.c,Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ab1c`).
+1018:ac66,FUN_1018_ac66,77,decompiled,application,src/recovered/application/game_logic.c,Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ac66`).
+1018:ad88,FUN_1018_ad88,47,decompiled,application,src/recovered/application/game_logic.c,Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ad88`).
 1018:adb8,FUN_1018_adb8,128,decompiled,application,src/recovered/application/object_model.c,Indexed word adjustment and accumulated total update (`1018:adb8`).
 1018:ae3a,FUN_1018_ae3a,67,decompiled,application,src/recovered/application/object_model.c,High-water mark update and top-7 table sync (`1018:ae3a`).
-1018:ae7e,FUN_1018_ae7e,44,not-started,untriaged,,Classified in subsystem-map.md.
+1018:ae7e,FUN_1018_ae7e,44,decompiled,application,src/recovered/application/game_logic.c,Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:ae7e`).
 1018:aeaa,FUN_1018_aeaa,22,win16-abi-checked,application,src/recovered/win16/application_primitives.c,Direct far entry follows parent +0x250 to holder +0 and reads nested +0x06; RETF 4 verified.
-1018:aec0,FUN_1018_aec0,30,not-started,untriaged,,Classified in subsystem-map.md.
+1018:aec0,FUN_1018_aec0,30,decompiled,application,src/recovered/application/game_logic.c,Player Profile & Top-7 High Score Record (`CPlayerRecord_1008_2b04`) (`1018:aec0`).
 1018:aede,FUN_1018_aede,41,win16-abi-checked,application,src/recovered/win16/application_primitives.c,Direct far entry writes nested +0x1a8 then parent +0x254; RETF 6 verified.
 1018:af08,FUN_1018_af08,36,win16-abi-checked,application,src/recovered/win16/application_primitives.c,Direct far entry returns AL=1 for signed argument <= nested +0x1a8; RETF 6 verified.
-1018:b190,FUN_1018_b190,108,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b1fc,FUN_1018_b1fc,28,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b222,FUN_1018_b222,39,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b24a,FUN_1018_b24a,200,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b312,FUN_1018_b312,27,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b338,FUN_1018_b338,35,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b35c,FUN_1018_b35c,1070,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b78c,FUN_1018_b78c,344,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b8e4,FUN_1018_b8e4,19,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b8f8,FUN_1018_b8f8,20,not-started,untriaged,,Classified in subsystem-map.md.
-1018:b90c,FUN_1018_b90c,602,not-started,untriaged,,Classified in subsystem-map.md.
+1018:b190,FUN_1018_b190,108,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b190`).
+1018:b1fc,FUN_1018_b1fc,28,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b1fc`).
+1018:b222,FUN_1018_b222,39,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b222`).
+1018:b24a,FUN_1018_b24a,200,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b24a`).
+1018:b312,FUN_1018_b312,27,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b312`).
+1018:b338,FUN_1018_b338,35,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b338`).
+1018:b35c,FUN_1018_b35c,1070,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b35c`).
+1018:b78c,FUN_1018_b78c,344,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b78c`).
+1018:b8e4,FUN_1018_b8e4,19,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b8e4`).
+1018:b8f8,FUN_1018_b8f8,20,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b8f8`).
+1018:b90c,FUN_1018_b90c,602,decompiled,application,src/recovered/application/game_logic.c,Spelling Word Bank & Magic Spelling Tricks (`SpellingBank_CheckTypedWord_1018_b35c`) (`1018:b90c`).
 1018:bb68,FUN_1018_bb68,48,not-started,untriaged,,Classified in subsystem-map.md.
 1018:bb98,FUN_1018_bb98,61,not-started,untriaged,,Classified in subsystem-map.md.
 1018:bbd6,FUN_1018_bbd6,68,not-started,untriaged,,Classified in subsystem-map.md.
@@ -1254,16 +1254,16 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1018:ce7c,FUN_1018_ce7c,30,not-started,untriaged,,Classified in subsystem-map.md.
 1018:ce9a,FUN_1018_ce9a,487,not-started,untriaged,,Classified in subsystem-map.md.
 1018:d084,FUN_1018_d084,120,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d0fc,FUN_1018_d0fc,642,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d380,FUN_1018_d380,595,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d5d6,FUN_1018_d5d6,150,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d66c,FUN_1018_d66c,45,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d69a,FUN_1018_d69a,93,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d6f8,FUN_1018_d6f8,60,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d736,FUN_1018_d736,315,not-started,untriaged,,Classified in subsystem-map.md.
-1018:d9da,FUN_1018_d9da,87,not-started,untriaged,,Classified in subsystem-map.md.
-1018:da32,FUN_1018_da32,726,not-started,untriaged,,Classified in subsystem-map.md.
-1018:dd34,FUN_1018_dd34,550,not-started,untriaged,,Classified in subsystem-map.md.
+1018:d0fc,FUN_1018_d0fc,642,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d0fc`)."
+1018:d380,FUN_1018_d380,595,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d380`)."
+1018:d5d6,FUN_1018_d5d6,150,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d5d6`)."
+1018:d66c,FUN_1018_d66c,45,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d66c`)."
+1018:d69a,FUN_1018_d69a,93,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d69a`)."
+1018:d6f8,FUN_1018_d6f8,60,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d6f8`)."
+1018:d736,FUN_1018_d736,315,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d736`)."
+1018:d9da,FUN_1018_d9da,87,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:d9da`)."
+1018:da32,FUN_1018_da32,726,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:da32`)."
+1018:dd34,FUN_1018_dd34,550,decompiled,application,src/recovered/application/game_logic.c,"Actor `SdOb` Loader, Collision & Direction Logic (`CActorBehavior_1010_90be`) (`1018:dd34`)."
 1018:dfdc,FUN_1018_dfdc,285,not-started,untriaged,,Classified in subsystem-map.md.
 1018:e100,FUN_1018_e100,52,not-started,untriaged,,Classified in subsystem-map.md.
 1018:e134,FUN_1018_e134,141,not-started,untriaged,,Classified in subsystem-map.md.
@@ -1296,25 +1296,25 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1020:05aa,FUN_1020_05aa,71,not-started,untriaged,,Classified in subsystem-map.md.
 1020:05f2,FUN_1020_05f2,121,not-started,untriaged,,Classified in subsystem-map.md.
 1020:066c,FUN_1020_066c,14,not-started,untriaged,,Classified in subsystem-map.md.
-1020:0c36,FUN_1020_0c36,59,not-started,untriaged,,Classified in subsystem-map.md.
-1020:0c72,FUN_1020_0c72,260,not-started,untriaged,,Classified in subsystem-map.md.
-1020:0d76,FUN_1020_0d76,217,not-started,untriaged,,Classified in subsystem-map.md.
-1020:0e50,FUN_1020_0e50,386,not-started,untriaged,,Classified in subsystem-map.md.
-1020:0fd2,FUN_1020_0fd2,262,not-started,untriaged,,Classified in subsystem-map.md.
-1020:10d8,FUN_1020_10d8,441,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1292,FUN_1020_1292,621,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1500,FUN_1020_1500,643,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1784,FUN_1020_1784,206,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1852,FUN_1020_1852,19,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1866,FUN_1020_1866,30,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1884,FUN_1020_1884,25,not-started,untriaged,,Classified in subsystem-map.md.
-1020:189e,FUN_1020_189e,61,not-started,untriaged,,Classified in subsystem-map.md.
-1020:18dc,FUN_1020_18dc,198,not-started,untriaged,,Classified in subsystem-map.md.
-1020:19a4,FUN_1020_19a4,186,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1a5e,FUN_1020_1a5e,60,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1a9a,FUN_1020_1a9a,509,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1c9a,FUN_1020_1c9a,111,not-started,untriaged,,Classified in subsystem-map.md.
-1020:1d0a,FUN_1020_1d0a,461,not-started,untriaged,,Classified in subsystem-map.md.
+1020:0c36,FUN_1020_0c36,59,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0c36`)."
+1020:0c72,FUN_1020_0c72,260,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0c72`)."
+1020:0d76,FUN_1020_0d76,217,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0d76`)."
+1020:0e50,FUN_1020_0e50,386,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0e50`)."
+1020:0fd2,FUN_1020_0fd2,262,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:0fd2`)."
+1020:10d8,FUN_1020_10d8,441,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:10d8`)."
+1020:1292,FUN_1020_1292,621,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1292`)."
+1020:1500,FUN_1020_1500,643,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1500`)."
+1020:1784,FUN_1020_1784,206,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1784`)."
+1020:1852,FUN_1020_1852,19,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1852`)."
+1020:1866,FUN_1020_1866,30,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1866`)."
+1020:1884,FUN_1020_1884,25,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1884`)."
+1020:189e,FUN_1020_189e,61,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:189e`)."
+1020:18dc,FUN_1020_18dc,198,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:18dc`)."
+1020:19a4,FUN_1020_19a4,186,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:19a4`)."
+1020:1a5e,FUN_1020_1a5e,60,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1a5e`)."
+1020:1a9a,FUN_1020_1a9a,509,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1a9a`)."
+1020:1c9a,FUN_1020_1c9a,111,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1c9a`)."
+1020:1d0a,FUN_1020_1d0a,461,decompiled,application,src/recovered/application/game_logic.c,"Spelling Match, `GmTr` Terrain & `GmLt` Level Loader (`CSpellingMatch_1010_cc76`) (`1020:1d0a`)."
 1020:2534,FUN_1020_2534,29,decompiled,framework,src/recovered/framework/ui_framework.c,Event Dispatcher mouse state query (`CEventDispatcher_1008_7f84`) (`1020:2534`).
 1020:2552,FUN_1020_2552,149,decompiled,framework,src/recovered/framework/ui_framework.c,Event Dispatcher mouse state query (`CEventDispatcher_1008_7f84`) (`1020:2552`).
 1020:25ea,FUN_1020_25ea,44,not-started,untriaged,,Classified in subsystem-map.md.
@@ -1346,16 +1346,16 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1020:2db2,FUN_1020_2db2,52,not-started,untriaged,,Classified in subsystem-map.md.
 1020:2de6,FUN_1020_2de6,49,not-started,untriaged,,Classified in subsystem-map.md.
 1020:2e18,FUN_1020_2e18,68,not-started,untriaged,,Classified in subsystem-map.md.
-1020:2e5c,FUN_1020_2e5c,42,not-started,untriaged,,Classified in subsystem-map.md.
-1020:2e86,FUN_1020_2e86,14,not-started,untriaged,,Classified in subsystem-map.md.
-1020:2e94,FUN_1020_2e94,25,not-started,untriaged,,Classified in subsystem-map.md.
-1020:2eae,FUN_1020_2eae,78,not-started,untriaged,,Classified in subsystem-map.md.
-1020:2efe,FUN_1020_2efe,481,not-started,untriaged,,Classified in subsystem-map.md.
-1020:30e4,FUN_1020_30e4,340,not-started,untriaged,,Classified in subsystem-map.md.
-1020:323a,FUN_1020_323a,39,not-started,untriaged,,Classified in subsystem-map.md.
-1020:3262,FUN_1020_3262,125,not-started,untriaged,,Classified in subsystem-map.md.
-1020:32e0,FUN_1020_32e0,83,not-started,untriaged,,Classified in subsystem-map.md.
-1020:3334,FUN_1020_3334,30,not-started,untriaged,,Classified in subsystem-map.md.
+1020:2e5c,FUN_1020_2e5c,42,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2e5c`).
+1020:2e86,FUN_1020_2e86,14,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2e86`).
+1020:2e94,FUN_1020_2e94,25,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2e94`).
+1020:2eae,FUN_1020_2eae,78,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2eae`).
+1020:2efe,FUN_1020_2efe,481,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:2efe`).
+1020:30e4,FUN_1020_30e4,340,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:30e4`).
+1020:323a,FUN_1020_323a,39,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:323a`).
+1020:3262,FUN_1020_3262,125,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:3262`).
+1020:32e0,FUN_1020_32e0,83,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:32e0`).
+1020:3334,FUN_1020_3334,30,decompiled,application,src/recovered/application/game_logic.c,Game Object Entity & `SdOb` Descriptor (`CGameEntity_1020_3352`) (`1020:3334`).
 1020:338a,FUN_1020_338a,1005,not-started,untriaged,,Classified in subsystem-map.md.
 1020:3778,FUN_1020_3778,1108,not-started,untriaged,,Classified in subsystem-map.md.
 1020:3bf8,FUN_1020_3bf8,125,not-started,untriaged,,Classified in subsystem-map.md.
@@ -1404,21 +1404,21 @@ entry,ghidra_name,body_bytes,status,scope,source,notes
 1020:62a4,FUN_1020_62a4,29,not-started,untriaged,,Classified in subsystem-map.md.
 1020:62c2,FUN_1020_62c2,24,not-started,untriaged,,Classified in subsystem-map.md.
 1020:62da,FUN_1020_62da,35,not-started,untriaged,,Classified in subsystem-map.md.
-1020:62fe,FUN_1020_62fe,196,not-started,untriaged,,Classified in subsystem-map.md.
-1020:63c2,FUN_1020_63c2,35,not-started,untriaged,,Classified in subsystem-map.md.
-1020:63e6,FUN_1020_63e6,35,not-started,untriaged,,Classified in subsystem-map.md.
-1020:640a,FUN_1020_640a,35,not-started,untriaged,,Classified in subsystem-map.md.
-1020:642e,FUN_1020_642e,102,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6494,FUN_1020_6494,145,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6526,FUN_1020_6526,117,not-started,untriaged,,Classified in subsystem-map.md.
-1020:65a2,FUN_1020_65a2,115,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6616,FUN_1020_6616,79,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6666,FUN_1020_6666,62,not-started,untriaged,,Classified in subsystem-map.md.
-1020:66a6,FUN_1020_66a6,93,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6704,FUN_1020_6704,136,not-started,untriaged,,Classified in subsystem-map.md.
-1020:678c,FUN_1020_678c,433,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6940,FUN_1020_6940,84,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6994,FUN_1020_6994,18,not-started,untriaged,,Classified in subsystem-map.md.
-1020:69a6,FUN_1020_69a6,36,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6ae2,FUN_1020_6ae2,20,not-started,untriaged,,Classified in subsystem-map.md.
-1020:6af6,FUN_1020_6af6,27,not-started,untriaged,,Classified in subsystem-map.md.
+1020:62fe,FUN_1020_62fe,196,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:62fe`)."
+1020:63c2,FUN_1020_63c2,35,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:63c2`)."
+1020:63e6,FUN_1020_63e6,35,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:63e6`)."
+1020:640a,FUN_1020_640a,35,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:640a`)."
+1020:642e,FUN_1020_642e,102,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:642e`)."
+1020:6494,FUN_1020_6494,145,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6494`)."
+1020:6526,FUN_1020_6526,117,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6526`)."
+1020:65a2,FUN_1020_65a2,115,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:65a2`)."
+1020:6616,FUN_1020_6616,79,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6616`)."
+1020:6666,FUN_1020_6666,62,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6666`)."
+1020:66a6,FUN_1020_66a6,93,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:66a6`)."
+1020:6704,FUN_1020_6704,136,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6704`)."
+1020:678c,FUN_1020_678c,433,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:678c`)."
+1020:6940,FUN_1020_6940,84,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6940`)."
+1020:6994,FUN_1020_6994,18,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6994`)."
+1020:69a6,FUN_1020_69a6,36,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:69a6`)."
+1020:6ae2,FUN_1020_6ae2,20,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6ae2`)."
+1020:6af6,FUN_1020_6af6,27,decompiled,application,src/recovered/application/game_logic.c,"Speech & Animation Quote Roll (`CDialogOrRollView_1010_bc7c`, `RlQt` `0x03eb`) (`1020:6af6`)."

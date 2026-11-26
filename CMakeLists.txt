@@ -26,7 +26,9 @@ target_link_libraries(recovered_resource_manager PUBLIC sb_win16_shim)
 add_library(recovered_application STATIC
     src/recovered/application/object_model.c
     src/recovered/application/application_state.c
+    src/recovered/application/game_logic.c
 )
+target_link_libraries(recovered_application PUBLIC recovered_resource_manager)
 
 add_custom_target(win16_objects
     COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/tools/build_win16_objects.sh
@@ -64,3 +66,7 @@ add_test(NAME recovered_graphics_gdi COMMAND test_graphics_gdi WORKING_DIRECTORY
 add_executable(test_ui_framework tests/test_ui_framework.c)
 target_link_libraries(test_ui_framework PRIVATE recovered_resource_manager)
 add_test(NAME recovered_ui_framework COMMAND test_ui_framework WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(test_game_logic tests/test_game_logic.c)
+target_link_libraries(test_game_logic PRIVATE recovered_application)
+add_test(NAME recovered_game_logic COMMAND test_game_logic WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
