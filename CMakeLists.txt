@@ -70,3 +70,9 @@ add_test(NAME recovered_ui_framework COMMAND test_ui_framework WORKING_DIRECTORY
 add_executable(test_game_logic tests/test_game_logic.c)
 target_link_libraries(test_game_logic PRIVATE recovered_application)
 add_test(NAME recovered_game_logic COMMAND test_game_logic WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(spelling_blizzard src/main.c)
+target_link_libraries(spelling_blizzard PRIVATE recovered_application)
+add_test(NAME spelling_blizzard_runner
+         COMMAND spelling_blizzard --level 1 --save-ppm ${CMAKE_CURRENT_BINARY_DIR}/frame_preview.ppm
+         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
