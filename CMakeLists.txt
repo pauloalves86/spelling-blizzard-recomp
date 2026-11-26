@@ -8,6 +8,7 @@ add_library(sb_win16_shim STATIC
     src/shim/win16_resource.c
     src/shim/win16_waveout.c
     src/shim/win16_gdi.c
+    src/shim/win16_user.c
 )
 
 add_library(recovered_message_pump STATIC
@@ -18,6 +19,7 @@ add_library(recovered_resource_manager STATIC
     src/recovered/framework/resource_manager.c
     src/recovered/framework/audio_waveout.c
     src/recovered/framework/graphics_gdi.c
+    src/recovered/framework/ui_framework.c
 )
 target_link_libraries(recovered_resource_manager PUBLIC sb_win16_shim)
 
@@ -58,3 +60,7 @@ add_test(NAME recovered_audio_waveout COMMAND test_audio_waveout WORKING_DIRECTO
 add_executable(test_graphics_gdi tests/test_graphics_gdi.c)
 target_link_libraries(test_graphics_gdi PRIVATE recovered_resource_manager)
 add_test(NAME recovered_graphics_gdi COMMAND test_graphics_gdi WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(test_ui_framework tests/test_ui_framework.c)
+target_link_libraries(test_ui_framework PRIVATE recovered_resource_manager)
+add_test(NAME recovered_ui_framework COMMAND test_ui_framework WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

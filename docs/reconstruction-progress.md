@@ -6,17 +6,44 @@ All functions in the five initialized code segments are listed in [reconstructio
 ## Function inventory
 
 - Code-segment functions: **1422** (180,530 bytes)
-- Decompiled & tested functions (Path 2 C + Win16 ABI): **182 / 1422 (12.80%)**
-- Decompiled & tested code bytes: **21,197 / 180,530 (11.74%)**
-  - Clean C decompiled against Win16 shim (`decompiled`): **179** (21,098 bytes)
+- Decompiled & tested functions (Path 2 C + Win16 ABI): **415 / 1422 (29.18%)**
+- Decompiled & tested code bytes: **41,235 / 180,530 (22.84%)**
+  - Clean C decompiled against Win16 shim (`decompiled`): **412** (41,136 bytes)
   - Win16 OMF ABI-checked entrypoints (`win16-abi-checked`): **3** (99 bytes)
 - Partial original functions: **1** (340 bytes)
-- Remaining functions (mapped in `docs/subsystem-map.md`): **1239**
+- Remaining functions (mapped in `docs/subsystem-map.md`): **1006**
 
 ## Decompiled Functions (Path 2 Clean C + Thin Win16 Shim)
 
 | Original entry | C source | Recovered behavior |
 |---|---|---|
+| `1008:018c` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:018c`). |
+| `1008:0190` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0190`). |
+| `1008:01c0` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:01c0`). |
+| `1008:01c4` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:01c4`). |
+| `1008:01c8` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:01c8`). |
+| `1008:020e` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:020e`). |
+| `1008:0212` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0212`). |
+| `1008:0216` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0216`). |
+| `1008:0226` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0226`). |
+| `1008:02ba` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:02ba`). |
+| `1008:02be` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:02be`). |
+| `1008:02c2` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:02c2`). |
+| `1008:02c6` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:02c6`). |
+| `1008:0330` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0330`). |
+| `1008:0398` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0398`). |
+| `1008:039c` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:039c`). |
+| `1008:0596` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0596`). |
+| `1008:0602` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0602`). |
+| `1008:0606` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0606`). |
+| `1008:0684` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0684`). |
+| `1008:0694` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0694`). |
+| `1008:06c6` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:06c6`). |
+| `1008:06ca` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:06ca`). |
+| `1008:06ce` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:06ce`). |
+| `1008:06ec` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:06ec`). |
+| `1008:06fc` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:06fc`). |
+| `1008:0700` | `src/recovered/framework/ui_framework.c` | Application base lifecycle & main loop (`CApplication_1008_2e32`) (`1008:0700`). |
 | `1008:225a` | `src/recovered/framework/audio_waveout.c` | `CSoundManager_1008_7edc` virtual destructor (`CSoundManager_Dtor_1008_225a`). |
 | `1008:22ac` | `src/recovered/framework/audio_waveout.c` | Checks if `waveOut` playback is still active (`CSoundManager_IsHardwareBusy_1008_22ac`). |
 | `1008:22ba` | `src/recovered/framework/audio_waveout.c` | Returns sound manager active flag `+0x16` (`CSoundManager_IsActive_1008_22ba`). |
@@ -30,6 +57,11 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1008:2bbc` | `src/recovered/framework/resource_manager.c` | Loads `SB_CDRES.DLL` into `DAT_1060_001c` (`ResMgr_LoadCdResLibrary_1008_2bbc`). |
 | `1008:2bcc` | `src/recovered/framework/resource_manager.c` | Frees `SB_CDRES.DLL` module handle (`ResMgr_FreeCdResLibrary_1008_2bcc`). |
 | `1008:2bdc` | `src/recovered/framework/resource_manager.c` | Routes `'WIND'` to `BLIZZARD.EXE` and all other FourCCs to `SB_CDRES.DLL` (`ResMgr_GetResourceModule_1008_2bdc`). |
+| `1008:2bf4` | `src/recovered/framework/ui_framework.c` | WinMain application startup & main loop entry (`Application_WinMainEntry_1008_2bf4`) (`1008:2bf4`). |
+| `1008:31b8` | `src/recovered/framework/ui_framework.c` | Desktop root view (`CDesktop_1008_7d10`) (`1008:31b8`). |
+| `1008:31da` | `src/recovered/framework/ui_framework.c` | Desktop root view (`CDesktop_1008_7d10`) (`1008:31da`). |
+| `1008:31fc` | `src/recovered/framework/ui_framework.c` | Desktop root view (`CDesktop_1008_7d10`) (`1008:31fc`). |
+| `1008:3218` | `src/recovered/framework/ui_framework.c` | Desktop root view (`CDesktop_1008_7d10`) (`1008:3218`). |
 | `1008:326e` | `src/recovered/framework/graphics_gdi.c` | Initializes 236-entry `CPaletteManager_1008_8278` at `DAT_1060_0198` (`CPaletteManager_Init_1008_326e`). |
 | `1008:3464` | `src/recovered/framework/graphics_gdi.c` | `CPaletteManager_1008_8278` virtual destructor (`CPaletteManager_Dtor_1008_3464`). |
 | `1008:34bc` | `src/recovered/framework/graphics_gdi.c` | Crossfades current palette to target palette (`CPaletteManager_FadeToCurrent_1008_34bc`). |
@@ -85,7 +117,88 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1008:65f2` | `src/recovered/framework/resource_manager.c` | Initializes `CResourceManager_1008_2da6` (`CResourceManager_Init_1008_65f2`). |
 | `1008:6602` | `src/recovered/framework/resource_manager.c` | Purges `PICT` (`0x03f3`) immediately on unlock when purgeable (`CResourceManager_UpdateEntryFlags_1008_6602`). |
 | `1008:6a28` | `src/recovered/framework/audio_waveout.c` | Verifies Win 3.10+, 11.025 kHz 8-bit mono async `waveOut`, and display capabilities (`System_CheckRequirements_1008_6a28`). |
+| `1008:72b6` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:72b6`). |
+| `1008:7592` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:7592`). |
+| `1008:75b2` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:75b2`). |
+| `1008:769a` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:769a`). |
+| `1008:76cc` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:76cc`). |
+| `1008:7716` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:7716`). |
+| `1008:77cc` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:77cc`). |
+| `1008:77d0` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:77d0`). |
+| `1008:783a` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:783a`). |
+| `1008:7b9a` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:7b9a`). |
+| `1008:7bbe` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:7bbe`). |
+| `1008:7bce` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:7bce`). |
+| `1008:7bf2` | `src/recovered/framework/ui_framework.c` | Application subsystem initialization, idle pump & shutdown (`CApplication_1008_2e32`) (`1008:7bf2`). |
+| `1008:7c02` | `src/recovered/framework/ui_framework.c` | Event Dispatcher & Cursor Manager (`CEventDispatcher_1008_7f84`) (`1008:7c02`). |
+| `1008:7c5c` | `src/recovered/framework/ui_framework.c` | Event Dispatcher & Cursor Manager (`CEventDispatcher_1008_7f84`) (`1008:7c5c`). |
 | `1008:7cb4` | `src/recovered/framework/graphics_gdi.c` | Returns active `HPALETTE` handle (`CPaletteManager_GetHPalette_1008_7cb4`). |
+| `1008:b6f8` | `src/recovered/framework/ui_framework.c` | Base Event/Command Target (`CEventTarget_1008_07f4`) (`1008:b6f8`). |
+| `1008:b6fa` | `src/recovered/framework/ui_framework.c` | Base Event/Command Target (`CEventTarget_1008_07f4`) (`1008:b6fa`). |
+| `1008:b70e` | `src/recovered/framework/ui_framework.c` | Base Event/Command Target (`CEventTarget_1008_07f4`) (`1008:b70e`). |
+| `1008:b746` | `src/recovered/framework/ui_framework.c` | Base Event/Command Target (`CEventTarget_1008_07f4`) (`1008:b746`). |
+| `1008:b7aa` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b7aa`). |
+| `1008:b7ae` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b7ae`). |
+| `1008:b7b2` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b7b2`). |
+| `1008:b7de` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b7de`). |
+| `1008:b802` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b802`). |
+| `1008:b82e` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b82e`). |
+| `1008:b85a` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b85a`). |
+| `1008:b86c` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b86c`). |
+| `1008:b88c` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b88c`). |
+| `1008:b8fc` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b8fc`). |
+| `1008:b928` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b928`). |
+| `1008:b93a` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b93a`). |
+| `1008:b95c` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b95c`). |
+| `1008:b994` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b994`). |
+| `1008:b9b6` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b9b6`). |
+| `1008:b9ee` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:b9ee`). |
+| `1008:baa0` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:baa0`). |
+| `1008:bb56` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:bb56`). |
+| `1008:bb96` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:bb96`). |
+| `1008:bbbc` | `src/recovered/framework/ui_framework.c` | Dynamic Collection (`CCollection_1008_0824`) (`1008:bbbc`). |
+| `1008:bca0` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bca0`). |
+| `1008:bcbe` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bcbe`). |
+| `1008:bd78` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bd78`). |
+| `1008:bdfe` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bdfe`). |
+| `1008:be48` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:be48`). |
+| `1008:be9a` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:be9a`). |
+| `1008:beba` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:beba`). |
+| `1008:bf06` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bf06`). |
+| `1008:bf30` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bf30`). |
+| `1008:bf5e` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bf5e`). |
+| `1008:bff4` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:bff4`). |
+| `1008:c01e` | `src/recovered/framework/ui_framework.c` | Indexed List (`CList_1008_0904`) (`1008:c01e`). |
+| `1008:c05c` | `src/recovered/framework/ui_framework.c` | Ordered Collection (`COrderedList_1008_0b08`) (`1008:c05c`). |
+| `1008:c08e` | `src/recovered/framework/ui_framework.c` | Ordered Collection (`COrderedList_1008_0b08`) (`1008:c08e`). |
+| `1008:c104` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c104`). |
+| `1008:c17e` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c17e`). |
+| `1008:c224` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c224`). |
+| `1008:c2ce` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c2ce`). |
+| `1008:c33c` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c33c`). |
+| `1008:c362` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c362`). |
+| `1008:c376` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c376`). |
+| `1008:c388` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c388`). |
+| `1008:c3a4` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c3a4`). |
+| `1008:c3a8` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c3a8`). |
+| `1008:c3b8` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c3b8`). |
+| `1008:c3cc` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c3cc`). |
+| `1008:c3ee` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c3ee`). |
+| `1008:c444` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c444`). |
+| `1008:c468` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c468`). |
+| `1008:c4aa` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c4aa`). |
+| `1008:c502` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c502`). |
+| `1008:c54c` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c54c`). |
+| `1008:c5aa` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c5aa`). |
+| `1008:c5ec` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c5ec`). |
+| `1008:c60a` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c60a`). |
+| `1008:c628` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c628`). |
+| `1008:c666` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c666`). |
+| `1008:c68a` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c68a`). |
+| `1008:c69e` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c69e`). |
+| `1008:c6b6` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c6b6`). |
+| `1008:c762` | `src/recovered/framework/ui_framework.c` | Object Pointer List (`CObList_1008_0a48`) (`1008:c762`). |
+| `1008:d1d8` | `src/recovered/framework/ui_framework.c` | Desktop allocator (`CDesktop_New_1008_d1d8`) (`1008:d1d8`). |
 | `1008:e412` | `src/recovered/framework/message_pump.c` | Message ranges/order decompiled (`framework_drain_message_ranges`). |
 | `1008:eed8` | `src/recovered/framework/resource_manager.c` | Zero-initialized memory allocator (`AllocZeroed_1008_eed8`). |
 | `1008:ef1e` | `src/recovered/framework/resource_manager.c` | Memory release helper (`FreeMem_1008_ef1e`). |
@@ -103,6 +216,7 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:01d0` | `src/recovered/framework/resource_manager.c` | Disposes heap/global buffer and frees handle descriptor (`Handle_Dispose_1010_01d0`). |
 | `1010:023e` | `src/recovered/framework/resource_manager.c` | Allocates heap/global buffer and double-indirected handle (`Handle_Alloc_1010_023e`). |
 | `1010:035c` | `src/recovered/framework/resource_manager.c` | Allocates zero-initialized handle (`Handle_AllocZeroed_1010_035c`). |
+| `1010:036c` | `src/recovered/framework/ui_framework.c` | Allocates and constructs `CObList_1008_0a48` (`CObList_New_1010_036c`) (`1010:036c`). |
 | `1010:03ee` | `src/recovered/framework/resource_manager.c` | Resizes handle payload buffer (`Handle_Resize_1010_03ee`). |
 | `1010:057c` | `src/recovered/framework/resource_manager.c` | Disposes handle via pointer and clears pointer (`Handle_FreeIndirect_1010_057c`). |
 | `1010:0608` | `src/recovered/framework/resource_manager.c` | No-op handle compaction stub (`Handle_MoveNeck_1010_0608`). |
@@ -123,6 +237,33 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:10f2` | `src/recovered/framework/resource_manager.c` | Fetches or loads resource by `(win16_type_id, mac_fourcc, res_id)` (`ResMgr_GetResource_1010_10f2`). |
 | `1010:11d8` | `src/recovered/framework/resource_manager.c` | Reloads purged resource handle on demand (`ResHandle_EnsureLoaded_1010_11d8`). |
 | `1010:1206` | `src/recovered/framework/resource_manager.c` | Purges unlocked resources and dereferences handle (`ResHandle_PurgeAndDeref_1010_1206`). |
+| `1010:1246` | `src/recovered/framework/ui_framework.c` | Dispatches virtual slot across `CObList` elements (`CObList_CallVirtual_1010_1246`) (`1010:1246`). |
+| `1010:15f0` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:15f0`). |
+| `1010:16da` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:16da`). |
+| `1010:16ea` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:16ea`). |
+| `1010:1794` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1794`). |
+| `1010:1804` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1804`). |
+| `1010:183c` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:183c`). |
+| `1010:1840` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1840`). |
+| `1010:18ec` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:18ec`). |
+| `1010:193c` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:193c`). |
+| `1010:197a` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:197a`). |
+| `1010:19b6` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:19b6`). |
+| `1010:19d8` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:19d8`). |
+| `1010:19fa` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:19fa`). |
+| `1010:1a22` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1a22`). |
+| `1010:1a4a` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1a4a`). |
+| `1010:1a72` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1a72`). |
+| `1010:1a8a` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1a8a`). |
+| `1010:1b42` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1b42`). |
+| `1010:1bae` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1bae`). |
+| `1010:1c20` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1c20`). |
+| `1010:1cbe` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1cbe`). |
+| `1010:1cde` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1cde`). |
+| `1010:1d32` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1d32`). |
+| `1010:1d84` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1d84`). |
+| `1010:1db6` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1db6`). |
+| `1010:1de8` | `src/recovered/framework/ui_framework.c` | View hierarchy & `Pane` (`0x03f1`) resource loader (`CView_1008_1aac`) (`1010:1de8`). |
 | `1010:24ae` | `src/recovered/framework/graphics_gdi.c` | Loads `'PICT'` (`0x03f3`) resource handle by ID (`Pict_LoadResourceHandle_1010_24ae`). |
 | `1010:24f8` | `src/recovered/framework/audio_waveout.c` | Inclusive bounded random integer helper (`Random_Range_1010_24f8`). |
 | `1010:25be` | `src/recovered/framework/resource_manager.c` | `CResourceTypeList_1010_2b12` virtual destructor (`CResourceTypeList_Dtor_1010_25be`). |
@@ -145,6 +286,8 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:2ba8` | `src/recovered/framework/graphics_gdi.c` | Stretches `HBITMAP` to `HBITMAP` via temporary DCs (`Gdi_StretchBitmapToBitmap_1010_2ba8`). |
 | `1010:2c40` | `src/recovered/framework/graphics_gdi.c` | Blits `HBITMAP` into destination `HDC` (`Gdi_BlitBitmapToDc_1010_2c40`). |
 | `1010:2cc0` | `src/recovered/framework/graphics_gdi.c` | Stretches source `HDC` to destination `HDC` (`Gdi_StretchDcToDc_1010_2cc0`). |
+| `1010:2d16` | `src/recovered/framework/ui_framework.c` | Win16 Window class registration & screen DC (`Window_RegisterClasses_1010_2d16`) (`1010:2d16`). |
+| `1010:2d22` | `src/recovered/framework/ui_framework.c` | Win16 Window class registration & screen DC (`Window_RegisterClasses_1010_2d16`) (`1010:2d22`). |
 | `1010:2d2e` | `src/recovered/framework/graphics_gdi.c` | Allocates and builds 14-byte 1-bit transparent sprite mask (`SpriteMask_Create_1010_2d2e`). |
 | `1010:2d58` | `src/recovered/framework/graphics_gdi.c` | Generates 1-bit monochrome mask where index 0 is transparent (`SpriteMask_InitFromBitmap_1010_2d58`). |
 | `1010:2e12` | `src/recovered/framework/graphics_gdi.c` | Destroys 14-byte transparent sprite mask (`SpriteMask_Destroy_1010_2e12`). |
@@ -164,9 +307,97 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1010:39d4` | `src/recovered/framework/audio_waveout.c` | Stops previous sound and starts new `SBBswSample` (`WavePlayer_PlaySample_1010_39d4`). |
 | `1010:3a10` | `src/recovered/framework/audio_waveout.c` | Sets 60 Hz playback completion tick (`WavePlayer_SetEndTick_1010_3a10`). |
 | `1010:3a24` | `src/recovered/framework/audio_waveout.c` | No-op waveOut completion callback (`WavePlayer_NoopCallback_1010_3a24`). |
+| `1010:3a28` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3a28`). |
+| `1010:3b76` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3b76`). |
+| `1010:3bac` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3bac`). |
+| `1010:3be2` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3be2`). |
+| `1010:3bfa` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3bfa`). |
+| `1010:3bfe` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3bfe`). |
+| `1010:3c82` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3c82`). |
+| `1010:3d2e` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3d2e`). |
+| `1010:3d32` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3d32`). |
+| `1010:3d42` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3d42`). |
+| `1010:3d52` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3d52`). |
+| `1010:3d56` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:3d56`). |
+| `1010:4270` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:4270`). |
+| `1010:42ce` | `src/recovered/framework/ui_framework.c` | Event Dispatcher (`CEventDispatcherBase_1008_0b84`) (`1010:42ce`). |
 | `1010:446a` | `src/recovered/framework/audio_waveout.c` | Constructs 60 Hz `TIMEGETTIME` timer at `DAT_1060_0a1e` (`CTimer60Hz_Ctor_1010_446a`). |
 | `1010:44d6` | `src/recovered/framework/audio_waveout.c` | `CTimer60Hz_1010_456a` destructor (`CTimer60Hz_Dtor_1010_44d6`). |
 | `1010:44ec` | `src/recovered/framework/audio_waveout.c` | Advances 60 Hz Bresenham tick counter from `TIMEGETTIME` (`CTimer60Hz_GetTicks_1010_44ec`). |
+| `1010:45ea` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:45ea`). |
+| `1010:4640` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4640`). |
+| `1010:46e0` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:46e0`). |
+| `1010:4762` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4762`). |
+| `1010:47c0` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:47c0`). |
+| `1010:4868` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4868`). |
+| `1010:487c` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:487c`). |
+| `1010:48aa` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:48aa`). |
+| `1010:48b0` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:48b0`). |
+| `1010:491e` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:491e`). |
+| `1010:4a52` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a52`). |
+| `1010:4a56` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a56`). |
+| `1010:4a5a` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a5a`). |
+| `1010:4a5e` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a5e`). |
+| `1010:4a62` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a62`). |
+| `1010:4a66` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a66`). |
+| `1010:4a6a` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a6a`). |
+| `1010:4a6e` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4a6e`). |
+| `1010:4ac6` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4ac6`). |
+| `1010:4aec` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4aec`). |
+| `1010:4b04` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4b04`). |
+| `1010:4b08` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4b08`). |
+| `1010:4b0c` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4b0c`). |
+| `1010:4b1e` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4b1e`). |
+| `1010:4b3c` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4b3c`). |
+| `1010:4b52` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4b52`). |
+| `1010:4b60` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4b60`). |
+| `1010:4bb8` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4bb8`). |
+| `1010:4bbe` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4bbe`). |
+| `1010:4bfc` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4bfc`). |
+| `1010:4c0a` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4c0a`). |
+| `1010:4c8c` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4c8c`). |
+| `1010:4cf8` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4cf8`). |
+| `1010:4d28` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4d28`). |
+| `1010:4d4c` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4d4c`). |
+| `1010:4d60` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4d60`). |
+| `1010:4d72` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4d72`). |
+| `1010:4d84` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4d84`). |
+| `1010:4ddc` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4ddc`). |
+| `1010:4e1a` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4e1a`). |
+| `1010:4e28` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4e28`). |
+| `1010:4e4a` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4e4a`). |
+| `1010:4ebe` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4ebe`). |
+| `1010:4f9a` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4f9a`). |
+| `1010:4fc0` | `src/recovered/framework/ui_framework.c` | View coordinate transform, hit-test & GDI drawing (`CView_1008_1aac`) (`1010:4fc0`). |
+| `1010:50ce` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:50ce`). |
+| `1010:512a` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:512a`). |
+| `1010:519a` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:519a`). |
+| `1010:527c` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:527c`). |
+| `1010:52c4` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:52c4`). |
+| `1010:530a` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:530a`). |
+| `1010:5348` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5348`). |
+| `1010:5384` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5384`). |
+| `1010:539a` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:539a`). |
+| `1010:53c8` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:53c8`). |
+| `1010:544e` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:544e`). |
+| `1010:54cc` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:54cc`). |
+| `1010:553e` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:553e`). |
+| `1010:559e` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:559e`). |
+| `1010:55c0` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:55c0`). |
+| `1010:55fe` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:55fe`). |
+| `1010:56c8` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:56c8`). |
+| `1010:5722` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5722`). |
+| `1010:57a6` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:57a6`). |
+| `1010:5824` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5824`). |
+| `1010:596e` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:596e`). |
+| `1010:5a64` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5a64`). |
+| `1010:5b18` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5b18`). |
+| `1010:5bd8` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5bd8`). |
+| `1010:5c9e` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5c9e`). |
+| `1010:5d5e` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5d5e`). |
+| `1010:5d62` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5d62`). |
+| `1010:5d66` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5d66`). |
+| `1010:5d7c` | `src/recovered/framework/ui_framework.c` | Win16 Window wrapper & `WndProc` bridge (`CWindow_1010_5942`) (`1010:5d7c`). |
 | `1018:63b2` | `src/recovered/framework/audio_waveout.c` | `CTimedCallback_1008_823c` flag `+0x0a` getter (`CTimedCallback_GetByte0a_1018_63b2`). |
 | `1018:63c0` | `src/recovered/framework/audio_waveout.c` | `CTimedCallback_1008_823c` flag `+0x09` getter (`CTimedCallback_GetByte09_1018_63c0`). |
 | `1018:63ce` | `src/recovered/framework/audio_waveout.c` | `CTimedCallback_1008_823c` paused flag `+0x08` getter (`CTimedCallback_IsPaused_1018_63ce`). |
@@ -192,6 +423,8 @@ All functions in the five initialized code segments are listed in [reconstructio
 | `1018:aeaa` | `src/recovered/win16/application_primitives.c` | Direct far entry follows parent +0x250 to holder +0 and reads nested +0x06; RETF 4 verified. |
 | `1018:aede` | `src/recovered/win16/application_primitives.c` | Direct far entry writes nested +0x1a8 then parent +0x254; RETF 6 verified. |
 | `1018:af08` | `src/recovered/win16/application_primitives.c` | Direct far entry returns AL=1 for signed argument <= nested +0x1a8; RETF 6 verified. |
+| `1020:2534` | `src/recovered/framework/ui_framework.c` | Event Dispatcher mouse state query (`CEventDispatcher_1008_7f84`) (`1020:2534`). |
+| `1020:2552` | `src/recovered/framework/ui_framework.c` | Event Dispatcher mouse state query (`CEventDispatcher_1008_7f84`) (`1020:2552`). |
 | `1020:27d8` | `src/recovered/framework/audio_waveout.c` | `CSoundChannel_1010_bdd4` virtual destructor (`CSoundChannel_Dtor_1020_27d8`). |
 | `1020:2810` | `src/recovered/framework/audio_waveout.c` | Selects next sequential/random `'snd '` in channel and triggers playback (`CSoundChannel_ExecuteNext_1020_2810`). |
 | `1020:28e0` | `src/recovered/framework/audio_waveout.c` | Checks if sound channel is ready and sound manager is idle (`CSoundChannel_IsReady_1020_28e0`). |
