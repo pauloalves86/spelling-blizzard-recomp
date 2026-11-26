@@ -18,3 +18,6 @@
 __pycache__/
 
 original/
+
+# sb_recomp default data directory (saves, INI)
+/run/
