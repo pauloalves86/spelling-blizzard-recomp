@@ -6,8 +6,8 @@ built on SDL2 and FreeType. Game logic, rendering, sound sequencing and input
 handling are the original code, not a re-implementation.
 
 It is the reference for the Path 2 goal. Hand-written clean C for any
-function (`src/recovered/`) can be checked against, and later swapped in for,
-the recompiled `f_SSSS_OOOO` with the same address.
+function can be checked against, and later swapped in for, the recompiled
+`f_SSSS_OOOO` with the same address.
 
 ## Build and run
 
@@ -32,7 +32,7 @@ Options:
 | --- | --- | --- |
 | NE parser | `tools/recomp/ne.py` | Segments, every relocation type, entries, module refs. |
 | Decoder | `tools/recomp/x86.py` | 8086–286 plus the 386 operand-size ops the compiler emits. Every reachable instruction decodes; there is no FPU code. |
-| Generator | `tools/recomp/gen.py` | One C function per original function (1,489 total: Ghidra's list, plus far-call targets, plus function pointers found next to selector relocations, such as the window procedure `1010:5db2`). Relocations are resolved at generation time. Switch tables come from the `cmp ax,N; ja; add ax,ax; xchg ax,bx; jmp cs:[bx+T]` pattern. A `jmp far` through memory to an address that isn't a function is a hand-made return (CRT `_setargv`). |
+| Generator | `tools/recomp/gen.py` | One C function per original function (1,489 total: Ghidra's list in `tools/recomp/functions.txt`, plus far-call targets, plus function pointers found next to selector relocations, such as the window procedure `1010:5db2`). Relocations are resolved at generation time. Switch tables come from the `cmp ax,N; ja; add ax,ax; xchg ax,bx; jmp cs:[bx+T]` pattern. A `jmp far` through memory to an address that isn't a function is a hand-made return (CRT `_setargv`). |
 | Runtime | `src/recomp/runtime.c`, `cpu.h` | Registers, flags, selector→linear memory, and a global heap where blocks over 64 KB are tiled across consecutive selectors (`__AHINCR` = 8). Selectors equal Ghidra's segment values. |
 | Loader | `src/recomp/loader.c` | Segments, relocations, PSP and environment. Task registers follow Wine's `InitTask`. |
 | KERNEL / DOS | `src/recomp/kernel.c`, `hostfs.c` | Memory, resources (EXE and `SB_CDRES.DLL`), files, INI profiles, INT 21h. DOS paths under `C:\SB\` map into the data dir, case-insensitive. |
@@ -41,8 +41,8 @@ Options:
 | MMSYSTEM | `src/recomp/mmsystem.c` | `waveOut` over the SDL audio queue. Buffers finish (`WHDR_DONE`, callbacks) when they have actually played. |
 
 Ghidra mis-sizes some API argument lists, so each implementation hard-codes
-the documented Win16 prototype. `tools/recomp/argsizes.py` cross-checks them
-against the pushes at the call sites.
+the documented Win16 prototype, checked against the pushes at the call
+sites.
 
 ## Status
 
@@ -62,6 +62,3 @@ function entries can be added to `tools/recomp/extra_entries.txt` (`SSSS:OOOO`).
 - `LoadCursor` by string name is not supported (the game hasn't used it).
 - Window non-client areas (caption, frame) aren't drawn. The game uses popup and child windows only.
 - Stretch modes are always nearest-neighbour.
-- `src/recovered/` (the earlier hand-written code) only approximates the
-  original and doesn't take part in `sb_recomp`. Treat it as notes until each
-  function is redone against the recompiled reference.

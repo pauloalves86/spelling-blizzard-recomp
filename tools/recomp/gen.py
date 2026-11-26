@@ -10,7 +10,6 @@ far calls to other segments, far calls to imported APIs). Indirect far calls
 
 Usage: gen.py <out_dir>
 """
-import json
 import os
 import struct
 import sys
@@ -68,22 +67,21 @@ class Program:
                     else:
                         raise SystemExit(f"unhandled reloc target {r}")
         self.entries = defaultdict(set)
-        idx = json.load(open(os.path.join(ROOT, "build", "decomp", "decomp_index.json")))["functions"]
-        for f in idx:
-            s, o = f["entry"].split(":")
-            segn = (int(s, 16) - 0x1000) // 8 + 1
-            if segn in self.code_segs:
-                self.entries[segn].add(int(o, 16))
-        self.entries[self.ne.cs].add(self.ne.ip)
-        for segn, (es, eo, _fl) in [(e[0], e) for e in self.ne.entries.values()]:
-            self.entries[es].add(eo)
-        extra = os.path.join(HERE, "extra_entries.txt")
-        if os.path.exists(extra):
-            for line in open(extra):
+        # functions.txt: entry points from the Ghidra analysis; extra_entries.txt: manual additions.
+        for name in ("functions.txt", "extra_entries.txt"):
+            path = os.path.join(HERE, name)
+            if not os.path.exists(path):
+                continue
+            for line in open(path):
                 line = line.split("#")[0].strip()
                 if line:
                     s, o = line.split(":")
-                    self.entries[(int(s, 16) - 0x1000) // 8 + 1].add(int(o, 16))
+                    segn = (int(s, 16) - 0x1000) // 8 + 1
+                    if segn in self.code_segs:
+                        self.entries[segn].add(int(o, 16))
+        self.entries[self.ne.cs].add(self.ne.ip)
+        for segn, (es, eo, _fl) in [(e[0], e) for e in self.ne.entries.values()]:
+            self.entries[es].add(eo)
         self.funcs = {}  # (seg, entry) -> Func
 
     def imm_value(self, seg, ins):

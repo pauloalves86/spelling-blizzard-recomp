@@ -20,9 +20,9 @@ There are two ways the original program is being brought back:
    input handling are the original code. See [docs/recomp.md](docs/recomp.md).
 2. **Clean decompilation (the end goal).** Readable, hand-written C that
    replaces the recompiled functions one by one, checked against the
-   recompiled reference at the same address. Earlier hand-written work lives
-   in `src/recovered/`. It is only an approximation of the original and isn't
-   used by `sb_recomp`.
+   recompiled reference at the same address. Earlier analysis notes and
+   hand-written reconstruction were removed from the tree; they're kept in
+   git history at the `pre-cleanup` tag.
 
 ## You need the original game files
 
@@ -99,8 +99,7 @@ ctest --test-dir build/cmake --output-on-failure
 `recomp_new_game_headless` plays through the opening of the real game without
 a window: credits, the map, New Game, typing a player name, and starting the
 first river level. It fails if the game hits anything the host layer doesn't
-implement. The other tests cover the earlier hand-written code in
-`src/recovered/`.
+implement.
 
 ## Status
 
@@ -118,12 +117,12 @@ It also uses noticeably more CPU than it should while idle.
 
 | Path | Contents |
 | --- | --- |
-| `tools/recomp/` | NE parser, x86-16 decoder and the C generator. |
+| `tools/recomp/` | NE parser, x86-16 decoder, the C generator, the function list (`functions.txt`) and API export tables. |
 | `src/recomp/` | Runtime, loader and the host Win16 API layer for `sb_recomp`. |
-| `src/recovered/`, `src/shim/`, `src/platform/` | Earlier hand-written reconstruction and its shim (`build/cmake/spelling_blizzard`). |
-| `tests/` | CTest programs and input scripts. |
-| `docs/` | Analysis notes: resource inventory, subsystem map, method tables, recompiler details. |
-| `ghidra/` | Ghidra analysis scripts (the project database is kept locally, not in git). |
+| `tests/recomp/` | Input script for the headless test. |
+| `docs/recomp.md` | How the recompiler and host layer work. |
+| `original/` | Your copy of the game files (not tracked). |
+| `run/` | Saves and settings written by the game (not tracked). |
 | `AGENTS.md` | Project rules for contributors and coding agents. |
 
 ## Legal

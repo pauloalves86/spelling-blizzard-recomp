@@ -13,8 +13,8 @@
 
 1. `original/BLIZZARD.EXE` & `original/SB_CDRES.DLL` — immutable binary ground truth.
 2. Batch-exported Ghidra decompilation (`build/decomp/`), method-table JSON (`build/method_tables.json`), and the Ghidra database (`ghidra/local/SpellingBlizzard.gpr`).
-3. Project documentation under `docs/` — architecture, subsystem maps, and vtable inventories.
-4. Reconstructed source code under `src/` — derived representation, continuously refined to match the binary.
+3. The static recompilation (`tools/recomp/`, `src/recomp/`, documented in `docs/recomp.md`) — the executable reference that clean C is checked against.
+4. Earlier analysis notes and hand-written reconstruction, removed from the tree but kept in git history at tag `pre-cleanup`.
 
 ## Core Rules (Pragmatic Decompilation)
 
@@ -29,7 +29,7 @@
 3. **Decompile by Subsystem and Class, Not Isolated Micro-Getters.**
    - Partition the 1,422 code functions into three buckets:
      1. **Bucket A — Compiler Runtime / CRT (`1000:*` and standard helpers):** Identify standard C runtime functions (`malloc`, `free`, `memcpy`, `strcpy`, file I/O, startup) and replace or bridge them via standard C / shim routines rather than re-implementing 16-bit DOS/CRT internals.
-     2. **Bucket B — Bright Star C++ Framework (`CView`, `CWindow`, `CDesktop`, `CEditText`, Resource Manager, Sound/WaveOut Streamer, Offscreen Layered Renderer):** Decompile class-by-class using the 142 recovered method tables in `docs/generated-method-tables.md`.
+     2. **Bucket B — Bright Star C++ Framework (`CView`, `CWindow`, `CDesktop`, `CEditText`, Resource Manager, Sound/WaveOut Streamer, Offscreen Layered Renderer):** Decompile class-by-class using the 142 recovered method tables (`build/method_tables.json`; the Markdown inventory is in git at tag `pre-cleanup`).
      3. **Bucket C — Game Logic (`SpellingDemons*`, match, grid, actors, levels, score/records):** Translate into clean, readable C/C++ methods and state structs backed by the framework and shim.
 
 4. **Single Unified Codebase + Thin Win16 API Shim (No Dual Mock/Win16 Duplication).**
@@ -52,10 +52,9 @@
 | `ghidra/local/SpellingBlizzard.gpr` | Working Ghidra 12.2 project for the executable. |
 | `build/decomp/` | Batch-exported Ghidra C decompilations and call/reference index for all functions. |
 | `build/method_tables.json` | Machine-extracted inventory of all 142 virtual method tables and constructor install chains. |
-| `docs/generated-method-tables.md` | Human-readable vtable hierarchy, slot offsets, and constructor sites. |
-| `docs/sb-cdres.md` | Resource inventory for `SB_CDRES.DLL` and the `BLIZZARD.EXE` resource-loading pipeline. |
-| `docs/subsystem-map.md` | Classification of functions and classes into CRT, Framework, Audio, Graphics, Resource, and Game subsystems. |
-| `src/` | Reconstructed C/C++ source code and Win16 shim. |
+| `tools/recomp/` | Recompiler: NE parser, x86-16 decoder, C generator, function list. |
+| `src/recomp/` | Recompiled-game runtime and host Win16 API layer (`sb_recomp`). |
+| `docs/recomp.md` | Recompiler design, options and status. |
 
 ## Build and Verification Workflow
 
@@ -69,7 +68,7 @@ Batch Ghidra Decompilation (build/decomp/) + Vtable Inventory (build/method_tabl
 Generated Class/Vtable Headers + Subsystem Map (CRT / Framework / Game)
         |
         v
-Clean C/C++ Decompilation + Thin Win16 API Shim (src/)
+Clean C/C++ Decompilation + Thin Win16 API Shim (src/recomp/)
         |
         v
 Automated Build, Unit/Subsystem Tests, & Runtime Verification
