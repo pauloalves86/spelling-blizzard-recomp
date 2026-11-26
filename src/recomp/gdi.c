@@ -958,7 +958,7 @@ void api_GDI_CREATEBITMAP(void)
     }
 }
 
-static int32_t bitmap_bits(uint16_t hbm, int32_t cb, uint32_t buf, int set)
+static int32_t bitmap_bits(uint16_t hbm, uint32_t cb, uint32_t buf, int set)
 {
     Bitmap *b = bmp_of(hbm);
     int stride, x, y, rows;
@@ -967,10 +967,9 @@ static int32_t bitmap_bits(uint16_t hbm, int32_t cb, uint32_t buf, int set)
         return 0;
     }
     stride = b->bpp == 8 ? ((b->w + 1) & ~1) : ((b->w + 15) / 16) * 2;
-    rows = (int)(cb / stride);
-    if (rows > b->h) {
-        rows = b->h;
-    }
+    /* cb is unsigned; callers pass oversized counts (16-bit size overflow) and
+     * GDI simply copies at most the whole bitmap. */
+    rows = cb / (uint32_t)stride > (uint32_t)b->h ? b->h : (int)(cb / (uint32_t)stride);
     for (y = 0; y < rows; ++y) {
         uint32_t lin = SEGBASE[(uint16_t)((buf >> 16) + 8 * (((uint32_t)(uint16_t)buf + (uint32_t)y * stride) >> 16)) >> 3];
         /* huge pointer: compute linear address of row y */
@@ -1008,7 +1007,9 @@ void api_GDI_SETBITMAPBITS(void)
     uint16_t h = arg_w(&a);
     uint32_t cb = arg_d(&a);
     uint32_t buf = arg_d(&a);
-    ret_d((uint32_t)bitmap_bits(h, (int32_t)cb, buf, 1));
+    ret_d((uint32_t)bitmap_bits(h, cb, buf, 1));
+    api_log("SetBitmapBits(%04x, %u, %08x) = %u [%dx%d]", h, cb, buf, ((uint32_t)DX << 16) | AX,
+            bmp_of(h) ? bmp_of(h)->w : -1, bmp_of(h) ? bmp_of(h)->h : -1);
     g_screen_dirty = 1;
     api_ret(10);
 }
@@ -1019,7 +1020,9 @@ void api_GDI_GETBITMAPBITS(void)
     uint16_t h = arg_w(&a);
     uint32_t cb = arg_d(&a);
     uint32_t buf = arg_d(&a);
-    ret_d((uint32_t)bitmap_bits(h, (int32_t)cb, buf, 0));
+    ret_d((uint32_t)bitmap_bits(h, cb, buf, 0));
+    api_log("GetBitmapBits(%04x, %u, %08x) = %u [%dx%d]", h, cb, buf, ((uint32_t)DX << 16) | AX,
+            bmp_of(h) ? bmp_of(h)->w : -1, bmp_of(h) ? bmp_of(h)->h : -1);
     api_ret(10);
 }
 

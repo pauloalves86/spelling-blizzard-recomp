@@ -1315,6 +1315,7 @@ void api_USER_DISPATCHMESSAGE(void)
     memcpy(&msg, p + 2, 2);
     memcpy(&wp, p + 4, 2);
     memcpy(&lp, p + 6, 4);
+    if (msg >= 0x100 && msg <= 0x105) api_log("Dispatch key msg %04x vk %02x", msg, wp);
     r = send_msg(hwnd, msg, wp, lp);
     if (msg == 0x0F) {
         Wnd *w = wnd_get(hwnd);
@@ -1346,6 +1347,7 @@ void api_USER_GETKEYSTATE(void)
     ArgReader a = args_pascal(2);
     int16_t vk = arg_i(&a);
     AX = (vk >= 0 && vk < 256) ? (uint16_t)g_keys[vk] : 0;
+    if (AX & 0x8000) api_log("GetKeyState(%02x) = down", vk);
     api_ret(2);
 }
 
@@ -1355,6 +1357,7 @@ void api_USER_GETASYNCKEYSTATE(void)
     int16_t vk = arg_i(&a);
     user_idle();
     AX = (vk >= 0 && vk < 256) ? (uint16_t)(g_keys[vk] & 0x8000) : 0;
+    api_log("GetAsyncKeyState(%02x) = %04x", vk, AX);
     api_ret(2);
 }
 
