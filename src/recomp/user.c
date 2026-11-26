@@ -515,6 +515,8 @@ static void run_script(void)
             int vk = key_by_name(e->arg);
             key_event(vk, 1, 0);
             key_event(vk, 0, 0);
+        } else if (!strcmp(e->cmd, "down") || !strcmp(e->cmd, "up")) {
+            key_event(key_by_name(e->arg), e->cmd[0] == 'd', 0);
         } else if (!strcmp(e->cmd, "text")) {
             const char *s;
             for (s = e->arg; *s; ++s) {
@@ -1243,6 +1245,8 @@ void api_USER_PEEKMESSAGE(void)
             m.wp = g_quit_code;
             if (flags & 1) g_quit_posted = 0;
         } else {
+            /* Nothing to do: yield like Win16's PeekMessage did to other tasks. */
+            SDL_Delay(1);
             AX = 0;
             return;
         }

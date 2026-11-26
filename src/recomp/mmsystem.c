@@ -184,6 +184,7 @@ void api_MMSYSTEM_WAVEOUTOPEN(void)
             SDL_ClearQueuedAudio(M.dev);
         }
     }
+    api_log("waveOutOpen(%u Hz, %u ch, %u bit, cb %08x flags %08x)", rate, ch, bits, cb, flags);
     if (lph) WW((uint16_t)(lph >> 16), (uint16_t)lph, HWAVEOUT_ID);
     notify(MM_WOM_OPEN, 0);
     AX = 0;
@@ -237,6 +238,7 @@ void api_MMSYSTEM_WAVEOUTWRITE(void)
         SDL_QueueAudio(M.dev, farp(data), len); /* huge buffers are contiguous in MEM */
     }
     M.written += len;
+    api_log("waveOutWrite(%u bytes)", len);
     M.pend[M.npend].hdr = hdr;
     M.pend[M.npend].end = M.written;
     M.npend++;
