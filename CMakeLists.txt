@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 add_library(sb_win16_shim STATIC
     src/shim/win16_resource.c
+    src/shim/win16_waveout.c
 )
 
 add_library(recovered_message_pump STATIC
@@ -14,6 +15,7 @@ add_library(recovered_message_pump STATIC
 
 add_library(recovered_resource_manager STATIC
     src/recovered/framework/resource_manager.c
+    src/recovered/framework/audio_waveout.c
 )
 target_link_libraries(recovered_resource_manager PUBLIC sb_win16_shim)
 
@@ -46,3 +48,7 @@ add_test(NAME recovered_object_model COMMAND test_recovered_object_model)
 add_executable(test_resource_manager tests/test_resource_manager.c)
 target_link_libraries(test_resource_manager PRIVATE recovered_resource_manager)
 add_test(NAME recovered_resource_manager COMMAND test_resource_manager WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(test_audio_waveout tests/test_audio_waveout.c)
+target_link_libraries(test_audio_waveout PRIVATE recovered_resource_manager)
+add_test(NAME recovered_audio_waveout COMMAND test_audio_waveout WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

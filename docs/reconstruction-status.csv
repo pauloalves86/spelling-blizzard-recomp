@@ -132,16 +132,16 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1008:135c,FUN_1008_135c,882,not-started,Game/UI Views & Dialogs,C: Game Logic,Game/UI Views & Dialogs,CViewSub_1018_625c,0x34,,,Classified in subsystem-map.md.
 1008:16ce,FUN_1008_16ce,90,not-started,Game/UI Views & Dialogs,C: Game Logic,Game/UI Views & Dialogs,CViewSub_1018_625c,0x58,,,Classified in subsystem-map.md.
 1008:1728,FUN_1008_1728,28,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
-1008:225a,FUN_1008_225a,82,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x0,,,Classified in subsystem-map.md.
-1008:22ac,FUN_1008_22ac,13,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0xc,,,Classified in subsystem-map.md.
-1008:22ba,FUN_1008_22ba,14,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x10,,,Classified in subsystem-map.md.
-1008:22c8,FUN_1008_22c8,14,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x14,,,Classified in subsystem-map.md.
-1008:22d6,FUN_1008_22d6,219,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x18,snd ,,Classified in subsystem-map.md.
-1008:23b2,FUN_1008_23b2,131,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x1c,,,Classified in subsystem-map.md.
-1008:2436,FUN_1008_2436,44,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x20,,,Classified in subsystem-map.md.
-1008:2462,FUN_1008_2462,137,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x24,,,Classified in subsystem-map.md.
-1008:24ec,FUN_1008_24ec,67,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x28,,,Classified in subsystem-map.md.
-1008:2530,FUN_1008_2530,14,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x2c,,,Classified in subsystem-map.md.
+1008:225a,FUN_1008_225a,82,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x0,,src/recovered/framework/audio_waveout.c,`CSoundManager_1008_7edc` virtual destructor (`CSoundManager_Dtor_1008_225a`).
+1008:22ac,FUN_1008_22ac,13,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0xc,,src/recovered/framework/audio_waveout.c,Checks if `waveOut` playback is still active (`CSoundManager_IsHardwareBusy_1008_22ac`).
+1008:22ba,FUN_1008_22ba,14,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x10,,src/recovered/framework/audio_waveout.c,Returns sound manager active flag `+0x16` (`CSoundManager_IsActive_1008_22ba`).
+1008:22c8,FUN_1008_22c8,14,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x14,,src/recovered/framework/audio_waveout.c,Returns sound interrupted flag `+0x0a` (`CSoundManager_WasInterrupted_1008_22c8`).
+1008:22d6,FUN_1008_22d6,219,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x18,snd ,src/recovered/framework/audio_waveout.c,Loads `'snd '` (`0x03ee`) BSW resource and plays via `waveOut` (`CSoundManager_PlaySoundResource_1008_22d6`).
+1008:23b2,FUN_1008_23b2,131,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x1c,,src/recovered/framework/audio_waveout.c,Waits for sound completion or user key/mouse interrupt (`CSoundManager_WaitOrInterrupt_1008_23b2`).
+1008:2436,FUN_1008_2436,44,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x20,,src/recovered/framework/audio_waveout.c,Waits for sound playback to complete (`CSoundManager_WaitUntilDone_1008_2436`).
+1008:2462,FUN_1008_2462,137,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x24,,src/recovered/framework/audio_waveout.c,Stops active sound and restores resource handle flags (`CSoundManager_Stop_1008_2462`).
+1008:24ec,FUN_1008_24ec,67,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x28,,src/recovered/framework/audio_waveout.c,Updates 10-minute (36000 tick) idle sound timer (`CSoundManager_IdleTimerCheck_1008_24ec`).
+1008:2530,FUN_1008_2530,14,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundManager_1008_7edc,0x2c,,src/recovered/framework/audio_waveout.c,Returns active `'snd '` resource ID (`CSoundManager_GetCurrentSoundId_1008_2530`).
 1008:253e,FUN_1008_253e,24,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CClass_1008_7f0c,0x74,,,Classified in subsystem-map.md.
 1008:2556,FUN_1008_2556,16,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CClass_1008_7f0c,0x0,,,Classified in subsystem-map.md.
 1008:2566,FUN_1008_2566,171,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CClass_1008_7f0c,0x6c,,,Classified in subsystem-map.md.
@@ -287,7 +287,7 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1008:687a,FUN_1008_687a,55,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
 1008:68b2,FUN_1008_68b2,140,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
 1008:693e,FUN_1008_693e,233,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
-1008:6a28,FUN_1008_6a28,512,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
+1008:6a28,FUN_1008_6a28,512,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,"Verifies Win 3.10+, 11.025 kHz 8-bit mono async `waveOut`, and display capabilities (`System_CheckRequirements_1008_6a28`)."
 1008:6dfc,FUN_1008_6dfc,80,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
 1008:6e4c,FUN_1008_6e4c,16,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_708a,0x20,,,Classified in subsystem-map.md.
 1008:6e5c,FUN_1008_6e5c,153,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_708a,0x14,,,Classified in subsystem-map.md.
@@ -565,7 +565,7 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1010:0614,FUN_1010_0614,48,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
 1010:0644,FUN_1010_0644,175,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
 1010:06f4,FUN_1010_06f4,172,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
-1010:07ae,FUN_1010_07ae,11,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
+1010:07ae,FUN_1010_07ae,11,decompiled,framework,B: Bright Star Framework,Framework/Core & UI Helpers,,,,src/recovered/framework/audio_waveout.c,Global 60 Hz tick query (`Timer_GetTicks60Hz_1010_07ae`).
 1010:07ba,FUN_1010_07ba,6,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
 1010:07d2,FUN_1010_07d2,40,not-started,Framework/UI Views & Windows,B: Bright Star Framework,Framework/UI Views & Windows,,,,,Classified in subsystem-map.md.
 1010:07fa,FUN_1010_07fa,148,not-started,Framework/UI Views & Windows,B: Bright Star Framework,Framework/UI Views & Windows,,,,,Classified in subsystem-map.md.
@@ -636,7 +636,7 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1010:23b2,FUN_1010_23b2,18,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_96a6,0x134,,,Classified in subsystem-map.md.
 1010:23c4,FUN_1010_23c4,232,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_96a6,0x138,,,Classified in subsystem-map.md.
 1010:24ae,FUN_1010_24ae,57,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_96a6,0x13c,PICT,,Classified in subsystem-map.md.
-1010:24f8,FUN_1010_24f8,54,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
+1010:24f8,FUN_1010_24f8,54,decompiled,framework,B: Bright Star Framework,Framework/Core & UI Helpers,,,,src/recovered/framework/audio_waveout.c,Inclusive bounded random integer helper (`Random_Range_1010_24f8`).
 1010:25be,FUN_1010_25be,37,decompiled,framework,B: Bright Star Framework,Framework/Resource Manager,CResourceTypeList_1010_2b12,0x0,,src/recovered/framework/resource_manager.c,`CResourceTypeList_1010_2b12` virtual destructor (`CResourceTypeList_Dtor_1010_25be`).
 1010:25e4,FUN_1010_25e4,103,decompiled,framework,B: Bright Star Framework,Framework/Resource Manager,CResourceTypeList_1010_2b12,0x54,,src/recovered/framework/resource_manager.c,Finds or creates resource handle entry by ID (`CResourceTypeList_FindOrCreateById_1010_25e4`).
 1010:264c,FUN_1010_264c,32,decompiled,framework,B: Bright Star Framework,Framework/Resource Manager,CResourceTypeList_1010_2b12,0x58,,src/recovered/framework/resource_manager.c,Copies 6-byte type descriptor (`CResourceTypeList_GetTypeDescriptor_1010_264c`).
@@ -665,20 +665,20 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1010:2e12,FUN_1010_2e12,77,not-started,Framework/Graphics & Offscreen,B: Bright Star Framework,Framework/Graphics & Offscreen,,,,,Classified in subsystem-map.md.
 1010:2e60,FUN_1010_2e60,266,not-started,Framework/Graphics & Offscreen,B: Bright Star Framework,Framework/Graphics & Offscreen,,,,,Classified in subsystem-map.md.
 1010:2f6a,FUN_1010_2f6a,177,not-started,Framework/Graphics & Offscreen,B: Bright Star Framework,Framework/Graphics & Offscreen,,,,,Classified in subsystem-map.md.
-1010:312a,FUN_1010_312a,40,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
-1010:3152,FUN_1010_3152,31,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
-1010:3172,FUN_1010_3172,30,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:3190,FUN_1010_3190,72,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:31d8,FUN_1010_31d8,221,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:32bc,FUN_1010_32bc,202,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:3386,FUN_1010_3386,354,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:34ea,FUN_1010_34ea,443,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:36a6,FUN_1010_36a6,25,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:36d0,FUN_1010_36d0,221,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:37e6,FUN_1010_37e6,489,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:39d4,FUN_1010_39d4,60,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:3a10,FUN_1010_3a10,19,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:3a24,FUN_1010_3a24,3,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
+1010:312a,FUN_1010_312a,40,decompiled,framework,B: Bright Star Framework,Framework/Core & UI Helpers,,,,src/recovered/framework/audio_waveout.c,Zero-initializes 10-byte `SBBswSample` (`BswSample_InitEmpty_1010_312a`).
+1010:3152,FUN_1010_3152,31,decompiled,framework,B: Bright Star Framework,Framework/Core & UI Helpers,,,,src/recovered/framework/audio_waveout.c,Frees PCM buffer in `SBBswSample` (`BswSample_FreeBuffer_1010_3152`).
+1010:3172,FUN_1010_3172,30,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,`SBBswSample` constructor (`BswSample_Ctor_1010_3172`).
+1010:3190,FUN_1010_3190,72,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Loads BSW audio sample directly from module resource (`BswSample_LoadFromExeResource_1010_3190`).
+1010:31d8,FUN_1010_31d8,221,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Parses 16-byte `BSW\0` header and copies PCM payload (`BswSample_ParseHeaderAndCopyPcm_1010_31d8`).
+1010:32bc,FUN_1010_32bc,202,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Unprepares and frees chunked `WAVEHDR` stream buffers (`BswStream_UnprepareAndFree_1010_32bc`).
+1010:3386,FUN_1010_3386,354,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Pumps next chunked `WAVEHDR` buffer to `waveOutWrite` (`BswStream_PumpNextChunk_1010_3386`).
+1010:34ea,FUN_1010_34ea,443,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Allocates and starts multi-chunk `waveOut` stream (`BswStream_StartChunked_1010_34ea`).
+1010:36a6,FUN_1010_36a6,25,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Constructs 50-byte `SBWavePlayer` at `DAT_1060_07cc` (`WavePlayer_Ctor_1010_36a6`).
+1010:36d0,FUN_1010_36d0,221,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,"Resets, unprepares, and closes `HWAVEOUT` (`WavePlayer_StopAndClose_1010_36d0`)."
+1010:37e6,FUN_1010_37e6,489,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Opens `waveOut` at 11.025/22.05 kHz and writes `WAVEHDR` (`WavePlayer_OpenAndWrite_1010_37e6`).
+1010:39d4,FUN_1010_39d4,60,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Stops previous sound and starts new `SBBswSample` (`WavePlayer_PlaySample_1010_39d4`).
+1010:3a10,FUN_1010_3a10,19,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Sets 60 Hz playback completion tick (`WavePlayer_SetEndTick_1010_3a10`).
+1010:3a24,FUN_1010_3a24,3,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,No-op waveOut completion callback (`WavePlayer_NoopCallback_1010_3a24`).
 1010:3a28,FUN_1010_3a28,82,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CEventDispatcherBase_1008_0b84,0xc,,,Classified in subsystem-map.md.
 1010:3b76,FUN_1010_3b76,54,not-started,Framework/Event & Command Dispatch,B: Bright Star Framework,Framework/Event & Command Dispatch,CEventDispatcherBase_1008_0b84,0x10,,,Classified in subsystem-map.md.
 1010:3bac,FUN_1010_3bac,54,not-started,Framework/Event & Command Dispatch,B: Bright Star Framework,Framework/Event & Command Dispatch,CEventDispatcherBase_1008_0b84,0x14,,,Classified in subsystem-map.md.
@@ -693,9 +693,9 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1010:3d56,FUN_1010_3d56,1278,not-started,Framework/Event & Command Dispatch,B: Bright Star Framework,Framework/Event & Command Dispatch,CEventDispatcherBase_1008_0b84,0x38,,,Classified in subsystem-map.md.
 1010:4270,FUN_1010_4270,93,not-started,Framework/Event & Command Dispatch,B: Bright Star Framework,Framework/Event & Command Dispatch,CEventDispatcherBase_1008_0b84,0x3c,,,Classified in subsystem-map.md.
 1010:42ce,FUN_1010_42ce,404,not-started,Framework/Event & Command Dispatch,B: Bright Star Framework,Framework/Event & Command Dispatch,CEventDispatcherBase_1008_0b84,0x40,,,Classified in subsystem-map.md.
-1010:446a,FUN_1010_446a,107,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
-1010:44d6,FUN_1010_44d6,21,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
-1010:44ec,FUN_1010_44ec,124,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,,,,,Classified in subsystem-map.md.
+1010:446a,FUN_1010_446a,107,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Constructs 60 Hz `TIMEGETTIME` timer at `DAT_1060_0a1e` (`CTimer60Hz_Ctor_1010_446a`).
+1010:44d6,FUN_1010_44d6,21,decompiled,framework,B: Bright Star Framework,Framework/Core & UI Helpers,,,,src/recovered/framework/audio_waveout.c,`CTimer60Hz_1010_456a` destructor (`CTimer60Hz_Dtor_1010_44d6`).
+1010:44ec,FUN_1010_44ec,124,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,,,,src/recovered/framework/audio_waveout.c,Advances 60 Hz Bresenham tick counter from `TIMEGETTIME` (`CTimer60Hz_GetTicks_1010_44ec`).
 1010:4576,FUN_1010_4576,115,not-started,Framework/Core & UI Helpers,B: Bright Star Framework,Framework/Core & UI Helpers,,,,,Classified in subsystem-map.md.
 1010:45ea,FUN_1010_45ea,86,not-started,Framework/Event & Command Dispatch,B: Bright Star Framework,Framework/Event & Command Dispatch,CControllerSub_1008_0838,0x30,,,Classified in subsystem-map.md.
 1010:4640,FUN_1010_4640,160,not-started,Framework/Event & Command Dispatch,B: Bright Star Framework,Framework/Event & Command Dispatch,CControllerSub_1008_0838,0x34,,,Classified in subsystem-map.md.
@@ -1096,18 +1096,18 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1018:553a,FUN_1018_553a,565,not-started,Game/Menus & Flow,C: Game Logic,Game/Menus & Flow,CMainMenuOrMatchView_1018_3228,0x1c,Pane,,Classified in subsystem-map.md.
 1018:5772,FUN_1018_5772,1345,not-started,Game/Menus & Flow,C: Game Logic,Game/Menus & Flow,CMainMenuOrMatchView_1018_3228,0x118,CPic;GmBn;MpRv;Pane,,Classified in subsystem-map.md.
 1018:6378,FUN_1018_6378,57,not-started,Game/Logic & State,C: Game Logic,Game/Logic & State,,,,,Classified in subsystem-map.md.
-1018:63b2,FUN_1018_63b2,14,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x10,,,Classified in subsystem-map.md.
-1018:63c0,FUN_1018_63c0,14,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x14,,,Classified in subsystem-map.md.
-1018:63ce,FUN_1018_63ce,14,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x18,,,Classified in subsystem-map.md.
-1018:63dc,FUN_1018_63dc,15,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x1c,,,Classified in subsystem-map.md.
-1018:63ec,FUN_1018_63ec,15,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x20,,,Classified in subsystem-map.md.
-1018:63fc,FUN_1018_63fc,3,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x24,,,Classified in subsystem-map.md.
-1018:6400,FUN_1018_6400,3,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x28,,,Classified in subsystem-map.md.
-1018:6404,FUN_1018_6404,40,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0xc,,,Classified in subsystem-map.md.
-1018:642c,FUN_1018_642c,61,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x2c,,,Classified in subsystem-map.md.
-1018:646a,FUN_1018_646a,36,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x30,,,Classified in subsystem-map.md.
-1018:648e,FUN_1018_648e,5,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x34,,,Classified in subsystem-map.md.
-1018:6494,FUN_1018_6494,5,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x38,,,Classified in subsystem-map.md.
+1018:63b2,FUN_1018_63b2,14,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x10,,src/recovered/framework/audio_waveout.c,`CTimedCallback_1008_823c` flag `+0x0a` getter (`CTimedCallback_GetByte0a_1018_63b2`).
+1018:63c0,FUN_1018_63c0,14,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x14,,src/recovered/framework/audio_waveout.c,`CTimedCallback_1008_823c` flag `+0x09` getter (`CTimedCallback_GetByte09_1018_63c0`).
+1018:63ce,FUN_1018_63ce,14,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x18,,src/recovered/framework/audio_waveout.c,`CTimedCallback_1008_823c` paused flag `+0x08` getter (`CTimedCallback_IsPaused_1018_63ce`).
+1018:63dc,FUN_1018_63dc,15,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x1c,,src/recovered/framework/audio_waveout.c,Resumes timed callback (`CTimedCallback_Resume_1018_63dc`).
+1018:63ec,FUN_1018_63ec,15,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x20,,src/recovered/framework/audio_waveout.c,Pauses timed callback (`CTimedCallback_Pause_1018_63ec`).
+1018:63fc,FUN_1018_63fc,3,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x24,,src/recovered/framework/audio_waveout.c,Timed callback virtual no-op (`CTimedCallback_OnStartNoop_1018_63fc`).
+1018:6400,FUN_1018_6400,3,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x28,,src/recovered/framework/audio_waveout.c,Timed callback virtual no-op (`CTimedCallback_OnTickNoop_1018_6400`).
+1018:6404,FUN_1018_6404,40,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0xc,,src/recovered/framework/audio_waveout.c,Executes timed callback and schedules next interval (`CTimedCallback_Execute_1018_6404`).
+1018:642c,FUN_1018_642c,61,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x2c,,src/recovered/framework/audio_waveout.c,Checks if unpaused timed callback reached target 60 Hz tick (`CTimedCallback_IsReady_1018_642c`).
+1018:646a,FUN_1018_646a,36,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x30,,src/recovered/framework/audio_waveout.c,Schedules next 60 Hz callback tick (`CTimedCallback_ScheduleNext_1018_646a`).
+1018:648e,FUN_1018_648e,5,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x34,,src/recovered/framework/audio_waveout.c,Returns 0 (`CTimedCallback_False0_1018_648e`).
+1018:6494,FUN_1018_6494,5,decompiled,framework,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_823c,0x38,,src/recovered/framework/audio_waveout.c,Returns 0 (`CTimedCallback_False1_1018_6494`).
 1018:649a,FUN_1018_649a,594,not-started,Game/UI Views & Dialogs,C: Game Logic,Game/UI Views & Dialogs,CViewSub_1018_6034,0x34,CPic;KeyE;KeyO,,Classified in subsystem-map.md.
 1018:66ee,FUN_1018_66ee,62,not-started,Game/UI Views & Dialogs,C: Game Logic,Game/UI Views & Dialogs,CViewSub_1018_6034,0x1c,,,Classified in subsystem-map.md.
 1018:6a8e,FUN_1018_6a8e,413,not-started,Game/Logic & State,C: Game Logic,Game/Logic & State,CClass_1018_684e,0x114,,,Classified in subsystem-map.md.
@@ -1321,13 +1321,13 @@ entry,ghidra_name,body_bytes,status,scope,bucket,subsystem,owner_class,owner_slo
 1020:2616,FUN_1020_2616,147,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_8024,0xc,,,Classified in subsystem-map.md.
 1020:26aa,FUN_1020_26aa,31,not-started,Framework/Core Object & Collections,B: Bright Star Framework,Framework/Core Object & Collections,CClass_1008_8024,0x24,,,Classified in subsystem-map.md.
 1020:26ca,FUN_1020_26ca,269,not-started,Game/Actors,C: Game Logic,Game/Actors,,,SAIL,,Classified in subsystem-map.md.
-1020:27d8,FUN_1020_27d8,55,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x0,,,Classified in subsystem-map.md.
-1020:2810,FUN_1020_2810,206,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0xc,,,Classified in subsystem-map.md.
-1020:28e0,FUN_1020_28e0,65,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x2c,,,Classified in subsystem-map.md.
-1020:2922,FUN_1020_2922,5,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x34,,,Classified in subsystem-map.md.
-1020:2928,FUN_1020_2928,141,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x3c,snd ,,Classified in subsystem-map.md.
-1020:29b6,FUN_1020_29b6,223,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x40,snd ,,Classified in subsystem-map.md.
-1020:2a96,FUN_1020_2a96,137,not-started,Framework/Audio & WaveOut,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x44,snd ,,Classified in subsystem-map.md.
+1020:27d8,FUN_1020_27d8,55,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x0,,src/recovered/framework/audio_waveout.c,`CSoundChannel_1010_bdd4` virtual destructor (`CSoundChannel_Dtor_1020_27d8`).
+1020:2810,FUN_1020_2810,206,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0xc,,src/recovered/framework/audio_waveout.c,Selects next sequential/random `'snd '` in channel and triggers playback (`CSoundChannel_ExecuteNext_1020_2810`).
+1020:28e0,FUN_1020_28e0,65,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x2c,,src/recovered/framework/audio_waveout.c,Checks if sound channel is ready and sound manager is idle (`CSoundChannel_IsReady_1020_28e0`).
+1020:2922,FUN_1020_2922,5,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x34,,src/recovered/framework/audio_waveout.c,Returns 1 (`CSoundChannel_True_1020_2922`).
+1020:2928,FUN_1020_2928,141,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x3c,snd ,src/recovered/framework/audio_waveout.c,Appends `'snd '` resource ID to channel and locks handle (`CSoundChannel_AddSound_1020_2928`).
+1020:29b6,FUN_1020_29b6,223,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x40,snd ,src/recovered/framework/audio_waveout.c,Sets primary `'snd '` resource ID on channel (`CSoundChannel_SetPrimarySound_1020_29b6`).
+1020:2a96,FUN_1020_2a96,137,decompiled,framework,B: Bright Star Framework,Framework/Audio & WaveOut,CSoundChannel_1010_bdd4,0x44,snd ,src/recovered/framework/audio_waveout.c,Stops and unlocks all `'snd '` handles in channel (`CSoundChannel_ClearSounds_1020_2a96`).
 1020:2b20,FUN_1020_2b20,85,not-started,Game/Actors & AI,C: Game Logic,Game/Actors & AI,CGameEntity_1020_2c2e,0x30,,,Classified in subsystem-map.md.
 1020:2b92,FUN_1020_2b92,125,not-started,Game/Logic & State,C: Game Logic,Game/Logic & State,CClass_1020_2024,0xc4,,,Classified in subsystem-map.md.
 1020:2c10,FUN_1020_2c10,30,not-started,Game/Logic & State,C: Game Logic,Game/Logic & State,CClass_1020_2024,0xd0,,,Classified in subsystem-map.md.
