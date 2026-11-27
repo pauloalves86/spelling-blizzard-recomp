@@ -99,10 +99,21 @@ target_link_libraries(tcc PRIVATE ${CMAKE_DL_LIBS} Threads::Threads m)
 set(SB_JIT_PRELUDE_C ${CMAKE_CURRENT_BINARY_DIR}/jit_prelude.c)
 sb_embed(${SB_JIT_PRELUDE_C} sb_jit_prelude
          src/recomp/jit_prelude.h src/recomp/cpu.h src/recomp/imports/api_decls.h)
+# Finding and checking the player's game files (folder, ISO, BIN/CUE).
+add_library(sb_gamefiles STATIC src/recomp/gamefiles.c src/recomp/sha256.c)
+target_include_directories(sb_gamefiles PUBLIC src/recomp)
+target_compile_options(sb_gamefiles PRIVATE -Wall -Wextra)
+
 add_executable(sb_recomp $<TARGET_OBJECTS:sb_recomp_runtime> src/recomp/jit.c ${SB_JIT_PRELUDE_C})
 target_include_directories(sb_recomp PRIVATE src/recomp src/recomp/imports)
 target_compile_options(sb_recomp PRIVATE -Wall)
-target_link_libraries(sb_recomp PRIVATE sb_gen_lib tcc SDL2::SDL2 PkgConfig::FREETYPE m)
+target_link_libraries(sb_recomp PRIVATE sb_gen_lib sb_gamefiles tcc SDL2::SDL2 PkgConfig::FREETYPE m)
+
+# Tests that need no game files.
+enable_testing()
+add_executable(gamefiles_test tests/gamefiles_test.c)
+target_link_libraries(gamefiles_test PRIVATE sb_gamefiles)
+add_test(NAME gamefiles COMMAND gamefiles_test ${CMAKE_CURRENT_BINARY_DIR}/gamefiles_test_run)
 
 set(SB_GAME_DIR ${CMAKE_CURRENT_SOURCE_DIR}/original CACHE PATH "Folder with your BLIZZARD.EXE and SB_CDRES.DLL")
 if(NOT EXISTS ${SB_GAME_DIR}/BLIZZARD.EXE)
@@ -147,7 +158,6 @@ target_include_directories(sb_recomp_aot PRIVATE src/recomp src/recomp/imports)
 target_link_libraries(sb_recomp_aot PRIVATE sb_recomp_gen SDL2::SDL2 PkgConfig::FREETYPE m)
 
 # Both play the opening of the game headless.
-enable_testing()
 foreach(prog sb_recomp sb_recomp_aot)
     add_test(NAME ${prog}_new_game_headless
              COMMAND ${prog} --headless --no-audio --game-dir ${SB_GAME_DIR}

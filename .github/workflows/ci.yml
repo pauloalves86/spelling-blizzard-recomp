@@ -37,3 +37,6 @@ jobs:
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j 4
+
+      - name: Tests that need no game files
+        run: ctest --test-dir build --output-on-failure
