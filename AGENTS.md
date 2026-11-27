@@ -13,7 +13,7 @@
 
 1. `original/BLIZZARD.EXE` & `original/SB_CDRES.DLL` — immutable binary ground truth.
 2. Batch-exported Ghidra decompilation (`build/decomp/`), method-table JSON (`build/method_tables.json`), and the Ghidra database (`ghidra/local/SpellingBlizzard.gpr`).
-3. The static recompilation (`tools/recomp/`, `src/recomp/`, documented in `docs/recomp.md`) — the executable reference that clean C is checked against.
+3. The static recompilation (`src/recomp/gen/`, `src/recomp/`, documented in `docs/recomp.md`) — the executable reference that clean C is checked against.
 4. Earlier analysis notes and hand-written reconstruction, removed from the tree but kept in git history at tag `pre-cleanup`.
 
 ## Core Rules (Pragmatic Decompilation)
@@ -52,7 +52,7 @@
 | `ghidra/local/SpellingBlizzard.gpr` | Working Ghidra 12.2 project for the executable. |
 | `build/decomp/` | Batch-exported Ghidra C decompilations and call/reference index for all functions. |
 | `build/method_tables.json` | Machine-extracted inventory of all 142 virtual method tables and constructor install chains. |
-| `tools/recomp/` | Recompiler: NE parser, x86-16 decoder, C generator, function list. |
+| `src/recomp/gen/` | Recompiler (C): NE parser, x86-16 decoder, C generator, API export table, function list. |
 | `src/recomp/` | Recompiled-game runtime and host Win16 API layer (`sb_recomp`). |
 | `docs/recomp.md` | Recompiler design, options and status. |
 

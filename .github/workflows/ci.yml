@@ -1,5 +1,5 @@
 # Checks everything that can be checked without the game files: the host
-# runtime compiles and the recompiler's Python is valid. The game itself is
+# runtime and the recompiler compile. The game itself is
 # never available in CI (see README.md).
 name: CI
 
@@ -29,10 +29,9 @@ jobs:
 
       - name: Check scripts
         run: |
-          python3 -m py_compile tools/recomp/*.py
-          bash -n build.sh
+          bash -n build.sh && bash -n SpellingBlizzard.sh
 
-      - name: Build runtime
+      - name: Build runtime and recompiler
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j 4

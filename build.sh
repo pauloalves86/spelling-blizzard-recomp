@@ -42,7 +42,7 @@ done
 [ "$(sha256 original/SB_CDRES.DLL)" = "$DLL_SHA" ] ||
     die "original/SB_CDRES.DLL is not the supported version."
 
-for tool in cmake python3 pkg-config cc; do
+for tool in cmake pkg-config cc; do
     command -v "$tool" >/dev/null || die "$tool not found; see Requirements in README.md"
 done
 

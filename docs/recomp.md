@@ -30,9 +30,9 @@ Options:
 
 | Piece | File | Notes |
 | --- | --- | --- |
-| NE parser | `tools/recomp/ne.py` | Segments, every relocation type, entries, module refs. |
-| Decoder | `tools/recomp/x86.py` | 8086–286 plus the 386 operand-size ops the compiler emits. Every reachable instruction decodes; there is no FPU code. |
-| Generator | `tools/recomp/gen.py` | One C function per original function (1,489 total: Ghidra's list in `tools/recomp/functions.txt`, plus far-call targets, plus function pointers found next to selector relocations, such as the window procedure `1010:5db2`). Relocations are resolved at generation time. Switch tables come from the `cmp ax,N; ja; add ax,ax; xchg ax,bx; jmp cs:[bx+T]` pattern. A `jmp far` through memory to an address that isn't a function is a hand-made return (CRT `_setargv`). |
+| NE parser | `src/recomp/gen/ne.c` | Segments, every relocation type, entries, module refs. |
+| Decoder | `src/recomp/gen/x86.c` | 8086–286 plus the 386 operand-size ops the compiler emits. Every reachable instruction decodes; there is no FPU code. |
+| Generator | `src/recomp/gen/gen.c` | One C function per original function (1,489 total: Ghidra's list in `src/recomp/gen/functions.txt`, plus far-call targets, plus function pointers found next to selector relocations, such as the window procedure `1010:5db2`). Relocations are resolved at generation time. Switch tables come from the `cmp ax,N; ja; add ax,ax; xchg ax,bx; jmp cs:[bx+T]` pattern. A `jmp far` through memory to an address that isn't a function is a hand-made return (CRT `_setargv`). |
 | Runtime | `src/recomp/runtime.c`, `cpu.h` | Registers, flags, selector→linear memory, and a global heap where blocks over 64 KB are tiled across consecutive selectors (`__AHINCR` = 8). Selectors equal Ghidra's segment values. |
 | Loader | `src/recomp/loader.c` | Segments, relocations, PSP and environment. Task registers follow Wine's `InitTask`. |
 | KERNEL / DOS | `src/recomp/kernel.c`, `hostfs.c` | Memory, resources (EXE and `SB_CDRES.DLL`), files, INI profiles, INT 21h. DOS paths under `C:\SB\` map into the data dir, case-insensitive. |
@@ -40,10 +40,21 @@ Options:
 | GDI | `src/recomp/gdi.c` | 8-bit palette display. Static colors are at 0–9 and 246–255, `RealizePalette` uses slot assignment, and `AnimatePalette` changes PC_RESERVED entries in place. ROP3 blits follow the Windows mono↔color rules. Regions are pixel masks. Text uses Liberation fonts without antialiasing. |
 | MMSYSTEM | `src/recomp/mmsystem.c` | `waveOut` over the SDL audio queue. Buffers finish (`WHDR_DONE`, callbacks) when they have actually played. |
 
+The recompiler is a C library (`gen_recompile()` in `src/recomp/gen/gen.h`)
+that returns the generated files as text, in about 40 ms. CMake builds and
+runs its command-line front end, `sb_gen`, while configuring:
+
+```sh
+sb_gen OUT_DIR --exe original/BLIZZARD.EXE [--imports src/recomp/imports [--update-imports]]
+```
+
+API names come from `src/recomp/gen/exports.c` (ordinal, name and argument
+bytes for KERNEL, GDI, USER and MMSYSTEM, from Ghidra's export files).
+
 The import table (`src/recomp/imports/`: API names, ordinals and thunk
 indices, no game code) is checked in, so the runtime compiles without the
-game. `gen.py` fails if it no longer matches the EXE; `gen.py <dir>
---update-imports` rewrites it. The program entry point is called through the
+game. `sb_gen --imports` fails if it no longer matches the EXE, and
+`--update-imports` rewrites it. The program entry point is called through the
 generated `recomp_start()`.
 
 Ghidra mis-sizes some API argument lists, so each implementation hard-codes
@@ -61,7 +72,7 @@ Checked headlessly (`tests/recomp/new_game.script`, ctest
 
 When the game reaches something not implemented it stops with
 `recomp fatal: …` and a BP-chain backtrace of original addresses. Missing
-function entries can be added to `tools/recomp/extra_entries.txt` (`SSSS:OOOO`).
+function entries can be added to `src/recomp/gen/functions.txt` (`SSSS:OOOO`).
 
 ## Known gaps
 

@@ -64,7 +64,7 @@ jobs:
           You need your own copy of Spelling Blizzard (`BLIZZARD.EXE` and `SB_CDRES.DLL`,
           version 1.10.CD for Windows). Nothing from the game is in this release: it is
           recompiled on your PC from your copy, so you also need a C compiler, CMake,
-          Python 3, SDL2 and FreeType (see README.md).
+          SDL2 and FreeType (see README.md).
 
           With [RecompLauncher](https://recomplauncher.com), pick your game folder and press Set Up.
           By hand:

@@ -36,7 +36,7 @@ Linux only for now.
 There are two ways the original program is being brought back:
 
 1. **Static recompilation (`sb_recomp`): plays the real game today.**
-   `tools/recomp/gen.py` translates every function of `BLIZZARD.EXE` from
+   The recompiler in `src/recomp/gen/` translates every function of `BLIZZARD.EXE` from
    x86-16 machine code into C, mechanically. That generated code runs on a
    small host implementation of the Win16 APIs the game uses (KERNEL, USER,
    GDI, MMSYSTEM), built on SDL2 and FreeType. Game logic, drawing, sound and
@@ -71,7 +71,6 @@ The build reads these files but never modifies them.
 ## Requirements
 
 - A C11 compiler (GCC or Clang), CMake 3.16 or newer, and `pkg-config`
-- Python 3, which runs the recompiler at configure time
 - SDL2 development files (SDL2, or sdl2-compat over SDL3)
 - FreeType development files
 - Liberation fonts, which stand in for the Windows fonts the game asks for
@@ -80,9 +79,9 @@ For example:
 
 ```sh
 # Arch Linux
-sudo pacman -S base-devel cmake python sdl2 freetype2 ttf-liberation
+sudo pacman -S base-devel cmake sdl2 freetype2 ttf-liberation
 # Debian / Ubuntu
-sudo apt install build-essential cmake pkg-config python3 libsdl2-dev libfreetype-dev fonts-liberation
+sudo apt install build-essential cmake pkg-config libsdl2-dev libfreetype-dev fonts-liberation
 ```
 
 ## Build and run
@@ -159,8 +158,8 @@ It also uses noticeably more CPU than it should while idle.
 
 | Path | Contents |
 | --- | --- |
-| `tools/recomp/` | NE parser, x86-16 decoder, the C generator, the function list (`functions.txt`) and API export tables. |
 | `src/recomp/` | Runtime, loader and the host Win16 API layer for `sb_recomp`. |
+| `src/recomp/gen/` | The recompiler, in C: NE parser, x86-16 decoder, the C generator, the function list (`functions.txt`) and API export table. |
 | `src/recomp/imports/` | The game's import table (API names and ordinals), so the runtime builds without the game. |
 | `tests/recomp/` | Input script for the headless test. |
 | `SpellingBlizzard.sh` | The program players start: `--prepare` builds from their copy, otherwise it plays. |

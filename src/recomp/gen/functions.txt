@@ -1,5 +1,6 @@
 # Function entry points (SSSS:OOOO) from the Ghidra analysis of BLIZZARD.EXE.
-# gen.py adds far-call targets, NE entries and pointer-discovered functions.
+# The recompiler adds far-call targets, NE entries and pointer-discovered functions;
+# add an entry here by hand if a function is reached only in a way it cannot see.
 1000:001a
 1000:00d8
 1000:0104

@@ -100,7 +100,7 @@ prepare() {
     fi
 
     echo "progress 0.03 Checking the build tools"
-    for tool in cmake python3 cc pkg-config; do command -v "$tool" >/dev/null || missing+=("$tool"); done
+    for tool in cmake cc pkg-config; do command -v "$tool" >/dev/null || missing+=("$tool"); done
     if command -v pkg-config >/dev/null; then
         pkg-config --exists sdl2 || missing+=("SDL2 (development files)")
         pkg-config --exists freetype2 || missing+=("FreeType (development files)")
@@ -108,7 +108,7 @@ prepare() {
     find_fonts || missing+=("the Liberation fonts")
     if [ ${#missing[@]} -gt 0 ]; then
         fail 66 "Missing: $(IFS=,; echo "${missing[*]}" | sed 's/,/, /g')." \
-            "Spelling Blizzard is recompiled on your PC from your copy. Install them (Debian/Ubuntu: sudo apt install build-essential cmake pkg-config python3 libsdl2-dev libfreetype-dev fonts-liberation; Arch: sudo pacman -S base-devel cmake python sdl2 freetype2 ttf-liberation), then set it up again."
+            "Spelling Blizzard is recompiled on your PC from your copy. Install them (Debian/Ubuntu: sudo apt install build-essential cmake pkg-config libsdl2-dev libfreetype-dev fonts-liberation; Arch: sudo pacman -S base-devel cmake sdl2 freetype2 ttf-liberation), then set it up again."
     fi
 
     rm -f "$STAMP"
