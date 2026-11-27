@@ -12,10 +12,31 @@ function can be checked against, and later swapped in for, the recompiled
 ## Build and run
 
 ```sh
+git submodule update --init               # third_party/tinycc
 cmake -S . -B build/cmake && cmake --build build/cmake -j
 build/cmake/sb_recomp                     # window at 2x, with sound
 build/cmake/sb_recomp --scale 3 --no-audio
 ```
+
+Two programs run the same recompiled code:
+
+- `sb_recomp` recompiles `BLIZZARD.EXE` when it starts (`src/recomp/jit.c`):
+  the recompiler library generates the C in memory (about 40 ms), and
+  TinyCC's libtcc compiles it into executable memory (about 60 ms) as one
+  translation unit. The source starts with a prelude built into the program
+  (`jit_prelude.h`, `cpu.h` and `imports/api_decls.h`) in place of system
+  headers; `#include` lines are dropped. The code can only reach the symbols
+  `jit.c` hands to libtcc: the runtime's CPU state and helpers, `memcpy`,
+  and every imported API. This program contains no game code and builds
+  without the game.
+- `sb_recomp_aot` (development, built when the game files are present) links
+  the same C generated into `build/.../recomp_gen/` and compiled by the host
+  compiler (`src/recomp/aot.c`), so a debugger sees every function.
+
+Under a fixed clock (`LD_PRELOAD` over `SDL_GetTicks`, `SDL_Delay` and
+`time`) both produce the same frames, saves and API call trace. Without
+it, frames from different builds differ slightly, because the game's
+animation follows real time.
 
 Options:
 - `--game-dir DIR`: where `BLIZZARD.EXE` and `SB_CDRES.DLL` live (default `original`).
@@ -33,7 +54,7 @@ Options:
 | NE parser | `src/recomp/gen/ne.c` | Segments, every relocation type, entries, module refs. |
 | Decoder | `src/recomp/gen/x86.c` | 8086–286 plus the 386 operand-size ops the compiler emits. Every reachable instruction decodes; there is no FPU code. |
 | Generator | `src/recomp/gen/gen.c` | One C function per original function (1,489 total: Ghidra's list in `src/recomp/gen/functions.txt`, plus far-call targets, plus function pointers found next to selector relocations, such as the window procedure `1010:5db2`). Relocations are resolved at generation time. Switch tables come from the `cmp ax,N; ja; add ax,ax; xchg ax,bx; jmp cs:[bx+T]` pattern. A `jmp far` through memory to an address that isn't a function is a hand-made return (CRT `_setargv`). |
-| Runtime | `src/recomp/runtime.c`, `cpu.h` | Registers, flags, selector→linear memory, and a global heap where blocks over 64 KB are tiled across consecutive selectors (`__AHINCR` = 8). Selectors equal Ghidra's segment values. |
+| Runtime | `src/recomp/runtime.c`, `cpu.h`, `jit.c`, `aot.c` | Registers, flags, selector→linear memory, and a global heap where blocks over 64 KB are tiled across consecutive selectors (`__AHINCR` = 8). Selectors equal Ghidra's segment values. |
 | Loader | `src/recomp/loader.c` | Segments, relocations, PSP and environment. Task registers follow Wine's `InitTask`. |
 | KERNEL / DOS | `src/recomp/kernel.c`, `hostfs.c` | Memory, resources (EXE and `SB_CDRES.DLL`), files, INI profiles, INT 21h. DOS paths under `C:\SB\` map into the data dir, case-insensitive. |
 | USER | `src/recomp/user.c` | Windows, message queue, painting, keyboard and mouse, software cursor, `wsprintf`, presentation. |
@@ -64,7 +85,7 @@ sites.
 ## Status
 
 Checked headlessly (`tests/recomp/new_game.script`, ctest
-`recomp_new_game_headless`), plus 5 minutes of random input with no fault:
+`sb_recomp_new_game_headless` and `sb_recomp_aot_new_game_headless`), plus 5 minutes of random input with no fault:
 
 - Credits screen, palette fade to the map, speech, NEW GAME, typing a name
   (saved to `MAGIC/PLAYERS/<NAME>.SBG`), PLAY, and the river level with the

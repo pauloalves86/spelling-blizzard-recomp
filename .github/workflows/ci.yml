@@ -1,5 +1,5 @@
-# Checks everything that can be checked without the game files: the host
-# runtime and the recompiler compile. The game itself is
+# Checks everything that can be checked without the game files: sb_recomp
+# (runtime, recompiler and TinyCC) compiles. The game itself is
 # never available in CI (see README.md).
 name: CI
 
@@ -18,6 +18,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          submodules: true
 
       - name: Install dependencies (Ubuntu)
         if: runner.os == 'Linux'
@@ -31,7 +33,7 @@ jobs:
         run: |
           bash -n build.sh && bash -n SpellingBlizzard.sh
 
-      - name: Build runtime and recompiler
+      - name: Build sb_recomp
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j 4

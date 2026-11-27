@@ -20,7 +20,7 @@ typedef struct GenFile {
 } GenFile;
 
 typedef struct GenOutput {
-    /* recomp_gen.h, gen_SSSS_K.c..., gen_table.c, gen_imports.h, gen_api_stubs.c */
+    /* recomp_gen.h, gen_SSSS_K.c..., gen_table.c */
     GenFile *files;
     int nfiles;
     /* The text of src/recomp/imports/import_list.h and api_decls.h for this EXE:

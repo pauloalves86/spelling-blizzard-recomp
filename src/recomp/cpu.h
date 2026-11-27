@@ -152,6 +152,12 @@ uint32_t cpu_imul3_32(uint32_t a, uint32_t b);
 
 /* ---- control transfer into the runtime ---- */
 typedef void (*RecompFn)(void);
+/* One recompiled function: its original address and its C code. */
+typedef struct RecompEntry {
+    uint16_t sel;
+    uint16_t off;
+    RecompFn fn;
+} RecompEntry;
 /* Call the function at sel:off. The caller has already pushed the return
  * address (exactly as the original instruction would). */
 void call_far(uint16_t sel, uint16_t off);

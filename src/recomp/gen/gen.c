@@ -95,7 +95,6 @@ struct G {
     uint32_t *keys;         /* sorted map keys */
     const Ins **sorted;     /* a function's instructions by address */
     uint32_t *sw;           /* switch targets */
-    const Import **used;
     Buf buf;
 };
 
@@ -1194,12 +1193,6 @@ static void set_file(GenFile *f, Buf *b) {
     b->n = b->cap = 0;
 }
 
-static int cmp_import_key(const void *a, const void *b) {
-    const Import *x = *(const Import *const *)a, *y = *(const Import *const *)b;
-    int c = strcmp(x->module, y->module);
-    return c ? c : (x->ordinal > y->ordinal) - (x->ordinal < y->ordinal);
-}
-
 static void write_outputs(G *g, Func **funcs, int nf) {
     GenOutput *o = g->out;
     Buf *b = &g->buf;
@@ -1239,24 +1232,9 @@ static void write_outputs(G *g, Func **funcs, int nf) {
     bprintf(g, b, "void recomp_start(void) { f_%04x_%04x(); }\n", ne_sel_of(g->ne.cs), (unsigned)g->ne.ip);
     set_file(new_file(g, "gen_table.c"), b);
 
-    const Import **used = g->used = xcalloc(g, (size_t)g->nimports, sizeof(Import *));
     int nused = 0;
-    for (int k = 0; k < g->nimports; k++)
-        if (g->imports[k].used) used[nused++] = &g->imports[k];
-    qsort(used, (size_t)nused, sizeof(Import *), cmp_import_key);
-    bputs(g, b, "/* Imported APIs referenced by generated code: X(module, name, ordinal, purge) */\n");
-    for (int k = 0; k < nused; k++)
-        bprintf(g, b, "X(%s, %s, %d, %d)\n", used[k]->module, imp_name(used[k]), used[k]->ordinal, used[k]->purge);
-    set_file(new_file(g, "gen_imports.h"), b);
+    for (int k = 0; k < g->nimports; k++) nused += g->imports[k].used;
     o->nimports_called = nused;
-
-    bputs(g, b, "/* Weak fallbacks for APIs not implemented yet (generated). */\n#include \"api.h\"\n\n");
-    for (int k = 0; k < g->nimports; k++) {
-        const Import *im = &g->imports[k];
-        bprintf(g, b, "__attribute__((weak)) void api_%s_%s(void) { api_unimplemented(\"%s\", \"%s\", %d); }\n",
-                im->module, imp_name(im), im->module, imp_name(im), im->ordinal);
-    }
-    set_file(new_file(g, "gen_api_stubs.c"), b);
 
     /* every import (also ones only referenced from data), in relocation order */
     bputs(g, b, "/* All imports in relocation order: X(index, module, name, ordinal, purge) */\n");
@@ -1286,7 +1264,6 @@ static void g_free(G *g, Func **funcs, int nf) {
     free(g->keys);
     free(g->sorted);
     free(g->sw);
-    free(g->used);
     free(g->buf.p);
     for (int k = 0; k < g->nfuncs; k++) func_free(g->funcs[k]);
     free(g->funcs);

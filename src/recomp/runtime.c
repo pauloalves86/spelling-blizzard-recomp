@@ -87,9 +87,12 @@ const char *recomp_import_name(unsigned idx)
     return idx < g_import_count ? g_imports[idx].name : "?";
 }
 
+RecompProgram recomp_program;
+
 RecompFn recomp_lookup(uint16_t sel, uint16_t off)
 {
-    unsigned lo = 0, hi = recomp_table_count;
+    const RecompEntry *recomp_table = recomp_program.table;
+    unsigned lo = 0, hi = recomp_program.count;
     uint32_t key = ((uint32_t)sel << 16) | off;
     while (lo < hi) {
         unsigned mid = (lo + hi) / 2;

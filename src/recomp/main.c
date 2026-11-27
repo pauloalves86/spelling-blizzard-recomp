@@ -76,6 +76,11 @@ int main(int argc, char **argv)
     if (hostfs_find_game_file("BLIZZARD.EXE", exe, sizeof(exe)) != 0) {
         snprintf(exe, sizeof(exe), "%s/BLIZZARD.EXE", game_dir);
     }
+    char err[512];
+    if (recomp_load_program(exe, err, sizeof err) != 0) {
+        fprintf(stderr, "cannot recompile %s: %s\n", exe, err);
+        return 1;
+    }
     if (loader_load_exe(exe) != 0) {
         fprintf(stderr, "cannot load %s\n", exe);
         return 1;
@@ -87,7 +92,7 @@ int main(int argc, char **argv)
     /* The loader "calls" the entry point: push a sentinel far return address. */
     PUSH16(THUNK_SEL);
     PUSH16(0xFFFF);
-    recomp_start();
+    recomp_program.start();
     fprintf(stderr, "[recomp] entry point returned\n");
     win16_shutdown();
     return 0;

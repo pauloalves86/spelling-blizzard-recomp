@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          submodules: true
 
       - name: Build packages
         run: |
@@ -33,12 +35,14 @@ jobs:
           # It recompiles the game from the player's copy, so it is the same for every
           # Linux machine; it is named per processor so launchers can pick it.
           git archive --prefix="$name/" HEAD | tar x -C stage
+          git -C third_party/tinycc archive --prefix="$name/third_party/tinycc/" HEAD | tar x -C stage
           echo "$version" > "stage/$name/VERSION"
           test -f "stage/$name/recomplauncher.json" && test -x "stage/$name/SpellingBlizzard.sh"
+          test -f "stage/$name/third_party/tinycc/libtcc.c"
           for arch in x86_64 arm64; do
             tar czf "dist/$name-linux-$arch.tar.gz" -C stage "$name"
           done
-          git archive --format=zip --prefix="$name/" -o "dist/$name-source.zip" HEAD
+          (cd stage && zip -qr "../dist/$name-source.zip" "$name")
           (cd dist && sha256sum * > "$name.sha256")
           echo "NAME=$name" >> "$GITHUB_ENV"
 

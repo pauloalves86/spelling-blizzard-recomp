@@ -14,15 +14,18 @@ extern "C" {
 #define DGROUP_SEL 0x1060u  /* segment 13, automatic data (DS == SS) */
 #define THUNK_SEL 0x10A0u   /* far pointers to imported APIs: THUNK_SEL:(index*4) */
 
-typedef struct RecompEntry {
-    uint16_t sel;
-    uint16_t off;
-    RecompFn fn;
-} RecompEntry;
-extern const RecompEntry recomp_table[];
-extern const unsigned recomp_table_count;
-/* The program entry point (generated). */
-void recomp_start(void);
+/* The recompiled program: every function, sorted by address, and the NE
+ * entry point. */
+typedef struct RecompProgram {
+    const RecompEntry *table;
+    unsigned count;
+    RecompFn start;
+} RecompProgram;
+extern RecompProgram recomp_program;
+/* Provides the program for the EXE at exe_path: either compiled into this
+ * executable ahead of time (aot.c) or recompiled and compiled now, in memory
+ * (jit.c). Returns 0, or -1 with a message in err. */
+int recomp_load_program(const char *exe_path, char *err, size_t errcap);
 
 extern int g_recomp_trace;
 

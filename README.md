@@ -41,6 +41,11 @@ There are two ways the original program is being brought back:
    small host implementation of the Win16 APIs the game uses (KERNEL, USER,
    GDI, MMSYSTEM), built on SDL2 and FreeType. Game logic, drawing, sound and
    input handling are the original code. See [docs/recomp.md](docs/recomp.md).
+
+   `sb_recomp` does this each time it starts: it recompiles your
+   `BLIZZARD.EXE` to C and compiles that C in memory with
+   [TinyCC](https://bellard.org/tcc/), in about 0.1 seconds. The program
+   itself contains no game code, and nothing from the game is written to disk.
 2. **Clean decompilation (the end goal).** Readable, hand-written C that
    replaces the recompiled functions one by one, checked against the
    recompiled reference at the same address. Earlier analysis notes and
@@ -50,8 +55,9 @@ There are two ways the original program is being brought back:
 ## You need the original game files
 
 The game files are **not** in this repository or its releases, and neither
-is any code built from them: the game is recompiled on your own machine. Put
-your own copies here (or let `./build.sh /path/to/game` copy them):
+is any code built from them: the game is recompiled on your own machine,
+when it starts. Building `sb_recomp` doesn't need them; playing does. Put your
+own copies here (or let `./build.sh /path/to/game` copy them):
 
 ```
 original/BLIZZARD.EXE    229,472 bytes
@@ -66,7 +72,7 @@ sha256sum original/BLIZZARD.EXE original/SB_CDRES.DLL
 # 1c6c36bde51b8c9ad3b3a0eaba0283d0468d81326b3dbe4dbfbf7305863b70e1  original/SB_CDRES.DLL
 ```
 
-The build reads these files but never modifies them.
+`sb_recomp` and the build read these files but never modify them.
 
 ## Requirements
 
@@ -86,8 +92,9 @@ sudo apt install build-essential cmake pkg-config libsdl2-dev libfreetype-dev fo
 
 ## Build and run
 
-From a clone of the repository (or a release package), with the
-requirements above installed:
+From a clone of the repository with its TinyCC submodule
+(`git clone --recursive`, or `git submodule update --init` in an existing
+clone), with the requirements above installed:
 
 ```sh
 ./build.sh /path/to/your/game     # copies the two files into original/, checks them, builds
@@ -106,8 +113,10 @@ cmake --build build/cmake -j
 build/cmake/sb_recomp
 ```
 
-Without the game files, CMake builds only the host runtime (that's what CI
-does).
+Without the game files, CMake still builds `sb_recomp` (that's what CI
+does). With them, it also builds `sb_recomp_aot` for development: the same
+game with the recompiled C generated into the build tree and compiled ahead
+of time by GCC or Clang, so a debugger sees every function, and the tests.
 
 This opens a 1280×960 window (640×480 at 2×) with sound. Close the window to
 quit. Saved players, high scores and the game's INI file go in `run/`.
@@ -137,10 +146,12 @@ If the fonts are somewhere other than `/usr/share/fonts/liberation`, set
 ctest --test-dir build/cmake --output-on-failure
 ```
 
-`recomp_new_game_headless` plays through the opening of the real game without
-a window: credits, the map, New Game, typing a player name, and starting the
-first river level. It fails if the game hits anything the host layer doesn't
-implement.
+`sb_recomp_new_game_headless` and `sb_recomp_aot_new_game_headless` play
+through the opening of the real game without a window, with the code compiled
+in memory and ahead of time: credits, the map, New Game, typing a player name,
+and starting the first river level. They fail if the game hits anything the
+host layer doesn't implement. They need the game files in `original/` (or
+`-DSB_GAME_DIR=...`).
 
 ## Status
 
@@ -160,6 +171,7 @@ It also uses noticeably more CPU than it should while idle.
 | --- | --- |
 | `src/recomp/` | Runtime, loader and the host Win16 API layer for `sb_recomp`. |
 | `src/recomp/gen/` | The recompiler, in C: NE parser, x86-16 decoder, the C generator, the function list (`functions.txt`) and API export table. |
+| `third_party/tinycc/` | [TinyCC](https://repo.or.cz/tinycc.git) (submodule, pinned), which compiles the recompiled C in memory. |
 | `src/recomp/imports/` | The game's import table (API names and ordinals), so the runtime builds without the game. |
 | `tests/recomp/` | Input script for the headless test. |
 | `SpellingBlizzard.sh` | The program players start: `--prepare` builds from their copy, otherwise it plays. |
@@ -176,6 +188,10 @@ It also uses noticeably more CPU than it should while idle.
 This repository contains tools and new source code only. Spelling Blizzard and
 its assets belong to their copyright holders. You need your own copy of the
 game to run it.
+
+`sb_recomp` includes [TinyCC](https://repo.or.cz/tinycc.git)'s libtcc,
+under the GNU LGPL 2.1 (`third_party/tinycc/COPYING`). Everything needed to
+rebuild `sb_recomp` with a modified libtcc is in this repository.
 
 ## Making a release
 
