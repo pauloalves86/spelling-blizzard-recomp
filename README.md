@@ -1,5 +1,7 @@
 # Spelling Blizzard Recomp
 
+<a href="https://recomplauncher.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://recomplauncher.com/assets/press/launcher/badge-light.svg"><img alt="Get it on RecompLauncher" src="https://recomplauncher.com/assets/press/launcher/badge-dark.svg" height="48"></picture></a>
+
 A project to preserve and decompile **Spelling Blizzard** (Bright Star
 Technology, 1994), a Windows 3.x educational spelling game, so it can run on
 modern systems without an emulator.
@@ -7,6 +9,27 @@ modern systems without an emulator.
 The game is a 16-bit Windows NE executable (`BLIZZARD.EXE`, version
 `1.10.CD for Windows`). It loads its art, animation, levels and speech from a
 CD resource library (`SB_CDRES.DLL`).
+
+## How to play
+
+You need your own copy of Spelling Blizzard 1.10.CD for Windows: the files
+`BLIZZARD.EXE` and `SB_CDRES.DLL`. The game is recompiled on your PC from
+those, so you also need the build tools listed under [Requirements](#requirements).
+Linux only for now.
+
+- **With [RecompLauncher](https://recomplauncher.com):** install it, pick the
+  folder with your two game files, and press Set Up, then Play.
+- **By hand:** download `SpellingBlizzard-<version>-linux-x86_64.tar.gz` from
+  [Releases](https://github.com/pauloalves86/spelling-blizzard-recomp/releases), unpack it, and run
+
+  ```sh
+  ./SpellingBlizzard.sh --prepare --game=/path/to/your/game   # once: checks your copy and builds
+  ./SpellingBlizzard.sh                                       # play (add --scale 3, --fullscreen, --no-audio)
+  ```
+
+  Your copy, the build, saves and logs all go in one folder:
+  `~/.local/share/spelling-blizzard-recomp`, or the one given with `--data DIR`.
+  Under RecompLauncher it's the game's `recompdata` folder.
 
 ## What's here
 
@@ -64,9 +87,8 @@ sudo apt install build-essential cmake pkg-config python3 libsdl2-dev libfreetyp
 
 ## Build and run
 
-Download the source package from
-[Releases](https://github.com/pauloalves86/spelling-blizzard-recomp/releases)
-(or clone the repository), install the requirements above, then:
+From a clone of the repository (or a release package), with the
+requirements above installed:
 
 ```sh
 ./build.sh /path/to/your/game     # copies the two files into original/, checks them, builds
@@ -98,6 +120,8 @@ Useful options:
 | `--scale N` | Window scale factor (default 2). |
 | `--no-audio` | Don't open an audio device. |
 | `--game-dir DIR` | Where `BLIZZARD.EXE` and `SB_CDRES.DLL` are (default `original`). |
+| `--game PATH` | The same folder, or the `BLIZZARD.EXE` in it. |
+| `--fullscreen` | Start full screen. |
 | `--data-dir DIR` | Writable directory for saves and settings (default `run`). |
 | `--headless` | Run without a window, for automated tests. |
 | `--quit-after MS` | Exit after this many milliseconds. |
@@ -139,7 +163,9 @@ It also uses noticeably more CPU than it should while idle.
 | `src/recomp/` | Runtime, loader and the host Win16 API layer for `sb_recomp`. |
 | `src/recomp/imports/` | The game's import table (API names and ordinals), so the runtime builds without the game. |
 | `tests/recomp/` | Input script for the headless test. |
-| `build.sh` | One-command build from your game files. |
+| `SpellingBlizzard.sh` | The program players start: `--prepare` builds from their copy, otherwise it plays. |
+| `recomplauncher.json` | Setup, settings and saves for [RecompLauncher](https://recomplauncher.com). |
+| `build.sh` | One-command build into the repository (`build/release/`), for development. |
 | `.github/workflows/` | CI (runtime build on Linux and macOS) and releases. |
 | `docs/recomp.md` | How the recompiler and host layer work. |
 | `original/` | Your copy of the game files (not tracked). |
@@ -161,6 +187,9 @@ git tag v0.1.0 && git push origin v0.1.0
 ```
 
 `.github/workflows/release.yml` builds the runtime on Linux and macOS, then
-publishes a release with the source package (`.tar.gz`, `.zip`,
-`SHA256SUMS`). Running the workflow by hand from the Actions tab builds the
+publishes a release with `SpellingBlizzard-<version>-linux-x86_64.tar.gz` and
+`-linux-arm64.tar.gz` (the same folder, with `recomplauncher.json` and
+`SpellingBlizzard.sh` on top), a `-source.zip` and a `.sha256` file. None of
+them contain anything from the game. Don't tag releases for docs or CI
+changes: under RecompLauncher every release makes players build again. Running the workflow by hand from the Actions tab builds the
 package as an artifact without publishing it.

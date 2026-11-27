@@ -1,6 +1,6 @@
-# Publishes a release when a tag like v0.1.0 is pushed. The release holds the
-# source package only: the recompiled game is built by each player from their
-# own copy of the game (./build.sh), so no game code is ever distributed.
+# Publishes a release when a tag like v0.1.0 is pushed. No game code is ever in
+# it: SpellingBlizzard.sh recompiles the game on the player's PC from their own
+# copy. recomplauncher.json sits at the top of each package for RecompLauncher.
 #
 # Run it by hand (Actions > Release > Run workflow) to build the package as a
 # workflow artifact without publishing anything.
@@ -24,15 +24,31 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Build source package
+      - name: Build packages
         run: |
           version=${GITHUB_REF_NAME//\//-}
-          name=spelling-blizzard-recomp-$version
-          mkdir dist
-          git archive --format=tar.gz --prefix="$name/" -o "dist/$name.tar.gz" HEAD
-          git archive --format=zip --prefix="$name/" -o "dist/$name.zip" HEAD
-          (cd dist && sha256sum * > SHA256SUMS)
+          name=SpellingBlizzard-$version
+          mkdir -p dist stage
+          # The player's package: SpellingBlizzard.sh and recomplauncher.json on top.
+          # It recompiles the game from the player's copy, so it is the same for every
+          # Linux machine; it is named per processor so launchers can pick it.
+          git archive --prefix="$name/" HEAD | tar x -C stage
+          echo "$version" > "stage/$name/VERSION"
+          test -f "stage/$name/recomplauncher.json" && test -x "stage/$name/SpellingBlizzard.sh"
+          for arch in x86_64 arm64; do
+            tar czf "dist/$name-linux-$arch.tar.gz" -C stage "$name"
+          done
+          git archive --format=zip --prefix="$name/" -o "dist/$name-source.zip" HEAD
+          (cd dist && sha256sum * > "$name.sha256")
           echo "NAME=$name" >> "$GITHUB_ENV"
+
+      - name: Smoke-test the package
+        run: |
+          mkdir smoke && tar xf dist/*-linux-x86_64.tar.gz -C smoke
+          # without a copy of the game the setup step must refuse with code 65
+          set +e
+          smoke/*/SpellingBlizzard.sh --prepare --game="$PWD/smoke" --data "$PWD/smoke/data"
+          test $? -eq 65
 
       - uses: actions/upload-artifact@v7
         with:
@@ -45,17 +61,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cat > notes.md <<'EOF'
-          This release contains source only. You need your own copy of Spelling Blizzard
-          (`BLIZZARD.EXE` and `SB_CDRES.DLL`, version 1.10.CD for Windows). The build
-          recompiles the game on your machine.
+          You need your own copy of Spelling Blizzard (`BLIZZARD.EXE` and `SB_CDRES.DLL`,
+          version 1.10.CD for Windows). Nothing from the game is in this release: it is
+          recompiled on your PC from your copy, so you also need a C compiler, CMake,
+          Python 3, SDL2 and FreeType (see README.md).
+
+          With [RecompLauncher](https://recomplauncher.com), pick your game folder and press Set Up.
+          By hand:
 
           ```sh
-          tar xf spelling-blizzard-recomp-*.tar.gz && cd spelling-blizzard-recomp-*/
-          ./build.sh /path/to/your/game
-          build/release/sb_recomp
+          tar xf SpellingBlizzard-*-linux-x86_64.tar.gz && cd SpellingBlizzard-*/
+          ./SpellingBlizzard.sh --prepare --game=/path/to/your/game
+          ./SpellingBlizzard.sh
           ```
-
-          See README.md for the packages to install first.
           EOF
           gh release create "$GITHUB_REF_NAME" dist/* --title "$GITHUB_REF_NAME" \
             --notes-file notes.md --generate-notes --verify-tag

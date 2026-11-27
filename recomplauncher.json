@@ -1,0 +1,69 @@
+{
+  "$schema": "https://recomplauncher.com/schema/recomplauncher.json",
+  "format": 1,
+  "name": "Spelling Blizzard",
+  "repo": "pauloalves86/spelling-blizzard-recomp",
+  "inputs": [
+    {
+      "id": "game",
+      "label": "Your Spelling Blizzard 1.10.CD for Windows: the folder with BLIZZARD.EXE and SB_CDRES.DLL (the CD, or the folder it was installed to with the CD's SB_CDRES.DLL copied in).",
+      "formats": [{ "type": "folder" }],
+      "check": { "file": "BLIZZARD.EXE" }
+    }
+  ],
+  "start": {
+    "program": ["SpellingBlizzard.sh"],
+    "args": ["--data", "{data}"]
+  },
+  "prepare": {
+    "program": ["SpellingBlizzard.sh"],
+    "args": ["--prepare", "--game={input:game}", "--data", "{data}"],
+    "label": "Recompiling the game from your copy (needs a C compiler, CMake, SDL2 and FreeType)",
+    "done": ["{data}/build/sb_recomp"],
+    "keeps_copy": true
+  },
+  "saves": ["{data}/saves"],
+  "folders": {
+    "game": [{ "path": "{data}/game" }],
+    "saves": [{ "path": "{data}/saves" }],
+    "logs": [{ "path": "{data}/logs" }]
+  },
+  "settings": [
+    {
+      "id": "window", "label": "Window size", "in": "args",
+      "help": "The game draws at 640×480. This is how many times bigger the window is.",
+      "choices": [
+        { "label": "Game's option (2×)", "args": [] },
+        { "label": "1×", "args": ["--scale", "1"] },
+        { "label": "3×", "args": ["--scale", "3"] },
+        { "label": "4×", "args": ["--scale", "4"] }
+      ]
+    },
+    {
+      "id": "fullscreen", "label": "Full screen", "in": "args",
+      "help": "Fill the screen, keeping the picture's 4:3 shape. Big Picture mode always starts full screen.",
+      "choices": [
+        { "label": "Off", "args": [] },
+        { "label": "On", "args": ["--fullscreen"] }
+      ]
+    },
+    {
+      "id": "sound", "label": "Sound", "in": "args",
+      "help": "Speech, music and sound effects.",
+      "choices": [
+        { "label": "On", "args": [] },
+        { "label": "Off", "args": ["--no-audio"] }
+      ]
+    }
+  ],
+  "actions": [
+    { "id": "saves", "label": "Saves", "help": "Players, high scores and the game's settings.", "open": "saves" },
+    { "id": "logs", "label": "Logs", "help": "What the game printed in its last five runs.", "open": "logs" }
+  ],
+  "exit_codes": {
+    "64": "Spelling Blizzard isn't set up yet. Press Set Up on its page.",
+    "65": "The game files are missing or a different version. Set it up again with Spelling Blizzard 1.10.CD for Windows.",
+    "66": "Something the game needs isn't installed. Set it up again to see what.",
+    "70": "The game reached something the recomp can't do yet. Please report it with the log."
+  }
+}
