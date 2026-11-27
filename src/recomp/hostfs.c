@@ -2,10 +2,13 @@
 
 #include <ctype.h>
 #include <dirent.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <strings.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 static char g_game_dir[512];
 static char g_data_dir[512];
@@ -133,4 +136,52 @@ int hostfs_resolve_dir(const char *dos_dir, char *out, size_t cap)
     struct stat st;
     data_path(dos_dir, out, cap, 0);
     return (stat(out, &st) == 0 && S_ISDIR(st.st_mode)) ? 0 : -1;
+}
+
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
+
+const char *hostfs_exe_dir(void)
+{
+    static char dir[1024];
+    static int done;
+    if (done) return dir;
+    done = 1;
+    char p[1024] = "";
+#if defined(__linux__)
+    ssize_t n = readlink("/proc/self/exe", p, sizeof(p) - 1);
+    p[n > 0 ? n : 0] = 0;
+#elif defined(__APPLE__)
+    uint32_t size = sizeof(p);
+    if (_NSGetExecutablePath(p, &size) != 0) p[0] = 0;
+#endif
+    char *slash = strrchr(p, '/');
+    if (slash) *slash = 0;
+    else p[0] = 0;
+    snprintf(dir, sizeof(dir), "%s", p);
+    return dir;
+}
+
+const char *hostfs_font_dir(void)
+{
+    static char dir[1100];
+    static const char *const system_dirs[] = {
+        "/usr/share/fonts/liberation", "/usr/share/fonts/truetype/liberation", "/usr/share/fonts/TTF",
+        "/usr/share/fonts/liberation-sans", "/usr/share/fonts/truetype/liberation2", "/usr/local/share/fonts",
+        "/opt/homebrew/share/fonts", NULL};
+    const char *env = getenv("SB_FONT_DIR");
+    struct stat st;
+    char probe[1200];
+    if (env && *env) return env;
+    if (*hostfs_exe_dir()) {
+        snprintf(dir, sizeof(dir), "%s/fonts", hostfs_exe_dir());
+        snprintf(probe, sizeof(probe), "%s/LiberationSans-Regular.ttf", dir);
+        if (stat(probe, &st) == 0) return dir;
+    }
+    for (int i = 0; system_dirs[i]; i++) {
+        snprintf(probe, sizeof(probe), "%s/LiberationSans-Regular.ttf", system_dirs[i]);
+        if (stat(probe, &st) == 0) return system_dirs[i];
+    }
+    return system_dirs[0];
 }

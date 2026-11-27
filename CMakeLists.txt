@@ -31,9 +31,10 @@ endfunction()
 # real implementations.)
 add_library(sb_recomp_runtime OBJECT
     src/recomp/main.c src/recomp/runtime.c src/recomp/loader.c src/recomp/kernel.c
-    src/recomp/hostfs.c src/recomp/user.c src/recomp/gdi.c src/recomp/mmsystem.c src/recomp/api_stubs.c)
+    src/recomp/hostfs.c src/recomp/user.c src/recomp/gdi.c src/recomp/mmsystem.c src/recomp/api_stubs.c
+    src/recomp/player.c)
 target_include_directories(sb_recomp_runtime PUBLIC src/recomp src/recomp/imports)
-target_link_libraries(sb_recomp_runtime PUBLIC SDL2::SDL2 PkgConfig::FREETYPE)
+target_link_libraries(sb_recomp_runtime PUBLIC SDL2::SDL2 PkgConfig::FREETYPE Threads::Threads)
 target_compile_options(sb_recomp_runtime PRIVATE -Wall -Wno-unused-function)
 
 # ---------------------------------------------------------------------------
@@ -99,21 +100,24 @@ target_link_libraries(tcc PRIVATE ${CMAKE_DL_LIBS} Threads::Threads m)
 set(SB_JIT_PRELUDE_C ${CMAKE_CURRENT_BINARY_DIR}/jit_prelude.c)
 sb_embed(${SB_JIT_PRELUDE_C} sb_jit_prelude
          src/recomp/jit_prelude.h src/recomp/cpu.h src/recomp/imports/api_decls.h)
+set(SB_JIT_SELFTEST_C ${CMAKE_CURRENT_BINARY_DIR}/jit_selftest.c)
+sb_embed(${SB_JIT_SELFTEST_C} sb_jit_selftest src/recomp/jit_selftest.h)
 # Finding and checking the player's game files (folder, ISO, BIN/CUE).
 add_library(sb_gamefiles STATIC src/recomp/gamefiles.c src/recomp/sha256.c)
 target_include_directories(sb_gamefiles PUBLIC src/recomp)
 target_compile_options(sb_gamefiles PRIVATE -Wall -Wextra)
 
-add_executable(sb_recomp $<TARGET_OBJECTS:sb_recomp_runtime> src/recomp/jit.c ${SB_JIT_PRELUDE_C})
+add_executable(sb_recomp $<TARGET_OBJECTS:sb_recomp_runtime> src/recomp/jit.c ${SB_JIT_PRELUDE_C} ${SB_JIT_SELFTEST_C})
 target_include_directories(sb_recomp PRIVATE src/recomp src/recomp/imports)
 target_compile_options(sb_recomp PRIVATE -Wall)
-target_link_libraries(sb_recomp PRIVATE sb_gen_lib sb_gamefiles tcc SDL2::SDL2 PkgConfig::FREETYPE m)
+target_link_libraries(sb_recomp PRIVATE sb_gen_lib sb_gamefiles tcc SDL2::SDL2 PkgConfig::FREETYPE Threads::Threads m)
 
 # Tests that need no game files.
 enable_testing()
 add_executable(gamefiles_test tests/gamefiles_test.c)
 target_link_libraries(gamefiles_test PRIVATE sb_gamefiles)
 add_test(NAME gamefiles COMMAND gamefiles_test ${CMAKE_CURRENT_BINARY_DIR}/gamefiles_test_run)
+add_test(NAME jit_self_test COMMAND sb_recomp --self-test)
 
 set(SB_GAME_DIR ${CMAKE_CURRENT_SOURCE_DIR}/original CACHE PATH "Folder with your BLIZZARD.EXE and SB_CDRES.DLL")
 if(NOT EXISTS ${SB_GAME_DIR}/BLIZZARD.EXE)
@@ -155,7 +159,7 @@ target_compile_options(sb_recomp_gen PRIVATE -O1 -w)
 
 add_executable(sb_recomp_aot $<TARGET_OBJECTS:sb_recomp_runtime> src/recomp/aot.c)
 target_include_directories(sb_recomp_aot PRIVATE src/recomp src/recomp/imports)
-target_link_libraries(sb_recomp_aot PRIVATE sb_recomp_gen SDL2::SDL2 PkgConfig::FREETYPE m)
+target_link_libraries(sb_recomp_aot PRIVATE sb_recomp_gen sb_gamefiles SDL2::SDL2 PkgConfig::FREETYPE Threads::Threads m)
 
 # Both play the opening of the game headless.
 foreach(prog sb_recomp sb_recomp_aot)

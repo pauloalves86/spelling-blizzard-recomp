@@ -13,6 +13,7 @@
 
 #include "api.h"
 #include "gdi.h"
+#include "hostfs.h"
 #include "win16.h"
 
 void mm_poll(void);
@@ -619,7 +620,7 @@ void user_idle(void)
 
 int win16_init(const Win16Options *opt)
 {
-    const char *font_dir = getenv("SB_FONT_DIR");
+    const char *font_dir = hostfs_font_dir();
     g_opt = *opt;
     if (opt->headless) {
         SDL_setenv("SDL_VIDEODRIVER", "dummy", 1);
@@ -643,7 +644,7 @@ int win16_init(const Win16Options *opt)
     SDL_RenderSetLogicalSize(g_ren, SCREEN_W, SCREEN_H);
     g_tex = SDL_CreateTexture(g_ren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_W, SCREEN_H);
     SDL_ShowCursor(SDL_DISABLE);
-    gdi_init(font_dir ? font_dir : "/usr/share/fonts/liberation");
+    gdi_init(font_dir);
     mm_init(opt->audio);
     memset(g_wnd, 0, sizeof(g_wnd));
     memset(g_cls, 0, sizeof(g_cls));

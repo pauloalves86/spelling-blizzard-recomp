@@ -1,9 +1,10 @@
-# Publishes a release when a tag like v0.1.0 is pushed. No game code is ever in
-# it: SpellingBlizzard.sh recompiles the game on the player's PC from their own
-# copy. recomplauncher.json sits at the top of each package for RecompLauncher.
+# Publishes a release when a tag like v0.1.0 is pushed: SpellingBlizzard,
+# ready to run, for Linux x86_64 and arm64. No game code is ever in it: the
+# program recompiles the player's own copy each time it starts, in memory.
+# recomplauncher.json sits at the top of each package for RecompLauncher.
 #
-# Run it by hand (Actions > Release > Run workflow) to build the package as a
-# workflow artifact without publishing anything.
+# Run it by hand (Actions > Release > Run workflow) to build the packages as
+# workflow artifacts without publishing anything.
 name: Release
 
 on:
@@ -18,45 +19,100 @@ jobs:
   check:
     uses: ./.github/workflows/ci.yml
 
-  package:
+  build:
     needs: check
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Ubuntu 22.04 (glibc 2.35), so the program also runs on older systems.
+          - arch: x86_64
+            runner: ubuntu-22.04
+          - arch: arm64
+            runner: ubuntu-22.04-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake pkg-config libsdl2-dev libfreetype-dev fonts-liberation2
+
+      - name: Build
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j 4 --target sb_recomp gamefiles_test
+
+      - name: Test (game files reader; compiling in memory on this processor)
+        run: ctest --test-dir build --output-on-failure
+
+      - name: Package
+        run: |
+          version=${GITHUB_REF_NAME//\//-}
+          name=SpellingBlizzard-$version
+          pkg=stage/$name
+          mkdir -p "$pkg/fonts" "$pkg/licenses" dist
+          cp build/sb_recomp "$pkg/SpellingBlizzard"
+          strip "$pkg/SpellingBlizzard"
+          cp recomplauncher.json README.md "$pkg/"
+          echo "$version" > "$pkg/VERSION"
+          # The Liberation fonts stand in for the Windows fonts the game asks for (SIL OFL 1.1).
+          for family in Sans Serif Mono; do
+            for style in Regular Bold Italic BoldItalic; do
+              cp "/usr/share/fonts/truetype/liberation2/Liberation$family-$style.ttf" "$pkg/fonts/"
+            done
+          done
+          cp /usr/share/doc/fonts-liberation2/copyright "$pkg/licenses/Liberation-fonts.txt"
+          cp third_party/tinycc/COPYING "$pkg/licenses/TinyCC-LGPL-2.1.txt"
+
+          # Smoke tests: it runs, compiles in memory, refuses a missing copy (65),
+          # and every library it needs is found.
+          "$pkg/SpellingBlizzard" --self-test
+          set +e
+          "$pkg/SpellingBlizzard" --prepare --game=/nonexistent --data "$RUNNER_TEMP/data"
+          test $? -eq 65 || exit 1
+          set -e
+          ldd "$pkg/SpellingBlizzard"
+          if ldd "$pkg/SpellingBlizzard" | grep -qi "not found"; then exit 1; fi
+
+          tar czf "dist/$name-linux-${{ matrix.arch }}.tar.gz" -C stage "$name"
+          echo "NAME=$name" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.NAME }}-linux-${{ matrix.arch }}
+          path: dist/
+
+  publish:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
         with:
           submodules: true
 
-      - name: Build packages
+      - uses: actions/download-artifact@v5
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Source package and checksums
         run: |
           version=${GITHUB_REF_NAME//\//-}
           name=SpellingBlizzard-$version
-          mkdir -p dist stage
-          # The player's package: SpellingBlizzard.sh and recomplauncher.json on top.
-          # It recompiles the game from the player's copy, so it is the same for every
-          # Linux machine; it is named per processor so launchers can pick it.
+          mkdir -p stage
           git archive --prefix="$name/" HEAD | tar x -C stage
           git -C third_party/tinycc archive --prefix="$name/third_party/tinycc/" HEAD | tar x -C stage
-          echo "$version" > "stage/$name/VERSION"
-          test -f "stage/$name/recomplauncher.json" && test -x "stage/$name/SpellingBlizzard.sh"
-          test -f "stage/$name/third_party/tinycc/libtcc.c"
-          for arch in x86_64 arm64; do
-            tar czf "dist/$name-linux-$arch.tar.gz" -C stage "$name"
-          done
           (cd stage && zip -qr "../dist/$name-source.zip" "$name")
           (cd dist && sha256sum * > "$name.sha256")
-          echo "NAME=$name" >> "$GITHUB_ENV"
-
-      - name: Smoke-test the package
-        run: |
-          mkdir smoke && tar xf dist/*-linux-x86_64.tar.gz -C smoke
-          # without a copy of the game the setup step must refuse with code 65
-          set +e
-          smoke/*/SpellingBlizzard.sh --prepare --game="$PWD/smoke" --data "$PWD/smoke/data"
-          test $? -eq 65
+          ls -l dist
 
       - uses: actions/upload-artifact@v7
         with:
-          name: ${{ env.NAME }}
+          name: release-files
           path: dist/
 
       - name: Publish release
@@ -65,18 +121,20 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cat > notes.md <<'EOF'
-          You need your own copy of Spelling Blizzard (`BLIZZARD.EXE` and `SB_CDRES.DLL`,
-          version 1.10.CD for Windows). Nothing from the game is in this release: it is
-          recompiled on your PC from your copy, so you also need a C compiler, CMake,
-          SDL2 and FreeType (see README.md).
+          You need your own copy of Spelling Blizzard 1.10.CD for Windows: the CD image
+          (.iso, or a .bin with its .cue), or the folder with `BLIZZARD.EXE` and
+          `SB_CDRES.DLL`. Nothing from the game is in this release: the program
+          recompiles your copy each time it starts, in about a tenth of a second,
+          in memory. It needs the SDL2 and FreeType libraries, which almost every
+          Linux desktop and the Steam Deck already have.
 
-          With [RecompLauncher](https://recomplauncher.com), pick your game folder and press Set Up.
+          With [RecompLauncher](https://recomplauncher.com), pick your copy and press Set Up, then Play.
           By hand:
 
           ```sh
           tar xf SpellingBlizzard-*-linux-x86_64.tar.gz && cd SpellingBlizzard-*/
-          ./SpellingBlizzard.sh --prepare --game=/path/to/your/game
-          ./SpellingBlizzard.sh
+          ./SpellingBlizzard --prepare --game=/path/to/your/copy.iso
+          ./SpellingBlizzard
           ```
           EOF
           gh release create "$GITHUB_REF_NAME" dist/* --title "$GITHUB_REF_NAME" \

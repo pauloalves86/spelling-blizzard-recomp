@@ -12,22 +12,25 @@ CD resource library (`SB_CDRES.DLL`).
 
 ## How to play
 
-You need your own copy of Spelling Blizzard 1.10.CD for Windows: the files
-`BLIZZARD.EXE` and `SB_CDRES.DLL`. The game is recompiled on your PC from
-those, so you also need the build tools listed under [Requirements](#requirements).
-Linux only for now.
+You need your own copy of Spelling Blizzard 1.10.CD for Windows: the CD image
+(`.iso`, or a `.bin` with its `.cue`), or the folder with `BLIZZARD.EXE` and
+`SB_CDRES.DLL`. Nothing else to install: the program recompiles your copy each
+time it starts, in about a tenth of a second. It uses the SDL2 and FreeType
+libraries, which almost every Linux desktop and the Steam Deck already have.
+Linux (x86_64 and arm64) for now.
 
-- **With [RecompLauncher](https://recomplauncher.com):** install it, pick the
-  folder with your two game files, and press Set Up, then Play.
-- **By hand:** download `SpellingBlizzard-<version>-linux-x86_64.tar.gz` from
+- **With [RecompLauncher](https://recomplauncher.com):** install it, pick your
+  copy, and press Set Up, then Play.
+- **By hand:** download `SpellingBlizzard-<version>-linux-x86_64.tar.gz` (or
+  `-linux-arm64`) from
   [Releases](https://github.com/pauloalves86/spelling-blizzard-recomp/releases), unpack it, and run
 
   ```sh
-  ./SpellingBlizzard.sh --prepare --game=/path/to/your/game   # once: checks your copy and builds
-  ./SpellingBlizzard.sh                                       # play (add --scale 3, --fullscreen, --no-audio)
+  ./SpellingBlizzard --prepare --game=/path/to/your/copy.iso   # once: checks your copy and keeps it
+  ./SpellingBlizzard                                           # play (add --scale 3, --fullscreen, --no-audio)
   ```
 
-  Your copy, the build, saves and logs all go in one folder:
+  Your copy, saves and logs all go in one folder:
   `~/.local/share/spelling-blizzard-recomp`, or the one given with `--data DIR`.
   Under RecompLauncher it's the game's `recompdata` folder.
 
@@ -75,6 +78,8 @@ sha256sum original/BLIZZARD.EXE original/SB_CDRES.DLL
 `sb_recomp` and the build read these files but never modify them.
 
 ## Requirements
+
+To build from source (playing a release needs none of this):
 
 - A C11 compiler (GCC or Clang), CMake 3.16 or newer, and `pkg-config`
 - SDL2 development files (SDL2, or sdl2-compat over SDL3)
@@ -125,20 +130,26 @@ Useful options:
 
 | Option | Meaning |
 | --- | --- |
+| `--prepare` | Check your copy and keep it in the data folder, then stop (no window). |
+| `--game PATH` | Your copy: a CD image (`.iso`, `.cue`), a folder with the two files, or one of them. |
+| `--data DIR` | The data folder for your copy, saves and logs (default `~/.local/share/spelling-blizzard-recomp`). |
 | `--scale N` | Window scale factor (default 2). |
 | `--no-audio` | Don't open an audio device. |
-| `--game-dir DIR` | Where `BLIZZARD.EXE` and `SB_CDRES.DLL` are (default `original`). |
-| `--game PATH` | The same folder, or the `BLIZZARD.EXE` in it. |
 | `--fullscreen` | Start full screen. |
-| `--data-dir DIR` | Writable directory for saves and settings (default `run`). |
+| `--game-dir DIR` | Development: play the files in `DIR` in place (default `original`). |
+| `--data-dir DIR` | Development: writable directory for saves and settings (default `run`). |
 | `--headless` | Run without a window, for automated tests. |
 | `--quit-after MS` | Exit after this many milliseconds. |
 | `--snapshot FILE.ppm` | Save the last frame as an image on exit. |
 | `--script FILE` | Play timed input from a file (see [docs/recomp.md](docs/recomp.md)). |
 | `--trace-api` | Log every Windows API call to stderr. |
+| `--self-test` | Check that compiling in memory works on this machine. |
 
-If the fonts are somewhere other than `/usr/share/fonts/liberation`, set
-`SB_FONT_DIR` to the directory that holds the `Liberation*.ttf` files.
+Without `--game-dir` or `--data-dir`, `sb_recomp` plays the copy kept in the
+data folder; if there is none, it plays `original/` with saves in `run/`.
+
+The fonts are looked for in `$SB_FONT_DIR`, then in `fonts/` next to the
+program (as in releases), then in the usual system folders.
 
 ## Tests
 
@@ -173,11 +184,10 @@ It also uses noticeably more CPU than it should while idle.
 | `src/recomp/gen/` | The recompiler, in C: NE parser, x86-16 decoder, the C generator, the function list (`functions.txt`) and API export table. |
 | `third_party/tinycc/` | [TinyCC](https://repo.or.cz/tinycc.git) (submodule, pinned), which compiles the recompiled C in memory. |
 | `src/recomp/imports/` | The game's import table (API names and ordinals), so the runtime builds without the game. |
-| `tests/recomp/` | Input script for the headless test. |
-| `SpellingBlizzard.sh` | The program players start: `--prepare` builds from their copy, otherwise it plays. |
+| `tests/` | The game-files reader's test and the input script for the headless test. |
 | `recomplauncher.json` | Setup, settings and saves for [RecompLauncher](https://recomplauncher.com). |
 | `build.sh` | One-command build into the repository (`build/release/`), for development. |
-| `.github/workflows/` | CI (runtime build on Linux and macOS) and releases. |
+| `.github/workflows/` | CI (build and tests on Linux and macOS) and releases. |
 | `docs/recomp.md` | How the recompiler and host layer work. |
 | `original/` | Your copy of the game files (not tracked). |
 | `run/` | Saves and settings written by the game (not tracked). |
@@ -201,10 +211,12 @@ Push a version tag:
 git tag v0.1.0 && git push origin v0.1.0
 ```
 
-`.github/workflows/release.yml` builds the runtime on Linux and macOS, then
-publishes a release with `SpellingBlizzard-<version>-linux-x86_64.tar.gz` and
-`-linux-arm64.tar.gz` (the same folder, with `recomplauncher.json` and
-`SpellingBlizzard.sh` on top), a `-source.zip` and a `.sha256` file. None of
-them contain anything from the game. Don't tag releases for docs or CI
-changes: under RecompLauncher every release makes players build again. Running the workflow by hand from the Actions tab builds the
-package as an artifact without publishing it.
+`.github/workflows/release.yml` runs CI, then builds `sb_recomp` on Ubuntu
+22.04 for x86_64 and arm64, runs its tests there (including `--self-test`,
+which compiles in memory on that processor), and publishes a release with
+`SpellingBlizzard-<version>-linux-x86_64.tar.gz` and `-linux-arm64.tar.gz`,
+a `-source.zip` (with TinyCC) and a `.sha256` file. Each package holds the
+program as `SpellingBlizzard`, `recomplauncher.json`, the Liberation fonts
+and the licenses. None of them contain anything from the game. Running the
+workflow by hand from the Actions tab builds the packages as artifacts
+without publishing them.

@@ -46,6 +46,11 @@ for tool in cmake pkg-config cc; do
     command -v "$tool" >/dev/null || die "$tool not found; see Requirements in README.md"
 done
 
+if [ ! -f third_party/tinycc/libtcc.c ]; then
+    [ -e .git ] || die "third_party/tinycc is empty: get the source with its TinyCC submodule (git clone --recursive)."
+    git submodule update --init third_party/tinycc || die "fetching third_party/tinycc failed"
+fi
+
 jobs=$( (nproc || sysctl -n hw.ncpu) 2>/dev/null || echo 4)
 cmake -S . -B "$BUILD_DIR" -DCMAKE_BUILD_TYPE=Release
 cmake --build "$BUILD_DIR" -j "$jobs"
@@ -53,4 +58,5 @@ cmake --build "$BUILD_DIR" -j "$jobs"
 echo
 echo "Built $BUILD_DIR/sb_recomp. Play with:"
 echo "  $BUILD_DIR/sb_recomp"
-echo "(run it from this directory; saves go in run/)"
+echo "(run it from this directory: it plays original/ with saves in run/, unless"
+echo " you kept a copy with --prepare; see README.md)"

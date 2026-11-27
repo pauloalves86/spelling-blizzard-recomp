@@ -39,13 +39,24 @@ it, frames from different builds differ slightly, because the game's
 animation follows real time.
 
 Options:
+- `--prepare --game=PATH [--data DIR]`: read the player's copy (a folder, one
+  of its files, an ISO, or a raw BIN/IMG through its CUE; `gamefiles.c`),
+  check it against the known SHA-256, keep it in `DIR/game`, recompile it
+  once, and print `progress <0..1> <text>` lines. Without `--game-dir` or
+  `--data-dir`, playing uses that copy, saves in `DIR/saves`, and copies
+  stderr into `DIR/logs` (`player.c`). Exit codes: 64 not set up, 65 copy
+  missing or wrong, 67 recompiling failed, 70 a crash (something not
+  supported yet).
+- `--self-test`: compile a check of the CPU helpers in memory and compare it
+  with the same code compiled by the host compiler (`jit_selftest.h`).
 - `--game-dir DIR`: where `BLIZZARD.EXE` and `SB_CDRES.DLL` live (default `original`).
 - `--data-dir DIR`: writable directory for the INI, player and high-score files (default `run`).
 - `--headless`, `--quit-after MS`, `--snapshot FILE.ppm`, `--trace-api`.
 - `--script FILE`: timed input, one event per line, `MS command args`:
   `click X Y`, `rclick X Y`, `move X Y`, `key NAME`, `down NAME`, `up NAME`,
   `text STRING`, `snap FILE.ppm`, `quit`.
-- `SB_FONT_DIR`: directory of the Liberation TTFs (default `/usr/share/fonts/liberation`).
+- `SB_FONT_DIR`: directory of the Liberation TTFs (otherwise `fonts/` next
+  to the program, then the usual system folders).
 
 ## Pipeline
 

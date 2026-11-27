@@ -6,20 +6,19 @@
   "inputs": [
     {
       "id": "game",
-      "label": "Your Spelling Blizzard 1.10.CD for Windows: the folder with BLIZZARD.EXE and SB_CDRES.DLL (the CD, or the folder it was installed to with the CD's SB_CDRES.DLL copied in).",
-      "formats": [{ "type": "folder" }],
-      "check": { "file": "BLIZZARD.EXE" }
+      "label": "Your Spelling Blizzard 1.10.CD for Windows: the CD image (.iso, or the .cue of a .bin), or a folder with BLIZZARD.EXE and SB_CDRES.DLL (the CD, or the folder it was installed to with the CD's SB_CDRES.DLL copied in).",
+      "formats": [{ "type": "file", "extensions": ["iso", "cue", "bin", "img"] }, { "type": "folder" }]
     }
   ],
   "start": {
-    "program": ["SpellingBlizzard.sh"],
+    "program": ["SpellingBlizzard"],
     "args": ["--data", "{data}"]
   },
   "prepare": {
-    "program": ["SpellingBlizzard.sh"],
+    "program": ["SpellingBlizzard"],
     "args": ["--prepare", "--game={input:game}", "--data", "{data}"],
-    "label": "Recompiling the game from your copy (needs a C compiler, CMake, SDL2 and FreeType)",
-    "done": ["{data}/build/sb_recomp"],
+    "label": "Checking your copy and keeping it for the game",
+    "done": ["{data}/game/SB_CDRES.DLL"],
     "keeps_copy": true
   },
   "saves": ["{data}/saves"],
@@ -63,7 +62,7 @@
   "exit_codes": {
     "64": "Spelling Blizzard isn't set up yet. Press Set Up on its page.",
     "65": "The game files are missing or a different version. Set it up again with Spelling Blizzard 1.10.CD for Windows.",
-    "66": "Something the game needs isn't installed. Set it up again to see what.",
+    "67": "Recompiling your copy of the game failed. Please report it with the log.",
     "70": "The game reached something the recomp can't do yet. Please report it with the log."
   }
 }

@@ -12,8 +12,12 @@
 #include "libtcc.h"
 #include "runtime.h"
 
-/* jit_prelude.h, cpu.h and api_decls.h, built in (CMake). */
+/* jit_prelude.h, cpu.h and api_decls.h, and jit_selftest.h, built in (CMake). */
 extern const char sb_jit_prelude[];
+extern const char sb_jit_selftest[];
+
+/* The self-test's code, compiled here by the host compiler too. */
+#include "jit_selftest.h"
 
 typedef struct Sym {
     const char *name;
@@ -139,6 +143,27 @@ static char *read_file(const char *path, size_t *len)
 /* The compiled code lives as long as the program. */
 static TCCState *g_tcc;
 
+/* Compiles src into executable memory; NULL (with the message in e) on error. */
+static TCCState *compile(const char *src, ErrCtx *e)
+{
+    TCCState *s = tcc_new();
+    if (!s) {
+        snprintf(e->err, e->errcap, "can't start the compiler");
+        return NULL;
+    }
+    tcc_set_error_func(s, e, tcc_error);
+    tcc_set_options(s, "-nostdinc -nostdlib -w");
+    tcc_set_output_type(s, TCC_OUTPUT_MEMORY);
+    for (size_t k = 0; k < sizeof runtime_syms / sizeof runtime_syms[0]; k++)
+        tcc_add_symbol(s, runtime_syms[k].name, runtime_syms[k].addr);
+    if (tcc_compile_string(s, src) || tcc_relocate(s)) {
+        if (!e->set) snprintf(e->err, e->errcap, "compiling failed");
+        tcc_delete(s);
+        return NULL;
+    }
+    return s;
+}
+
 int recomp_load_program(const char *exe_path, char *err, size_t errcap)
 {
     double t0 = now_ms();
@@ -167,25 +192,9 @@ int recomp_load_program(const char *exe_path, char *err, size_t errcap)
     }
 
     ErrCtx ectx = {err, errcap, 0};
-    TCCState *s = tcc_new();
-    if (!s) {
-        free(src.p);
-        snprintf(err, errcap, "can't start the compiler");
-        return -1;
-    }
-    tcc_set_error_func(s, &ectx, tcc_error);
-    tcc_set_options(s, "-nostdinc -nostdlib -w");
-    tcc_set_output_type(s, TCC_OUTPUT_MEMORY);
-    for (size_t k = 0; k < sizeof runtime_syms / sizeof runtime_syms[0]; k++)
-        tcc_add_symbol(s, runtime_syms[k].name, runtime_syms[k].addr);
-    rc = tcc_compile_string(s, src.p);
+    TCCState *s = compile(src.p, &ectx);
     free(src.p);
-    if (rc == 0) rc = tcc_relocate(s);
-    if (rc) {
-        if (!ectx.set) snprintf(err, errcap, "compiling the recompiled code failed");
-        tcc_delete(s);
-        return -1;
-    }
+    if (!s) return -1;
     const RecompEntry *table = tcc_get_symbol(s, "recomp_table");
     const unsigned *count = tcc_get_symbol(s, "recomp_table_count");
     RecompFn start = (RecompFn)tcc_get_symbol(s, "recomp_start");
@@ -201,4 +210,67 @@ int recomp_load_program(const char *exe_path, char *err, size_t errcap)
     fprintf(stderr, "[recomp] recompiled %u functions in %.0f ms (C generated in %.0f ms)\n", nfuncs, now_ms() - t0,
             t1 - t0);
     return 0;
+}
+
+int recomp_self_test(void)
+{
+    char err[512];
+    ErrCtx ectx = {err, sizeof err, 0};
+    Src src = {0};
+    if (src_add(&src, sb_jit_prelude, strlen(sb_jit_prelude)) ||
+        src_add(&src, sb_jit_selftest, strlen(sb_jit_selftest))) {
+        fprintf(stderr, "self-test: out of memory\n");
+        return -1;
+    }
+    double t0 = now_ms();
+    TCCState *s = compile(src.p, &ectx);
+    free(src.p);
+    if (!s) {
+        fprintf(stderr, "self-test: compiling in memory failed: %s\n", err);
+        return -1;
+    }
+    uint32_t (*jit_mix)(uint32_t, uint32_t) = (uint32_t (*)(uint32_t, uint32_t))tcc_get_symbol(s, "selftest_mix");
+    if (!jit_mix) {
+        fprintf(stderr, "self-test: no selftest_mix in the compiled code\n");
+        tcc_delete(s);
+        return -1;
+    }
+    /* a scratch 64 KB at selector 0x10 for the memory and stack checks */
+    uint8_t *saved_mem = MEM, *scratch = calloc(1, 0x10000);
+    uint32_t saved_base = SEGBASE[2];
+    CPU saved_cpu = cpu;
+    if (!scratch) {
+        tcc_delete(s);
+        return -1;
+    }
+    MEM = scratch;
+    SEGBASE[2] = 0;
+    int bad = 0;
+    uint32_t a = 0x12345678u, b = 0x9abcdef0u, sum = 0;
+    for (int k = 0; k < 20000 && !bad; k++) {
+        a = a * 1664525u + 1013904223u;
+        b = b ^ (b << 13);
+        b ^= b >> 17;
+        b ^= b << 5;
+        memset(&cpu, 0, sizeof cpu);
+        uint32_t want = selftest_mix(a, b);
+        CPU cpu_want = cpu;
+        memset(&cpu, 0, sizeof cpu);
+        uint32_t got = jit_mix(a, b);
+        if (got != want || memcmp(&cpu, &cpu_want, sizeof cpu)) {
+            fprintf(stderr, "self-test: different result for (0x%08x, 0x%08x): 0x%08x compiled in memory, 0x%08x by "
+                            "the host compiler\n", a, b, got, want);
+            bad = 1;
+        }
+        sum ^= got;
+    }
+    MEM = saved_mem;
+    SEGBASE[2] = saved_base;
+    cpu = saved_cpu;
+    free(scratch);
+    tcc_delete(s);
+    if (!bad)
+        printf("self-test: compiling in memory works (%.0f ms to compile, 20000 checks, 0x%08x)\n", now_ms() - t0,
+               sum);
+    return bad ? -1 : 0;
 }

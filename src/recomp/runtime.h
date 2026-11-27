@@ -26,6 +26,8 @@ extern RecompProgram recomp_program;
  * executable ahead of time (aot.c) or recompiled and compiled now, in memory
  * (jit.c). Returns 0, or -1 with a message in err. */
 int recomp_load_program(const char *exe_path, char *err, size_t errcap);
+/* Checks that compiling in memory works on this machine (jit.c). */
+int recomp_self_test(void);
 
 extern int g_recomp_trace;
 

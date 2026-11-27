@@ -20,5 +20,11 @@ const char *hostfs_data_dir(void);
 int hostfs_find_game_file(const char *name, char *out, size_t cap);
 /* Resolve a directory in the data dir (0 if it exists). */
 int hostfs_resolve_dir(const char *dos_dir, char *out, size_t cap);
+/* The folder this program is in (empty if unknown). */
+const char *hostfs_exe_dir(void);
+/* The folder with the Liberation fonts that stand in for the Windows ones:
+ * $SB_FONT_DIR, else fonts/ next to this program (releases), else a usual
+ * system folder. */
+const char *hostfs_font_dir(void);
 
 #endif
