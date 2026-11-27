@@ -6,6 +6,7 @@
  * kernel.c, user.c, gdi.c, mmsystem.c) implemented on SDL2.
  */
 #include <stdio.h>
+#include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -19,8 +20,10 @@ static void usage(void)
     fprintf(stderr,
             "usage: sb_recomp [options]\n"
             "  --game-dir DIR    directory with BLIZZARD.EXE and SB_CDRES.DLL (default: original)\n"
+            "  --game PATH       the same directory, or the BLIZZARD.EXE in it\n"
             "  --data-dir DIR    writable directory for INI and player files (default: run)\n"
             "  --scale N         window scale (default 2)\n"
+            "  --fullscreen      start full screen\n"
             "  --no-audio        disable audio output\n"
             "  --headless        no window/audio device (SDL dummy drivers)\n"
             "  --quit-after MS   exit after MS milliseconds of game time\n"
@@ -32,6 +35,8 @@ static void usage(void)
 int main(int argc, char **argv)
 {
     const char *game_dir = "original";
+    static char game_buf[1024];
+    struct stat st;
     const char *data_dir = "run";
     char exe[1024];
     Win16Options opt;
@@ -42,7 +47,20 @@ int main(int argc, char **argv)
     opt.audio = 1;
     for (i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--game-dir") && i + 1 < argc) game_dir = argv[++i];
+        else if (!strcmp(argv[i], "--game") && i + 1 < argc) {
+            /* a folder, or a file in it (BLIZZARD.EXE): use the file's folder */
+            const char *p = argv[++i];
+            const char *slash = strrchr(p, '/');
+            if (stat(p, &st) == 0 && !S_ISDIR(st.st_mode)) {
+                if (slash) snprintf(game_buf, sizeof(game_buf), "%.*s", (int)(slash - p), p);
+                else snprintf(game_buf, sizeof(game_buf), ".");
+                game_dir = game_buf;
+            } else {
+                game_dir = p;
+            }
+        }
         else if (!strcmp(argv[i], "--data-dir") && i + 1 < argc) data_dir = argv[++i];
+        else if (!strcmp(argv[i], "--fullscreen")) opt.fullscreen = 1;
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) opt.scale = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--no-audio")) opt.audio = 0;
         else if (!strcmp(argv[i], "--headless")) opt.headless = 1;
@@ -55,7 +73,9 @@ int main(int argc, char **argv)
 
     hostfs_init(game_dir, data_dir);
     recomp_init_memory();
-    snprintf(exe, sizeof(exe), "%s/BLIZZARD.EXE", game_dir);
+    if (hostfs_find_game_file("BLIZZARD.EXE", exe, sizeof(exe)) != 0) {
+        snprintf(exe, sizeof(exe), "%s/BLIZZARD.EXE", game_dir);
+    }
     if (loader_load_exe(exe) != 0) {
         fprintf(stderr, "cannot load %s\n", exe);
         return 1;

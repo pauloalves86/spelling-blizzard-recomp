@@ -8,7 +8,7 @@ return. Relocations are resolved at generation time (selector immediates,
 far calls to other segments, far calls to imported APIs). Indirect far calls
 (C++ virtual calls) go through `call_far`, backed by a generated lookup table.
 
-Usage: gen.py <out_dir> [--update-imports]
+Usage: gen.py <out_dir> [--exe PATH] [--update-imports]
 
 The import tables the host runtime is compiled against are checked in under
 src/recomp/imports/ (they list API names and ordinals, no game code), so the
@@ -28,6 +28,8 @@ from x86 import Decoder, Imm, Mem, Reg, SReg, DecodeError  # noqa: E402
 import xml.etree.ElementTree as ET  # noqa: E402
 
 EXE = os.path.join(ROOT, "original", "BLIZZARD.EXE")
+if "--exe" in sys.argv:
+    EXE = sys.argv[sys.argv.index("--exe") + 1]
 
 
 def load_exports():
@@ -639,7 +641,8 @@ def discover_pointer_entries(prog, done):
 
 
 def main():
-    out_dir = [a for a in sys.argv[1:] if not a.startswith("--")][0]
+    args = sys.argv[1:]
+    out_dir = [a for i, a in enumerate(args) if not a.startswith("--") and (i == 0 or args[i - 1] != "--exe")][0]
     os.makedirs(out_dir, exist_ok=True)
     prog = Program()
     prog.called = set()

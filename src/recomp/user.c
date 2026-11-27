@@ -633,7 +633,7 @@ int win16_init(const Win16Options *opt)
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
     g_win = SDL_CreateWindow("Spelling Blizzard", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                              SCREEN_W * (opt->scale > 0 ? opt->scale : 2), SCREEN_H * (opt->scale > 0 ? opt->scale : 2),
-                             SDL_WINDOW_RESIZABLE);
+                             SDL_WINDOW_RESIZABLE | (opt->fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0));
     if (!g_win) {
         fprintf(stderr, "SDL_CreateWindow: %s\n", SDL_GetError());
         return -1;

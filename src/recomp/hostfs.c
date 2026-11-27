@@ -118,6 +118,11 @@ int hostfs_resolve_existing(const char *dos_path, char *out, size_t cap)
     return find_ci(g_game_dir, name, out, cap);
 }
 
+int hostfs_find_game_file(const char *name, char *out, size_t cap)
+{
+    return find_ci(g_game_dir, name, out, cap);
+}
+
 void hostfs_resolve_create(const char *dos_path, char *out, size_t cap)
 {
     data_path(dos_path, out, cap, 1);

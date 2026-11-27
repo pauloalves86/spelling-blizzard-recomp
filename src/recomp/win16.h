@@ -9,6 +9,7 @@ typedef struct Win16Options {
     int scale;
     int audio;
     int headless;          /* dummy SDL drivers */
+    int fullscreen;        /* start full screen (desktop resolution) */
     uint32_t max_ms;       /* auto-quit after this many ms (0 = never) */
     const char *snapshot;  /* write final screen as PPM here */
     const char *script;    /* scripted input: "t=ms key|char|click ..." */

@@ -16,6 +16,8 @@ int hostfs_resolve_existing(const char *dos_path, char *out, size_t cap);
 /* Resolve for writing/creating (always in the data dir). */
 void hostfs_resolve_create(const char *dos_path, char *out, size_t cap);
 const char *hostfs_data_dir(void);
+/* Find a file in the game directory by name, ignoring case (0 if found). */
+int hostfs_find_game_file(const char *name, char *out, size_t cap);
 /* Resolve a directory in the data dir (0 if it exists). */
 int hostfs_resolve_dir(const char *dos_dir, char *out, size_t cap);
 
