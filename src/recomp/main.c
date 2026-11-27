@@ -12,7 +12,6 @@
 #include "api.h"
 #include "hostfs.h"
 #include "loader.h"
-#include "recomp_gen.h"
 #include "win16.h"
 
 static void usage(void)
@@ -68,7 +67,7 @@ int main(int argc, char **argv)
     /* The loader "calls" the entry point: push a sentinel far return address. */
     PUSH16(THUNK_SEL);
     PUSH16(0xFFFF);
-    f_1000_001a();
+    recomp_start();
     fprintf(stderr, "[recomp] entry point returned\n");
     win16_shutdown();
     return 0;

@@ -40,6 +40,12 @@ Options:
 | GDI | `src/recomp/gdi.c` | 8-bit palette display. Static colors are at 0–9 and 246–255, `RealizePalette` uses slot assignment, and `AnimatePalette` changes PC_RESERVED entries in place. ROP3 blits follow the Windows mono↔color rules. Regions are pixel masks. Text uses Liberation fonts without antialiasing. |
 | MMSYSTEM | `src/recomp/mmsystem.c` | `waveOut` over the SDL audio queue. Buffers finish (`WHDR_DONE`, callbacks) when they have actually played. |
 
+The import table (`src/recomp/imports/`: API names, ordinals and thunk
+indices, no game code) is checked in, so the runtime compiles without the
+game. `gen.py` fails if it no longer matches the EXE; `gen.py <dir>
+--update-imports` rewrites it. The program entry point is called through the
+generated `recomp_start()`.
+
 Ghidra mis-sizes some API argument lists, so each implementation hard-codes
 the documented Win16 prototype, checked against the pushes at the call
 sites.

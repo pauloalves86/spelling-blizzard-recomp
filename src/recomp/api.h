@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-#include "gen_api_decls.h"
+#include "api_decls.h"
 
 _Noreturn void api_unimplemented(const char *module, const char *name, int ordinal);
 void api_log(const char *fmt, ...);

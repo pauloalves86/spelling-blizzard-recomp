@@ -21,6 +21,8 @@ typedef struct RecompEntry {
 } RecompEntry;
 extern const RecompEntry recomp_table[];
 extern const unsigned recomp_table_count;
+/* The program entry point (generated). */
+void recomp_start(void);
 
 extern int g_recomp_trace;
 

@@ -26,7 +26,9 @@ There are two ways the original program is being brought back:
 
 ## You need the original game files
 
-The game files are **not** in this repository. Put your own copies here:
+The game files are **not** in this repository or its releases, and neither
+is any code built from them: the game is recompiled on your own machine. Put
+your own copies here (or let `./build.sh /path/to/game` copy them):
 
 ```
 original/BLIZZARD.EXE    229,472 bytes
@@ -62,13 +64,29 @@ sudo apt install build-essential cmake pkg-config python3 libsdl2-dev libfreetyp
 
 ## Build and run
 
-From the repository root:
+Download the source package from
+[Releases](https://github.com/pauloalves86/spelling-blizzard-recomp/releases)
+(or clone the repository), install the requirements above, then:
+
+```sh
+./build.sh /path/to/your/game     # copies the two files into original/, checks them, builds
+build/release/sb_recomp
+```
+
+`build.sh` finds the files regardless of case. Run it without an argument if
+they're already in `original/`. Run `sb_recomp` from the repository directory,
+because the game and data directories are relative to it.
+
+To build by hand instead:
 
 ```sh
 cmake -S . -B build/cmake
 cmake --build build/cmake -j
 build/cmake/sb_recomp
 ```
+
+Without the game files, CMake builds only the host runtime (that's what CI
+does).
 
 This opens a 1280×960 window (640×480 at 2×) with sound. Close the window to
 quit. Saved players, high scores and the game's INI file go in `run/`.
@@ -119,7 +137,10 @@ It also uses noticeably more CPU than it should while idle.
 | --- | --- |
 | `tools/recomp/` | NE parser, x86-16 decoder, the C generator, the function list (`functions.txt`) and API export tables. |
 | `src/recomp/` | Runtime, loader and the host Win16 API layer for `sb_recomp`. |
+| `src/recomp/imports/` | The game's import table (API names and ordinals), so the runtime builds without the game. |
 | `tests/recomp/` | Input script for the headless test. |
+| `build.sh` | One-command build from your game files. |
+| `.github/workflows/` | CI (runtime build on Linux and macOS) and releases. |
 | `docs/recomp.md` | How the recompiler and host layer work. |
 | `original/` | Your copy of the game files (not tracked). |
 | `run/` | Saves and settings written by the game (not tracked). |
@@ -130,3 +151,16 @@ It also uses noticeably more CPU than it should while idle.
 This repository contains tools and new source code only. Spelling Blizzard and
 its assets belong to their copyright holders. You need your own copy of the
 game to run it.
+
+## Making a release
+
+Push a version tag:
+
+```sh
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+`.github/workflows/release.yml` builds the runtime on Linux and macOS, then
+publishes a release with the source package (`.tar.gz`, `.zip`,
+`SHA256SUMS`). Running the workflow by hand from the Actions tab builds the
+package as an artifact without publishing it.

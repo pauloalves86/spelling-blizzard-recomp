@@ -9,13 +9,28 @@ find_package(SDL2 CONFIG REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(FREETYPE REQUIRED IMPORTED_TARGET freetype2)
 
+# ---------------------------------------------------------------------------
+# Host runtime: CPU helpers, loader and the Win16 API layer. It contains no
+# game code and builds without the game files.
+# ---------------------------------------------------------------------------
+# (Object files, not an archive: the generated code's weak API stubs must
+# never win over the runtime's real implementations.)
+add_library(sb_recomp_runtime OBJECT
+    src/recomp/main.c src/recomp/runtime.c src/recomp/loader.c src/recomp/kernel.c
+    src/recomp/hostfs.c src/recomp/user.c src/recomp/gdi.c src/recomp/mmsystem.c)
+target_include_directories(sb_recomp_runtime PUBLIC src/recomp src/recomp/imports)
+target_link_libraries(sb_recomp_runtime PUBLIC SDL2::SDL2 PkgConfig::FREETYPE)
+target_compile_options(sb_recomp_runtime PRIVATE -Wall -Wno-unused-function)
+
 if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/original/BLIZZARD.EXE)
-    message(FATAL_ERROR "original/BLIZZARD.EXE not found: copy your game files into original/ (see README.md)")
+    message(WARNING "original/BLIZZARD.EXE not found: building the runtime only. "
+                    "Copy your game files into original/ to build sb_recomp (see README.md).")
+    return()
 endif()
 
 # ---------------------------------------------------------------------------
-# Static recompilation of original/BLIZZARD.EXE (tools/recomp/gen.py) running
-# on a host Win16 layer. Generated sources live in the build tree.
+# Static recompilation of original/BLIZZARD.EXE (tools/recomp/gen.py).
+# Generated sources live in the build tree and are never distributed.
 # ---------------------------------------------------------------------------
 set(RECOMP_GEN_DIR ${CMAKE_CURRENT_BINARY_DIR}/recomp_gen)
 file(GLOB RECOMP_TOOL_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/tools/recomp/*.py
@@ -32,14 +47,11 @@ add_custom_command(OUTPUT ${RECOMP_GEN_DIR}/stamp
     DEPENDS ${RECOMP_TOOL_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/original/BLIZZARD.EXE
     COMMENT "Recompiling original/BLIZZARD.EXE to C")
 add_library(sb_recomp_gen STATIC ${RECOMP_GEN_SOURCES} ${RECOMP_GEN_DIR}/stamp)
-target_include_directories(sb_recomp_gen PUBLIC ${RECOMP_GEN_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/src/recomp)
+target_include_directories(sb_recomp_gen PRIVATE ${RECOMP_GEN_DIR} src/recomp src/recomp/imports)
 target_compile_options(sb_recomp_gen PRIVATE -O1 -w)
 
-add_executable(sb_recomp
-    src/recomp/main.c src/recomp/runtime.c src/recomp/loader.c src/recomp/kernel.c
-    src/recomp/hostfs.c src/recomp/user.c src/recomp/gdi.c src/recomp/mmsystem.c)
+add_executable(sb_recomp $<TARGET_OBJECTS:sb_recomp_runtime>)
 target_link_libraries(sb_recomp PRIVATE sb_recomp_gen SDL2::SDL2 PkgConfig::FREETYPE m)
-target_compile_options(sb_recomp PRIVATE -Wall -Wno-unused-function)
 
 enable_testing()
 add_test(NAME recomp_new_game_headless

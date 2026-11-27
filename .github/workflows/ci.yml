@@ -1,0 +1,38 @@
+# Checks everything that can be checked without the game files: the host
+# runtime compiles and the recompiler's Python is valid. The game itself is
+# never available in CI (see README.md).
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_call:
+
+jobs:
+  runtime:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y cmake pkg-config libsdl2-dev libfreetype-dev
+
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install sdl2 freetype pkg-config
+
+      - name: Check scripts
+        run: |
+          python3 -m py_compile tools/recomp/*.py
+          bash -n build.sh
+
+      - name: Build runtime
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j 4

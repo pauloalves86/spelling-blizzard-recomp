@@ -1,13 +1,12 @@
 /* Static-recompilation runtime core: memory, selectors, NE loader, dispatch.
  */
 #include "runtime.h"
+#include "api.h"
 
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "recomp_gen.h"
 
 CPU cpu;
 uint8_t *MEM;
@@ -67,7 +66,7 @@ typedef struct ImportEntry {
 
 #define X(idx, mod, name, ord, purge) {#mod, #name, ord, purge, api_##mod##_##name},
 static const ImportEntry g_imports[] = {
-#include "gen_import_list.h"
+#include "import_list.h"
 };
 #undef X
 static const unsigned g_import_count = sizeof(g_imports) / sizeof(g_imports[0]);

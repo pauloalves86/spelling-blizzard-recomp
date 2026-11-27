@@ -8,7 +8,12 @@ return. Relocations are resolved at generation time (selector immediates,
 far calls to other segments, far calls to imported APIs). Indirect far calls
 (C++ virtual calls) go through `call_far`, backed by a generated lookup table.
 
-Usage: gen.py <out_dir>
+Usage: gen.py <out_dir> [--update-imports]
+
+The import tables the host runtime is compiled against are checked in under
+src/recomp/imports/ (they list API names and ordinals, no game code), so the
+runtime builds without the game files. gen.py checks that they match the EXE;
+--update-imports rewrites them.
 """
 import os
 import struct
@@ -634,7 +639,7 @@ def discover_pointer_entries(prog, done):
 
 
 def main():
-    out_dir = sys.argv[1]
+    out_dir = [a for a in sys.argv[1:] if not a.startswith("--")][0]
     os.makedirs(out_dir, exist_ok=True)
     prog = Program()
     prog.called = set()
@@ -701,21 +706,33 @@ def main():
             fh.write(f"    {{0x{sel_of(s):04x}, 0x{e:04x}, {f.name}}},\n")
         fh.write("};\n")
         fh.write(f"const unsigned recomp_table_count = {len(funcs)};\n")
+        fh.write(f"\n/* NE entry point {sel_of(prog.ne.cs):04x}:{prog.ne.ip:04x} */\n")
+        fh.write(f"void recomp_start(void) {{ {funcs[(prog.ne.cs, prog.ne.ip)].name}(); }}\n")
     with open(os.path.join(out_dir, "gen_imports.h"), "w") as fh:
         fh.write("/* Imported APIs referenced by generated code: X(module, name, ordinal, purge) */\n")
         for key, (name, purge) in sorted(prog.used_imports.items()):
             fh.write(f"X({key[0]}, {name}, {key[1]}, {purge})\n")
-    # all imports (incl. ones only referenced from data) with thunk indices
-    with open(os.path.join(out_dir, "gen_import_list.h"), "w") as fh:
-        fh.write("/* All imports in relocation order: X(index, module, name, ordinal, purge) */\n")
-        for key, idx in sorted(prog.imports.items(), key=lambda kv: kv[1]):
-            name, purge = EXPORTS.get(key, (f"{key[0]}_{key[1]}", -1))
-            fh.write(f"X({idx}, {key[0]}, {name}, {key[1]}, {purge})\n")
-    with open(os.path.join(out_dir, "gen_api_decls.h"), "w") as fh:
-        fh.write("/* Prototypes for every imported API (generated). */\n")
-        for key, idx in sorted(prog.imports.items(), key=lambda kv: kv[1]):
-            name, purge = EXPORTS.get(key, (f"{key[0]}_{key[1]}", -1))
-            fh.write(f"void api_{key[0]}_{name}(void);\n")
+    # all imports (incl. ones only referenced from data) with thunk indices;
+    # checked in under src/recomp/imports so the runtime builds without the EXE
+    ordered = sorted(prog.imports.items(), key=lambda kv: kv[1])
+    import_list = "/* All imports in relocation order: X(index, module, name, ordinal, purge) */\n"
+    api_decls = "/* Prototypes for every imported API (generated). */\n"
+    for key, idx in ordered:
+        name, purge = EXPORTS.get(key, (f"{key[0]}_{key[1]}", -1))
+        import_list += f"X({idx}, {key[0]}, {name}, {key[1]}, {purge})\n"
+        api_decls += f"void api_{key[0]}_{name}(void);\n"
+    imports_dir = os.path.join(ROOT, "src", "recomp", "imports")
+    for fname, text in (("import_list.h", import_list), ("api_decls.h", api_decls)):
+        path = os.path.join(imports_dir, fname)
+        current = open(path).read() if os.path.exists(path) else None
+        if current != text:
+            if "--update-imports" in sys.argv:
+                with open(path, "w") as fh:
+                    fh.write(text)
+                print(f"updated {os.path.relpath(path, ROOT)}")
+            else:
+                raise SystemExit(f"{os.path.relpath(path, ROOT)} does not match the EXE's imports; "
+                                 "rerun gen.py with --update-imports")
     with open(os.path.join(out_dir, "gen_api_stubs.c"), "w") as fh:
         fh.write("/* Weak fallbacks for APIs not implemented yet (generated). */\n#include \"api.h\"\n\n")
         for key, idx in sorted(prog.imports.items(), key=lambda kv: kv[1]):
