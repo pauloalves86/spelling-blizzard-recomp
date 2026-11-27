@@ -22,7 +22,7 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Build source package
         run: |
@@ -34,7 +34,7 @@ jobs:
           (cd dist && sha256sum * > SHA256SUMS)
           echo "NAME=$name" >> "$GITHUB_ENV"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: ${{ env.NAME }}
           path: dist/
